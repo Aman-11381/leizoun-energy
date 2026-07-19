@@ -6,10 +6,8 @@ import { site } from "@/lib/config/site";
 import { buildWhatsAppLink, buildMailtoLink, cn } from "@/lib/utils";
 import { WhatsApp, Mail, Check, ArrowRight } from "@/components/icons";
 
-const buyerTypes = ["Distributor", "Dealer", "OEM Partner", "Retailer", "Individual"] as const;
-
 type Props = {
-  categoryOptions?: { slug: string; name: string }[];
+  /** Optional product-interest label, included silently in the message. */
   defaultCategory?: string;
   compact?: boolean;
 };
@@ -20,12 +18,10 @@ type Props = {
  * single swap point for a future POST endpoint (Next.js API route) — the
  * UI never changes.
  */
-export function InquiryForm({ categoryOptions, defaultCategory, compact }: Props) {
+export function InquiryForm({ defaultCategory, compact }: Props) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [category, setCategory] = useState(defaultCategory ?? "");
-  const [buyer, setBuyer] = useState<string>("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState<null | "whatsapp" | "email">(null);
 
@@ -38,17 +34,13 @@ export function InquiryForm({ categoryOptions, defaultCategory, compact }: Props
     return Object.keys(e).length === 0;
   }
 
-  const interest =
-    categoryOptions?.find((c) => c.slug === category)?.name ??
-    (defaultCategory ? defaultCategory : undefined);
-
   function submit(channel: "whatsapp" | "email") {
     if (!validate()) return;
     const fields = {
       name,
       phone,
       message,
-      category: [interest, buyer].filter(Boolean).join(" · ") || undefined,
+      category: defaultCategory || undefined,
     };
     const href =
       channel === "whatsapp"
@@ -119,43 +111,6 @@ export function InquiryForm({ categoryOptions, defaultCategory, compact }: Props
           {errors.phone && <p className="mt-1 text-xs text-error">{errors.phone}</p>}
         </div>
       </div>
-
-      {categoryOptions && categoryOptions.length > 0 && (
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="relative">
-            <select
-              id="category"
-              className={cn(field, "pt-6 appearance-none")}
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="">Any product</option>
-              {categoryOptions.map((c) => (
-                <option key={c.slug} value={c.slug}>{c.name}</option>
-              ))}
-            </select>
-            <label htmlFor="category" className="pointer-events-none absolute left-4 top-2 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
-              Product interest
-            </label>
-          </div>
-          <div className="relative">
-            <select
-              id="buyer"
-              className={cn(field, "pt-6 appearance-none")}
-              value={buyer}
-              onChange={(e) => setBuyer(e.target.value)}
-            >
-              <option value="">I am a…</option>
-              {buyerTypes.map((b) => (
-                <option key={b} value={b}>{b}</option>
-              ))}
-            </select>
-            <label htmlFor="buyer" className="pointer-events-none absolute left-4 top-2 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
-              Buyer type
-            </label>
-          </div>
-        </div>
-      )}
 
       <div className="relative">
         <textarea

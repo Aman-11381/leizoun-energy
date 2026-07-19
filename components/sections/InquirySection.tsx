@@ -13,7 +13,7 @@ export async function InquirySection({
   id?: string;
 }) {
   const categories = await getCategories();
-  const options = categories.map((c) => ({ slug: c.slug, name: c.name }));
+  const interest = categories.find((c) => c.slug === defaultCategory)?.name;
 
   return (
     <Section id={id} tone="raised">
@@ -52,7 +52,7 @@ export async function InquirySection({
 
         <Reveal delay={0.1}>
           <div className="clip-shear surface-lit rounded-[12px] border border-graphite-500 p-6 md:p-8">
-            <InquiryForm categoryOptions={options} defaultCategory={defaultCategory} />
+            <InquiryForm defaultCategory={interest} />
           </div>
         </Reveal>
       </div>
