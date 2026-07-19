@@ -147,6 +147,34 @@ body {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
 }
 
+/* Sheared button with a UNIFORM 1px border on every edge, including the
+   diagonal cut. A plain CSS border gets sliced off by clip-path along the
+   shear, so we layer two clipped fills instead: ::before = border color,
+   ::after = fill inset by 1px. Colors are driven by CSS variables so hover
+   states can transition. */
+.btn-shear {
+  position: relative;
+  isolation: isolate;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+}
+.btn-shear::before,
+.btn-shear::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: background-color 0.3s var(--ease-power, ease);
+}
+.btn-shear::before {
+  inset: 0;
+  background: var(--btn-border, var(--color-graphite-500));
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%);
+}
+.btn-shear::after {
+  inset: 1px;
+  background: var(--btn-fill, transparent);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%);
+}
+
 /* Frosted glass surface */
 .glass {
   background: rgba(18, 21, 27, 0.72);

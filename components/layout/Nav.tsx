@@ -49,7 +49,8 @@ export function Nav() {
       <div className="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-6 md:px-10">
         <Logo />
 
-        <nav className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setMegaOpen(false)}>
+        <div className="hidden items-center gap-8 lg:flex">
+          <nav className="flex items-center gap-1" onMouseLeave={() => setMegaOpen(false)}>
           <div
             className="relative"
             onMouseEnter={() => setMegaOpen(true)}
@@ -119,7 +120,6 @@ export function Nav() {
             })}
         </nav>
 
-        <div className="hidden lg:block">
           <ButtonLink href="/contact" size="sm">
             Enquire
           </ButtonLink>

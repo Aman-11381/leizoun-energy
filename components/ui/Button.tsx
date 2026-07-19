@@ -13,15 +13,15 @@ const sizes: Record<Size, string> = {
 
 const variants: Record<Variant, string> = {
   primary:
-    "group relative overflow-hidden bg-graphite-600 text-silver-100 border border-graphite-500 hover:border-volt-500/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
+    "group btn-shear text-silver-100 [--btn-border:#2a313b] [--btn-fill:#1c2129] hover:[--btn-border:rgba(30,144,255,0.6)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
   secondary:
-    "border border-graphite-500 text-silver-200 hover:text-silver-100 hover:border-silver-300/60 hover:bg-graphite-600/40",
+    "btn-shear text-silver-200 hover:text-silver-100 [--btn-border:#2a313b] [--btn-fill:transparent] hover:[--btn-border:rgba(154,164,178,0.6)] hover:[--btn-fill:rgba(28,33,41,0.4)]",
   ghost:
-    "text-silver-200 hover:text-silver-100 px-0 border-0",
+    "text-silver-200 hover:text-silver-100 px-0",
 };
 
 const baseCls =
-  "clip-shear inline-flex items-center justify-center gap-2 font-medium uppercase tracking-[0.12em] rounded-[2px] transition-[color,border-color,background-color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-volt-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-800 active:translate-y-px";
+  "inline-flex items-center justify-center gap-2 font-medium uppercase tracking-[0.12em] transition-[color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-volt-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-800 active:translate-y-px";
 
 function Inner({ variant, children }: { variant: Variant; children: ReactNode }) {
   return (
