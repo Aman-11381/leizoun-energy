@@ -7,8 +7,16 @@ export const site = {
   shortName: "LEIZOUN",
   tagline: "Lithium Power. Limitless Future.",
   description:
-    "LEIZOUN ENERGY engineers next-generation lithium battery technology — high-performance, intelligent, and built to last. E-Bike, E-Rickshaw, Inverter, UPS and Industrial energy solutions.",
+    "Backed by four decades of battery manufacturing expertise, LEIZOUN ENERGY brings a trusted legacy of quality into next-generation lithium technology — energy solutions for electric mobility, automotive, solar, home, commercial and industrial applications.",
   url: "https://leizoun.energy",
+
+  // Heritage of the parent business (40+ years in lead-acid manufacturing).
+  // Add the legacy brand name here if you'd like it referenced on the site.
+  legacy: {
+    years: "40+",
+    decades: "four decades",
+    brandName: "", // e.g. "our founding battery brand" — optional
+  },
 
   contact: {
     phoneDisplay: "+91 00000 00000",

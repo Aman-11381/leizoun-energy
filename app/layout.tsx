@@ -34,11 +34,14 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "lithium battery",
+    "lithium battery manufacturer",
     "e-bike battery",
     "e-rickshaw battery",
     "inverter battery",
+    "solar battery",
     "UPS battery",
     "industrial battery",
+    "energy storage",
     "LEIZOUN ENERGY",
   ],
   openGraph: {

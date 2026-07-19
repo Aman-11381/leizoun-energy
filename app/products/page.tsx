@@ -26,8 +26,9 @@ export default async function ProductsPage() {
             The LEIZOUN range
           </Heading>
           <p className="mt-6 text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-            Five engineered product lines — each purpose-built for its application, unified by
-            intelligent battery management, premium cells, and relentless quality.
+            Lithium product lines engineered on four decades of battery expertise — each
+            purpose-built for its application, unified by intelligent battery management, premium
+            cells, and the quality standard behind our name.
           </p>
         </Reveal>
       </Section>

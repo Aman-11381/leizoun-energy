@@ -37,8 +37,8 @@ export function Footer() {
           <div className="md:col-span-5">
             <Logo href={null} />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-silver-300">
-              {site.tagline} We engineer next-generation lithium battery technology for
-              mobility, backup, and industrial energy.
+              {site.tagline} Four decades of battery expertise, now engineered into
+              next-generation lithium technology for mobility, solar, home and industry.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-silver-300">
               <li className="flex items-center gap-3">

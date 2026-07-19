@@ -24,8 +24,8 @@ export async function InquirySection({
             Let&apos;s talk energy
           </Heading>
           <p className="mt-5 max-w-md text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-            Tell us what you need — product, quantity, or partnership. Our team responds
-            fast, with the right technical answer.
+            Tell us what you need — product, quantity, or partnership. Backed by decades of
+            experience, our team responds fast, with the right technical answer.
           </p>
 
           <ul className="mt-8 space-y-4 text-sm text-silver-200">

@@ -9,23 +9,23 @@ import { Bolt, Shield, Cpu, Gauge, Leaf, Cycle } from "@/components/icons";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "The story, mission and manufacturing philosophy behind LEIZOUN ENERGY — engineering next-generation lithium battery technology.",
+    "Over 40 years of battery manufacturing expertise, now engineered into lithium technology. The legacy, mission and manufacturing philosophy behind LEIZOUN ENERGY.",
 };
 
 const journey = [
-  { year: "Foundation", title: "A vision for cleaner power", body: "Born from the belief that energy should be intelligent, reliable, and clean." },
-  { year: "Engineering", title: "Building the platform", body: "Developing a smart BMS and precision manufacturing at the core of every product." },
-  { year: "Range", title: "A full product family", body: "From mobility to industrial storage — one standard of quality across five lines." },
-  { year: "Future", title: "Scaling the electric era", body: "Expanding capacity, categories, and partnerships for a limitless future." },
+  { year: "The Legacy", title: "Four decades of batteries", body: "Over 40 years manufacturing dependable batteries — building deep expertise and lasting customer trust." },
+  { year: "The Expertise", title: "Knowledge that compounds", body: "Mastery of battery technology, manufacturing, quality and market needs, backed by an established sales and service network." },
+  { year: "The Evolution", title: "Keeping pace with change", body: "Staying ahead as the world moves toward electric mobility, renewable energy and advanced storage." },
+  { year: "LEIZOUN ENERGY", title: "The lithium chapter", body: "Carrying our legacy of quality forward into next-generation lithium technology." },
 ];
 
 const values = [
   { icon: Gauge, title: "Performance", body: "We refuse to compromise on power, density, or reliability." },
   { icon: Shield, title: "Safety", body: "Protection is engineered in — never an afterthought." },
   { icon: Cpu, title: "Intelligence", body: "Smart management makes every cell smarter and safer." },
-  { icon: Cycle, title: "Longevity", body: "Products designed to last years, not seasons." },
-  { icon: Leaf, title: "Responsibility", body: "Cleaner energy for people and the planet." },
-  { icon: Bolt, title: "Innovation", body: "We build for the next decade, not the last one." },
+  { icon: Cycle, title: "Longevity", body: "Products built to last — the standard behind our name for decades." },
+  { icon: Leaf, title: "Commitment", body: "Long-term relationships and service, not one-time sales." },
+  { icon: Bolt, title: "Innovation", body: "The experience of the past, the technology of the future." },
 ];
 
 export default function AboutPage() {
@@ -34,21 +34,23 @@ export default function AboutPage() {
       {/* Intro */}
       <Section className="pt-32 md:pt-40">
         <Reveal className="max-w-3xl">
-          <Eyebrow index="◆">About LEIZOUN</Eyebrow>
+          <Eyebrow index="◆">Our Legacy · Our Experience</Eyebrow>
           <Heading as="h1" className="mt-5">
-            Engineering the limitless future of energy
+            From a legacy of battery expertise to the future of lithium energy
           </Heading>
           <p className="mt-6 text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-            LEIZOUN ENERGY is a lithium battery technology company built on a simple conviction:
-            that power should be intelligent, dependable, and clean. We design and manufacture
-            advanced energy systems that move people, protect businesses, and power industry.
+            For over four decades, our journey has been built on quality, expertise, trust, and
+            customer commitment. With more than 40 years in battery manufacturing, we&apos;ve
+            developed deep knowledge of the technology, the market, and our customers. LEIZOUN
+            ENERGY brings that same commitment into advanced lithium technology — for electric
+            mobility, automotive, home, solar, commercial and industrial energy.
           </p>
         </Reveal>
         <RevealGroup className="mt-14 grid grid-cols-2 gap-8 border-t border-graphite-500 pt-8 md:grid-cols-4">
           {[
-            { k: 5, s: "+", l: "Product lines" },
+            { k: 40, s: "+", l: "Years of expertise" },
             { k: 3000, s: "+", l: "Charge cycles" },
-            { k: 260, s: "", l: "Wh/kg density" },
+            { k: 6, s: "+", l: "Energy sectors" },
             { k: 100, s: "%", l: "QA tested" },
           ].map((s) => (
             <RevealItem key={s.l}>
@@ -69,14 +71,14 @@ export default function AboutPage() {
           <Reveal className="surface-lit p-10 md:p-14">
             <Eyebrow index="01">Mission</Eyebrow>
             <p className="mt-6 font-display text-xl leading-relaxed text-silver-100">
-              To deliver intelligent, high-performance lithium energy that people and businesses
-              can depend on — every day, in every condition.
+              To understand each application, provide the right lithium solution, deliver
+              consistent quality, and support our customers for the long term.
             </p>
           </Reveal>
           <Reveal delay={0.1} className="surface-lit p-10 md:p-14">
             <Eyebrow index="02">Vision</Eyebrow>
             <p className="mt-6 font-display text-xl leading-relaxed text-silver-100">
-              To be the energy technology brand that defines the electric era — powering a
+              To carry a trusted legacy of battery expertise into the electric era — powering a
               limitless, sustainable future.
             </p>
           </Reveal>
@@ -88,7 +90,7 @@ export default function AboutPage() {
         <Reveal className="mb-12 max-w-2xl">
           <Eyebrow index="03">Journey</Eyebrow>
           <Heading as="h2" className="mt-5">
-            The road to limitless
+            Four decades, one commitment
           </Heading>
         </Reveal>
         <div className="relative">
@@ -115,10 +117,11 @@ export default function AboutPage() {
           <Reveal delay={0.1}>
             <Eyebrow index="04">Manufacturing & Technology</Eyebrow>
             <Heading as="h2" className="mt-5">
-              Precision, at every step
+              Precision, proven over decades
             </Heading>
             <p className="mt-5 text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-              Every LEIZOUN battery is built on grade-A cells, assembled on quality-controlled
+              The manufacturing discipline we&apos;ve refined over 40 years now underpins every
+              LEIZOUN lithium battery — built on grade-A cells, assembled on quality-controlled
               lines, and governed by an intelligent BMS. From incoming inspection to final
               testing, precision is the standard — not the exception.
             </p>
@@ -164,8 +167,8 @@ export default function AboutPage() {
       </Section>
 
       <CtaBand
-        title="Build the future with us"
-        subtitle="Explore our products or start a conversation about partnership."
+        title="The next generation of energy"
+        subtitle="Carrying 40 years of expertise into lithium. Explore our products or start a conversation about partnership."
         primary={{ label: "View Products", href: "/products" }}
         secondary={{ label: "Contact Us", href: "/contact" }}
       />

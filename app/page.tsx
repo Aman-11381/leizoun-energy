@@ -37,10 +37,10 @@ const whyLithium = [
 ];
 
 const applications = [
-  { title: "Electric Mobility", body: "E-bikes, e-rickshaws and light EVs", slug: "e-bike" },
-  { title: "Home & Business Backup", body: "Inverters and UPS for clean continuity", slug: "inverter" },
-  { title: "Critical Systems", body: "Built-in UPS for sensitive equipment", slug: "ups" },
-  { title: "Industrial & Telecom", body: "Scalable energy storage at scale", slug: "industrial" },
+  { title: "Electric Mobility", body: "E-bikes, e-rickshaws & electric vehicles", slug: "e-bike" },
+  { title: "Solar & Home Energy", body: "Inverter & solar storage for homes and offices", slug: "inverter" },
+  { title: "Critical & Commercial", body: "Built-in UPS for critical, commercial systems", slug: "ups" },
+  { title: "Industrial & Storage", body: "Telecom, industrial & large-scale storage", slug: "industrial" },
 ];
 
 export default async function Home() {
@@ -54,23 +54,23 @@ export default async function Home() {
       <Section>
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
-            <Eyebrow index="01">The Company</Eyebrow>
+            <Eyebrow index="01">Our Legacy</Eyebrow>
             <Heading as="h2" className="mt-5">
-              Not just batteries. Advanced energy technology.
+              A legacy of battery expertise. The future of lithium energy.
             </Heading>
           </Reveal>
           <Reveal delay={0.1} className="flex flex-col justify-center">
             <p className="text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-              LEIZOUN ENERGY engineers intelligent lithium power systems for a fast-electrifying
-              world. From high-density mobility packs to industrial energy storage, every product
-              is designed around performance, safety, and longevity — and backed by precision
-              manufacturing and a smart battery-management platform.
+              For over 40 years, we&apos;ve manufactured dependable batteries and earned the trust
+              of customers through quality, expertise, and long-term commitment. LEIZOUN ENERGY is
+              our next chapter — bringing that same deep technical knowledge, proven manufacturing,
+              and customer service to advanced lithium technology for a fast-electrifying world.
             </p>
             <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
               {[
-                { k: 5, s: "+", l: "Product lines" },
+                { k: 40, s: "+", l: "Years of expertise" },
                 { k: 3000, s: "+", l: "Charge cycles" },
-                { k: 40, s: "+", l: "Applications" },
+                { k: 6, s: "+", l: "Energy sectors" },
                 { k: 100, s: "%", l: "QA tested" },
               ].map((s) => (
                 <div key={s.l}>
@@ -124,9 +124,9 @@ export default async function Home() {
               The physics of a better battery
             </Heading>
             <p className="mt-5 max-w-md text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-              Lithium fundamentally outperforms legacy chemistries — more energy in less weight,
-              far more cycles, and near-zero maintenance. It&apos;s the foundation of the electric
-              future, and of everything we build.
+              Lithium fundamentally outperforms the chemistries we&apos;ve mastered over decades —
+              more energy in less weight, far more cycles, and near-zero maintenance. It&apos;s the
+              natural evolution of our craft, and the foundation of everything we now build.
             </p>
             <div className="mt-8">
               <Link
@@ -248,10 +248,10 @@ export default async function Home() {
         <Seam className="mb-14 max-w-xs" />
         <div className="grid gap-10 md:grid-cols-4">
           {[
-            { k: "Precision", l: "Manufacturing", d: "Automated, quality-controlled production lines." },
+            { k: "40 Years", l: "Of Expertise", d: "Four decades of battery manufacturing know-how." },
             { k: "Grade-A", l: "Cells", d: "Only premium cells, individually tested." },
             { k: "Certified", l: "Standards", d: "Built to national and international norms." },
-            { k: "Backed", l: "Support", d: "Responsive technical and partner support." },
+            { k: "Trusted", l: "Service", d: "Long-term technical and partner support." },
           ].map((s) => (
             <Reveal key={s.l}>
               <p className="font-display text-2xl text-metal">{s.k}</p>

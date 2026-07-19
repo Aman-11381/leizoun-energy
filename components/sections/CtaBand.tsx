@@ -5,7 +5,7 @@ import { ArrowRight } from "@/components/icons";
 
 export function CtaBand({
   title = "Power your business with LEIZOUN",
-  subtitle = "Partner with a next-generation energy manufacturer. Distributors, dealers and OEMs welcome.",
+  subtitle = "Partner with a battery manufacturer that pairs four decades of trust with next-generation lithium technology. Distributors, dealers and OEMs welcome.",
   primary = { label: "Become a Distributor", href: "/contact" },
   secondary = { label: "View Products", href: "/products" },
 }: {

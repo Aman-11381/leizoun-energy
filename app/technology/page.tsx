@@ -37,9 +37,10 @@ export default function TechnologyPage() {
             Intelligence engineered into every cell
           </Heading>
           <p className="mt-6 text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-            LEIZOUN energy systems are more than cells in a case. They&apos;re intelligent
-            platforms — combining premium chemistry, a smart BMS, thermal control, and layered
-            safety, validated by rigorous testing.
+            LEIZOUN energy systems are more than cells in a case. Backed by four decades of
+            battery manufacturing know-how, they&apos;re intelligent platforms — combining premium
+            chemistry, a smart BMS, thermal control, and layered safety, validated by rigorous
+            testing.
           </p>
         </Reveal>
         <RevealGroup className="mt-14 grid grid-cols-2 gap-8 border-t border-graphite-500 pt-8 md:grid-cols-4">

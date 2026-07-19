@@ -107,10 +107,10 @@ const categories: ProductCategory[] = [
     name: "Inverter Batteries",
     tagline: "Silent, clean, always ready.",
     summary:
-      "Lithium inverter batteries for homes and businesses — instant backup, zero maintenance, compact footprint.",
+      "Lithium inverter and solar batteries for homes and businesses — instant backup, zero maintenance, compact footprint.",
     overview:
-      "LEIZOUN inverter batteries replace bulky lead-acid banks with a compact, maintenance-free lithium solution. Faster recharge, deeper usable capacity, and a longer lifespan — with clean, safe operation for homes, shops, and offices.",
-    applications: ["Home backup", "Retail & offices", "Small business", "Clinics"],
+      "LEIZOUN inverter batteries replace bulky lead-acid banks with a compact, maintenance-free lithium solution. Faster recharge, deeper usable capacity, and a longer lifespan — ideal for home backup, offices, shops, and pairing with rooftop solar.",
+    applications: ["Home backup", "Solar systems", "Retail & offices", "Clinics"],
     specChips: [
       { label: "Voltage", value: "12–48", unit: "V" },
       { label: "Capacity", value: "50–200", unit: "Ah" },
@@ -166,10 +166,10 @@ const categories: ProductCategory[] = [
     name: "Industrial Battery Solutions",
     tagline: "Energy infrastructure at scale.",
     summary:
-      "Custom-engineered lithium systems for industrial, telecom, and energy-storage applications.",
+      "Custom-engineered lithium systems for industrial, telecom, renewable and energy-storage applications.",
     overview:
-      "For large buyers and OEM partners, LEIZOUN designs and manufactures industrial-grade lithium systems — scalable, monitored, and built to specification. Telecom backup, energy storage, and heavy-duty applications with enterprise reliability and support.",
-    applications: ["Telecom towers", "Energy storage", "OEM integration", "Heavy machinery"],
+      "For large buyers and OEM partners, LEIZOUN designs and manufactures industrial-grade lithium systems — scalable, monitored, and built to specification. Telecom backup, solar and renewable storage, and heavy-duty applications with enterprise reliability and support.",
+    applications: ["Telecom towers", "Solar & renewable storage", "OEM integration", "Heavy machinery"],
     specChips: [
       { label: "Voltage", value: "Custom", unit: "" },
       { label: "Capacity", value: "Scalable", unit: "" },

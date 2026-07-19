@@ -38,7 +38,8 @@ export default async function ContactPage() {
           </Heading>
           <p className="mt-6 max-w-md text-[length:var(--text-lead)] leading-relaxed text-silver-300">
             Whether you&apos;re a distributor, OEM partner, or looking for a premium battery — tell
-            us what you need. Our team responds fast, with the right technical answer.
+            us what you need. Backed by four decades of experience, our team responds fast, with
+            the right technical answer.
           </p>
 
           <ul className="mt-10 space-y-3">
