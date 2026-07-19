@@ -1,7 +1,6 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { ProductVisual } from "@/components/ui/ProductVisual";
 import { ArrowRight } from "@/components/icons";
-import { site } from "@/lib/config/site";
 import type { CSSProperties } from "react";
 
 const d = (delay: string) => ({ ["--d" as string]: delay } as CSSProperties);
@@ -34,9 +33,8 @@ export function Hero() {
             className="anim-hero mt-7 max-w-xl text-[length:var(--text-lead)] leading-relaxed text-silver-300"
             style={d("0.22s")}
           >
-            Built on four decades of trusted battery manufacturing, {site.name} carries a legacy
-            of quality into the lithium era — intelligent, high-performance energy for mobility,
-            automotive, solar, home and industry.
+            Four decades of battery expertise, now engineered into lithium — intelligent,
+            high-performance energy for mobility, home and industry.
           </p>
 
           <div className="anim-hero mt-9 flex flex-col gap-4 sm:flex-row" style={d("0.32s")}>
@@ -54,8 +52,8 @@ export function Hero() {
           >
             {[
               { k: "40+", v: "Years of expertise" },
-              { k: "3000+", v: "Charge cycles" },
-              { k: "6+", v: "Energy sectors" },
+              { k: "Zero", v: "Maintenance" },
+              { k: "Fast", v: "Charging" },
             ].map((s) => (
               <div key={s.v}>
                 <p className="font-display text-lg text-silver-100">{s.k}</p>

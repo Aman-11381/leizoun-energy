@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { Seam } from "@/components/ui/Section";
 import { site } from "@/lib/config/site";
-import { Phone, Mail, MapPin, Clock } from "@/components/icons";
+import { Phone, Mail, MapPin } from "@/components/icons";
 
 const columns = [
   {
@@ -19,14 +19,11 @@ const columns = [
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Technology", href: "/technology" },
       { label: "Products", href: "/products" },
       { label: "Contact", href: "/contact" },
     ],
   },
 ];
-
-const certs = ["ISO 9001", "BIS Certified", "CE", "RoHS", "IEC 62133"];
 
 export function Footer() {
   return (
@@ -57,10 +54,6 @@ export function Footer() {
                 <MapPin className="h-4 w-4 text-steel-400" />
                 {site.contact.address}
               </li>
-              <li className="flex items-center gap-3">
-                <Clock className="h-4 w-4 text-steel-400" />
-                {site.contact.hours}
-              </li>
             </ul>
           </div>
 
@@ -84,14 +77,7 @@ export function Footer() {
 
         <div className="mt-14 hairline" />
 
-        <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            {certs.map((c) => (
-              <span key={c} className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">
-                {c}
-              </span>
-            ))}
-          </div>
+        <div className="mt-6 text-center">
           <p className="text-xs text-steel-400">
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>

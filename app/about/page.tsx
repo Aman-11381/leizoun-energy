@@ -3,7 +3,6 @@ import { Section, Eyebrow, Heading, Divider, Seam } from "@/components/ui/Sectio
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ProductVisual } from "@/components/ui/ProductVisual";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { StatCounter } from "@/components/ui/StatCounter";
 import { Bolt, Shield, Cpu, Gauge, Leaf, Cycle } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -48,15 +47,13 @@ export default function AboutPage() {
         </Reveal>
         <RevealGroup className="mt-14 grid grid-cols-2 gap-8 border-t border-graphite-500 pt-8 md:grid-cols-4">
           {[
-            { k: 40, s: "+", l: "Years of expertise" },
-            { k: 3000, s: "+", l: "Charge cycles" },
-            { k: 6, s: "+", l: "Energy sectors" },
-            { k: 100, s: "%", l: "QA tested" },
+            { big: "40+", l: "Years of expertise" },
+            { big: "Trusted", l: "Manufacturing" },
+            { big: "Smart", l: "BMS technology" },
+            { big: "Long-term", l: "Customer support" },
           ].map((s) => (
             <RevealItem key={s.l}>
-              <p className="font-display text-3xl text-metal">
-                <StatCounter value={s.k} suffix={s.s} />
-              </p>
+              <p className="font-display text-3xl text-metal">{s.big}</p>
               <p className="mt-2 text-xs text-steel-400">{s.l}</p>
             </RevealItem>
           ))}

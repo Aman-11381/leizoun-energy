@@ -20,11 +20,10 @@ npm run lint
 
 | Route | Description |
 |---|---|
-| `/` | Landing — hero, positioning, featured products, why-lithium, advantages, technology, applications, strengths, CTA, inquiry |
+| `/` | Landing — hero, positioning, featured products, advantages, strengths, CTA, inquiry |
 | `/products` | Catalogue — premium alternating showcase of the 5 category lines |
 | `/products/[category]` | Category template (e-bike, e-rickshaw, inverter, ups, industrial) |
 | `/about` | Brand story — mission, vision, journey, manufacturing, values |
-| `/technology` | Deep-dive — BMS, safety, thermal, testing, lithium vs lead-acid |
 | `/contact` | Contact + inquiry form |
 
 ## Structure

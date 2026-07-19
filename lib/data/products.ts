@@ -52,14 +52,14 @@ const categories: ProductCategory[] = [
       "LEIZOUN E-Bike batteries deliver exceptional energy density in a compact, rugged form. Intelligent cell balancing and a smart BMS protect every ride, while fast-charge chemistry keeps riders moving. Built for real-world vibration, heat, and daily cycling.",
     applications: ["Electric bicycles", "Light EVs", "Delivery fleets", "Scooters"],
     specChips: [
-      { label: "Voltage", value: "36–72", unit: "V" },
-      { label: "Capacity", value: "10–40", unit: "Ah" },
-      { label: "Cycle life", value: "1500+", unit: "cycles" },
+      { label: "Charging", value: "Fast", unit: "" },
+      { label: "Weight", value: "Light", unit: "" },
+      { label: "Protection", value: "Smart BMS", unit: "" },
     ],
     highlights: [
-      { title: "Energy density", value: "260 Wh/kg", note: "More range per kilogram" },
-      { title: "Fast charge", value: "0–80% · 1.5h", note: "Back on the road faster" },
-      { title: "Weight saving", value: "−60%", note: "vs comparable lead-acid" },
+      { title: "Energy density", value: "High", note: "More range per kilogram" },
+      { title: "Fast charge", value: "Rapid", note: "Back on the road faster" },
+      { title: "Weight saving", value: "Lighter", note: "vs comparable lead-acid" },
     ],
     differentiators: [
       { title: "Smart BMS", body: "Per-cell monitoring for balanced, protected performance across every ride." },
@@ -82,14 +82,14 @@ const categories: ProductCategory[] = [
       "Engineered for the demands of commercial e-rickshaw operation, LEIZOUN packs sustain high current draw, deep daily cycling, and long duty hours. Lower running cost, faster charging, and dramatically longer service life than traditional lead-acid.",
     applications: ["Passenger e-rickshaws", "Cargo loaders", "Last-mile transport"],
     specChips: [
-      { label: "Voltage", value: "48–60", unit: "V" },
-      { label: "Capacity", value: "40–120", unit: "Ah" },
-      { label: "Cycle life", value: "2000+", unit: "cycles" },
+      { label: "Duty", value: "Heavy-duty", unit: "" },
+      { label: "Cycling", value: "Deep", unit: "" },
+      { label: "Charging", value: "Rapid", unit: "" },
     ],
     highlights: [
       { title: "Daily range", value: "Full shift", note: "Sustained high-current output" },
-      { title: "Service life", value: "4–5 yrs", note: "vs ~1 yr lead-acid" },
-      { title: "Running cost", value: "−45%", note: "Lower cost per km" },
+      { title: "Service life", value: "Extended", note: "Far beyond lead-acid" },
+      { title: "Running cost", value: "Lower", note: "Reduced cost per kilometre" },
     ],
     differentiators: [
       { title: "Deep-cycle chemistry", body: "Optimised for heavy daily discharge without capacity fade." },
@@ -112,14 +112,14 @@ const categories: ProductCategory[] = [
       "LEIZOUN inverter batteries replace bulky lead-acid banks with a compact, maintenance-free lithium solution. Faster recharge, deeper usable capacity, and a longer lifespan — ideal for home backup, offices, shops, and pairing with rooftop solar.",
     applications: ["Home backup", "Solar systems", "Retail & offices", "Clinics"],
     specChips: [
-      { label: "Voltage", value: "12–48", unit: "V" },
-      { label: "Capacity", value: "50–200", unit: "Ah" },
-      { label: "Cycle life", value: "3000+", unit: "cycles" },
+      { label: "Maintenance", value: "Zero", unit: "" },
+      { label: "Recharge", value: "Fast", unit: "" },
+      { label: "Design", value: "Compact", unit: "" },
     ],
     highlights: [
-      { title: "Usable capacity", value: "95%", note: "Deep discharge, more backup" },
+      { title: "Usable capacity", value: "Deep", note: "More usable backup" },
       { title: "Maintenance", value: "Zero", note: "No topping up, ever" },
-      { title: "Footprint", value: "−50%", note: "Compact wall-friendly design" },
+      { title: "Footprint", value: "Compact", note: "Wall-friendly design" },
     ],
     differentiators: [
       { title: "Maintenance-free", body: "Sealed lithium chemistry — no water top-up, no acid, no fumes." },
@@ -142,14 +142,14 @@ const categories: ProductCategory[] = [
       "LEIZOUN built-in UPS batteries provide instantaneous switchover and stable power for sensitive equipment. Integrated intelligence, compact packaging, and a long maintenance-free life make them ideal for networking, POS, and critical infrastructure.",
     applications: ["Networking & servers", "POS systems", "Security systems", "Critical loads"],
     specChips: [
-      { label: "Voltage", value: "12–48", unit: "V" },
-      { label: "Backup", value: "Instant", unit: "switchover" },
-      { label: "Cycle life", value: "3000+", unit: "cycles" },
+      { label: "Switchover", value: "Instant", unit: "" },
+      { label: "Protection", value: "Smart BMS", unit: "" },
+      { label: "Operation", value: "Silent", unit: "" },
     ],
     highlights: [
-      { title: "Switchover", value: "< 10 ms", note: "Seamless to the load" },
+      { title: "Switchover", value: "Instant", note: "Seamless to the load" },
       { title: "Integration", value: "Built-in BMS", note: "Smart, self-protecting" },
-      { title: "Lifespan", value: "8–10 yrs", note: "Design service life" },
+      { title: "Lifespan", value: "Extended", note: "Long service life" },
     ],
     differentiators: [
       { title: "Seamless continuity", body: "Instant switchover protects sensitive electronics from dropouts." },

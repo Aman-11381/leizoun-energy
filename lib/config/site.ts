@@ -23,7 +23,7 @@ export const site = {
     // E.164 digits only, used for WhatsApp deep links.
     whatsapp: "910000000000",
     email: "hello@leizoun.energy",
-    address: "Industrial Area, India",
+    address: "Hyderabad, India",
     hours: "Mon–Sat · 9:30 AM – 6:30 PM IST",
   },
 
@@ -37,7 +37,6 @@ export const site = {
 
 export const nav = [
   { label: "Products", href: "/products" },
-  { label: "Technology", href: "/technology" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
