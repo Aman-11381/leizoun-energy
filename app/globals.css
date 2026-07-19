@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+/*
+  LEIZOUN ENERGY — Design tokens
+  Derived from the logo: brushed metal, electric-blue energy seam,
+  forward shear geometry, Bank-Gothic-style display type.
+  Dark-first. Blue is used surgically.
+*/
+
+@theme {
+  /* Neutrals — the stage & structure */
+  --color-ink-900: #000000;
+  --color-ink-800: #0a0c10;
+  --color-ink-700: #12151b;
+  --color-graphite-600: #1c2129;
+  --color-graphite-500: #2a313b;
+  --color-steel-400: #5b6472;
+  --color-silver-300: #9aa4b2;
+  --color-silver-200: #c9d1db;
+  --color-silver-100: #edf1f6;
+
+  /* Electric blue — the energy accent */
+  --color-volt-600: #0b6fd6;
+  --color-volt-500: #1e90ff;
+  --color-volt-400: #3aa0ff;
+
+  /* Semantic */
+  --color-success: #27c08a;
+  --color-warning: #e8b341;
+  --color-error: #f0564a;
+
+  /* Fonts (wired in layout.tsx) */
+  --font-display: var(--font-display-face), "Michroma", sans-serif;
+  --font-sans: var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
+
+  /* Fluid type scale */
+  --text-display: clamp(2.75rem, 6vw, 4.5rem);
+  --text-h1: clamp(2.25rem, 4.5vw, 3.25rem);
+  --text-h2: clamp(1.75rem, 3vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --text-lead: clamp(1.05rem, 1.5vw, 1.25rem);
+
+  /* Signature shear angle */
+  --shear: -12deg;
+
+  /* Easing — confident expo-out */
+  --ease-power: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+}
+
+:root {
+  --background: var(--color-ink-800);
+  --foreground: var(--color-silver-100);
+
+  /* Signature composites */
+  --metal-gradient: linear-gradient(
+    180deg,
+    #f4f7fb 0%,
+    #c9d1db 42%,
+    #7e8794 72%,
+    #3a414c 100%
+  );
+  --volt-glow: 0 0 24px rgba(30, 144, 255, 0.55);
+  --hairline: rgba(154, 164, 178, 0.14);
+}
+
+* {
+  border-color: var(--color-graphite-500);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(30, 144, 255, 0.28);
+  color: var(--color-silver-100);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-graphite-500);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-steel-400);
+}
+
+/* ---- Utilities ---- */
+
+/* Brushed-metal display text */
+.text-metal {
+  background: var(--metal-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* The electric-blue energy seam */
+.seam {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-volt-500) 50%,
+    transparent 100%
+  );
+  box-shadow: var(--volt-glow);
+}
+
+/* Machined hairline divider */
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hairline) 20%,
+    var(--hairline) 80%,
+    transparent
+  );
+}
+
+/* Sheared clip — one corner cut, echoes logo geometry */
+.clip-shear {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+}
+
+/* Frosted glass surface */
+.glass {
+  background: rgba(18, 21, 27, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Subtle top-down surface light for cards */
+.surface-lit {
+  background:
+    radial-gradient(120% 80% at 50% -20%, rgba(154, 164, 178, 0.08), transparent 60%),
+    var(--color-graphite-600);
+}
+
+/* Faint engineering grid backdrop */
+.grid-backdrop {
+  background-image:
+    linear-gradient(rgba(154, 164, 178, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(154, 164, 178, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-steel-400);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Scroll-reveal (CSS-only, progressive enhancement) ----
+   Content is visible by default. In browsers that support scroll-driven
+   animations we hide-then-reveal on scroll; everywhere else it stays visible.
+   No JavaScript, no hydration dependency, no flash of invisible content. */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* On-load hero entrance (plays once, no JS) */
+@media (prefers-reduced-motion: no-preference) {
+  .anim-hero {
+    opacity: 0;
+    animation: hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--d, 0s);
+  }
+  .anim-hero-visual {
+    opacity: 0;
+    animation: hero-scale 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.2s;
+  }
+}
+
+/* Scroll-driven reveal where supported */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      opacity: 0;
+      animation: reveal-rise 1ms linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+    }
+  }
+}
