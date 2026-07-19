@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Section, Eyebrow, Heading, Divider, Seam } from "@/components/ui/Section";
+import { Section, Eyebrow, Heading, Divider } from "@/components/ui/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
-import { ProductVisual } from "@/components/ui/ProductVisual";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { Bolt, Shield, Cpu, Gauge, Leaf, Cycle } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "About",
@@ -16,15 +14,6 @@ const journey = [
   { year: "The Expertise", title: "Knowledge that compounds", body: "Mastery of battery technology, manufacturing, quality and market needs, backed by an established sales and service network." },
   { year: "The Evolution", title: "Keeping pace with change", body: "Staying ahead as the world moves toward electric mobility, renewable energy and advanced storage." },
   { year: "LEIZOUN ENERGY", title: "The lithium chapter", body: "Carrying our legacy of quality forward into next-generation lithium technology." },
-];
-
-const values = [
-  { icon: Gauge, title: "Performance", body: "We refuse to compromise on power, density, or reliability." },
-  { icon: Shield, title: "Safety", body: "Protection is engineered in — never an afterthought." },
-  { icon: Cpu, title: "Intelligence", body: "Smart management makes every cell smarter and safer." },
-  { icon: Cycle, title: "Longevity", body: "Products built to last — the standard behind our name for decades." },
-  { icon: Leaf, title: "Commitment", body: "Long-term relationships and service, not one-time sales." },
-  { icon: Bolt, title: "Innovation", body: "The experience of the past, the technology of the future." },
 ];
 
 export default function AboutPage() {
@@ -103,64 +92,6 @@ export default function AboutPage() {
             ))}
           </RevealGroup>
         </div>
-      </Section>
-
-      {/* Manufacturing & Technology */}
-      <Section>
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
-            <ProductVisual slug="industrial" className="aspect-[5/4] w-full rounded-[14px] border border-graphite-500" />
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Eyebrow index="04">Manufacturing & Technology</Eyebrow>
-            <Heading as="h2" className="mt-5">
-              Precision, proven over decades
-            </Heading>
-            <p className="mt-5 text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-              The manufacturing discipline we&apos;ve refined over 40 years now underpins every
-              LEIZOUN lithium battery — built on grade-A cells, assembled on quality-controlled
-              lines, and governed by an intelligent BMS. From incoming inspection to final
-              testing, precision is the standard — not the exception.
-            </p>
-            <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-              {[
-                "Grade-A cell sourcing",
-                "Smart BMS integration",
-                "Automated assembly",
-                "Multi-stage QA testing",
-                "Thermal & safety validation",
-                "Traceable quality control",
-              ].map((t) => (
-                <li key={t} className="flex items-center gap-3 text-sm text-silver-200">
-                  <span className="h-1.5 w-1.5 rounded-full bg-volt-500" />
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </Section>
-
-      {/* Core values */}
-      <Section tone="raised">
-        <Reveal className="mb-12 max-w-2xl">
-          <Seam className="mb-8 max-w-xs" />
-          <Eyebrow index="05">Core Values</Eyebrow>
-          <Heading as="h2" className="mt-5">
-            What we stand for
-          </Heading>
-        </Reveal>
-        <RevealGroup className="grid gap-px overflow-hidden rounded-[12px] border border-graphite-500 bg-graphite-500 sm:grid-cols-2 lg:grid-cols-3">
-          {values.map((v) => (
-            <RevealItem key={v.title} className="group surface-lit p-8 transition-colors hover:bg-ink-700">
-              <span className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-graphite-500 text-silver-300 transition-colors group-hover:border-volt-500/50 group-hover:text-volt-400">
-                <v.icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 font-display text-base text-silver-100">{v.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-silver-300">{v.body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
       </Section>
 
       <CtaBand
