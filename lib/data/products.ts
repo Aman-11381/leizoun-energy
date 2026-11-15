@@ -1,194 +1,319 @@
 /**
  * LEIZOUN ENERGY — Product content model.
  *
- * This is the single source of truth for the catalogue today (static),
- * shaped so a future backend (CMS / REST / GraphQL) can populate the same
- * types with zero UI changes. All page components consume the async
- * accessors below, never the raw array — so swapping in `fetch()` later
- * is a one-file change.
+ * Single source of truth for the catalogue. Content is transcribed from the
+ * official product pamphlets, data sheets and warranty cards. Page components
+ * consume the async accessors below, never the raw array — so swapping in a
+ * CMS / API `fetch()` later is a one-file change.
  */
 
-export type Spec = { label: string; value: string; unit?: string };
+export type ProductImage = { src: string; alt: string; width: number; height: number };
 
-export type ProductVariant = {
+/** Keys resolved to icons by `iconForFeature` in `components/icons`. */
+export type FeatureIcon =
+  | "maintenance"
+  | "bms"
+  | "booster"
+  | "protection"
+  | "india"
+  | "performance"
+  | "backup"
+  | "eco"
+  | "bluetooth";
+
+export type Feature = { title: string; body: string; icon: FeatureIcon };
+
+export type SpecField = { key: string; label: string };
+
+export type ProductModel = {
   sku: string;
-  name: string;
-  specs: Spec[];
+  /** Grouping value for `grouped` spec sheets (e.g. nominal voltage). */
+  group?: string;
+  specs: Record<string, string>;
+};
+
+/**
+ * `grouped` — one row per model, grouped by `group` (inverter range).
+ * `matrix`  — one row per parameter, one column per model (e-rickshaw data sheet).
+ */
+export type SpecSheet = {
+  layout: "grouped" | "matrix";
+  groupLabel?: string;
+  fields: SpecField[];
+  notes: string[];
 };
 
 export type ProductCategory = {
   slug: string;
   name: string;
-  /** Short tagline shown on cards. */
+  /** Short label for menus and compact UI. */
+  shortName: string;
   tagline: string;
-  /** One-paragraph overview for the category page. */
-  overview: string;
   /** Card-level short description. */
   summary: string;
+  /** One-paragraph overview for the category page. */
+  overview: string;
+  chemistry: string;
+  /** Transparent studio render — the primary product shot. */
+  image: ProductImage;
+  /** Full-bleed lifestyle scene from the product pamphlet. */
+  scene: ProductImage;
+  /** Additional transparent renders. */
+  gallery: ProductImage[];
+  /** Headline figures (hero + cards). */
+  keyStats: { label: string; value: string }[];
+  features: Feature[];
   applications: string[];
-  /** Headline spec chips (voltage / capacity ranges etc.). */
-  specChips: Spec[];
-  /** Highlight tiles on the category page. */
-  highlights: { title: string; value: string; note: string }[];
-  /** Differentiators for this line. */
-  differentiators: { title: string; body: string }[];
-  /** Accent used for subtle per-category tinting (kept within brand). */
-  accent: "volt" | "silver";
-  /** Placeholder art-direction hint until real renders are supplied. */
-  renderHint: string;
-  /** Populated by future backend; empty for now. */
-  variants: ProductVariant[];
+  protections: string[];
+  warranty: { headline: string; summary: string; terms: string[] };
+  specSheet: SpecSheet;
+  models: ProductModel[];
   featured?: boolean;
 };
 
+const warrantyCoverage =
+  "From the date of purchase by the original buyer, the warranty covers free repairs or replacements against any manufacturing defects arising solely out of faulty raw material or workmanship and manifesting during normal use of the battery. Water damage is not covered, and the warranty ceases if the battery is broken or mishandled.";
+
+const inverterModels: ProductModel[] = [
+  ["12.8 V", "128LE13072", "6 Years*", "2:00 hrs+"],
+  ["12.8 V", "128LE15072", "6 Years*", "2:30 hrs+"],
+  ["12.8 V", "128LE16084", "7 Years*", "3:00 hrs+"],
+  ["12.8 V", "128LE22084", "7 Years*", "4:00 hrs+"],
+  ["12.8 V", "128LE26084", "7 Years*", "4:30 hrs+"],
+  ["12.8 V", "128LE34084", "7 Years*", "6:00 hrs+"],
+  ["25.6 V", "256LE13072", "6 Years*", "4:30 hrs+"],
+  ["25.6 V", "256LE15072", "6 Years*", "5:15 hrs"],
+  ["25.6 V", "256LE16084", "7 Years*", "6:00 hrs+"],
+  ["25.6 V", "256LE22084", "7 Years*", "7:30 hrs+"],
+  ["25.6 V", "256LE26084", "7 Years*", "9:00 hrs+"],
+  ["25.6 V", "256LE34084", "7 Years*", "12:00 hrs+"],
+  ["51.2 V", "512LE13072S", "6 Years*", "9:00 hrs+"],
+  ["51.2 V", "512LE16084S", "7 Years*", "12:00 hrs+"],
+  ["51.2 V", "512LE26084S", "7 Years*", "18:30 hrs+"],
+  ["51.2 V", "512LE34084S", "7 Years*", "25:00 hrs+"],
+].map(([group, sku, warranty, backup]) => ({ sku, group, specs: { warranty, backup } }));
+
+/** E-rickshaw data sheet rows: [label, 512LE10536, 608LE10536, 640LE10536]. */
+const eRickshawRows: [string, string, string, string][] = [
+  ["Parameters", "51.2V 105Ah", "60V 105Ah", "64V 105Ah"],
+  ["Nominal Voltage (V)", "51.2", "60", "64"],
+  ["Rated Capacity (Ah)", "105", "105", "105"],
+  ["Rated Energy (kWh)", "5.37", "6.3", "6.72"],
+  ["Recommended Charging Voltage (CV)", "55.2", "65.55", "69"],
+  ["Battery Operating Voltage (V)", "58.4", "69.35", "73"],
+  ["High Voltage Disconnection (V)", "58.4", "69.35", "73"],
+  ["Standard Charging Current (A)", "25", "20", "20"],
+  ["Discharging Voltage (V)", "42.4", "50.35", "53"],
+  ["Standard Discharging Current (A)", "60", "80", "80"],
+  ["Max. Discharging Current (A)", "80", "100", "100"],
+  ["Operating Temperature", "0 to 55°C", "0 to 55°C", "0 to 55°C"],
+  [
+    "Communication Protocol",
+    "Fixed: BLE; Optional: CAN, RS485/UART, IOT",
+    "Fixed: BLE; Optional: CAN, RS485/UART, IOT",
+    "Fixed: BLE; Optional: CAN, RS485/UART, IOT",
+  ],
+  ["Cycle Life @25°C, 80% DOD, 0.2/0.2C", ">2000+", ">2000+", ">2000+"],
+  ["Battery Chemistry", "LiFePO4", "LiFePO4", "LiFePO4"],
+  ["Battery Pack", "16S1P", "19S1P", "20S1P"],
+  ["IP Rating", "IP 68", "IP 68", "IP 68"],
+  ["Weight (Kg)", "47 ±1% (Approx)", "51.500 ±1% (Approx)", "51.500 ±1% (Approx)"],
+  ["Dimensions (L × W × H)", "535 × 370 × 215 mm", "595 × 362 × 225 mm", "595 × 362 × 225 mm"],
+  ["BMS Configuration", "8S to 24S 80Amp", "8S to 24S 100Amp", "8S to 24S 100Amp"],
+  ["Storage Temperature", "0 to 35°C", "0 to 35°C", "0 to 35°C"],
+  ["Discharge Operating Temperature", "-20°C to 60°C", "-20°C to 60°C", "-20°C to 60°C"],
+];
+
+const eRickshawSkus = ["512LE10536", "608LE10536", "640LE10536"];
+const fieldKey = (label: string) => label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 const categories: ProductCategory[] = [
   {
-    slug: "e-bike",
-    name: "E-Bike Batteries",
-    tagline: "Lightweight range. Relentless output.",
+    slug: "inverter",
+    name: "Lithium Inverter Batteries",
+    shortName: "Inverter Batteries",
+    tagline: "Silent, clean, always ready.",
     summary:
-      "High-density lithium packs engineered for electric bicycles and light EVs — more range, less weight, longer life.",
+      "LiFePO4 inverter batteries in 12.8 V, 25.6 V and 51.2 V — up to 25 hours of backup at 400 W, zero maintenance and up to 7 years' warranty.",
     overview:
-      "LEIZOUN E-Bike batteries deliver exceptional energy density in a compact, rugged form. Intelligent cell balancing and a smart BMS protect every ride, while fast-charge chemistry keeps riders moving. Built for real-world vibration, heat, and daily cycling.",
-    applications: ["Electric bicycles", "Light EVs", "Delivery fleets", "Scooters"],
-    specChips: [
-      { label: "Charging", value: "Fast", unit: "" },
-      { label: "Weight", value: "Light", unit: "" },
-      { label: "Protection", value: "Smart BMS", unit: "" },
+      "A sleek, maintenance-free lithium upgrade for home and business inverters. Every LEIZOUN inverter battery is built on LiFePO4 chemistry with an inbuilt BMS, a voltage booster switch and upgraded protections — available across 16 models in 12.8 V, 25.6 V and 51.2 V systems.",
+    chemistry: "LiFePO4",
+    image: {
+      src: "/products/inverter/inverter-hero.webp",
+      alt: "LEIZOUN lithium inverter battery — gloss black front panel with white body",
+      width: 1600,
+      height: 962,
+    },
+    scene: {
+      src: "/products/inverter/inverter-scene.webp",
+      alt: "LEIZOUN lithium inverter battery on an illuminated blue stage",
+      width: 1800,
+      height: 1071,
+    },
+    gallery: [
+      {
+        src: "/products/inverter/inverter-angle.webp",
+        alt: "LEIZOUN inverter battery, three-quarter view",
+        width: 1600,
+        height: 964,
+      },
+      {
+        src: "/products/inverter/inverter-front.webp",
+        alt: "LEIZOUN inverter battery, front view",
+        width: 1600,
+        height: 910,
+      },
+      {
+        src: "/products/inverter/inverter-side.webp",
+        alt: "LEIZOUN inverter battery, side view showing the white body",
+        width: 1600,
+        height: 976,
+      },
     ],
-    highlights: [
-      { title: "Energy density", value: "High", note: "More range per kilogram" },
-      { title: "Fast charge", value: "Rapid", note: "Back on the road faster" },
-      { title: "Weight saving", value: "Lighter", note: "vs comparable lead-acid" },
+    keyStats: [
+      { label: "Models", value: "16" },
+      { label: "System voltages", value: "12.8–51.2 V" },
+      { label: "Backup @ 400 W", value: "Up to 25 hrs" },
+      { label: "Warranty", value: "Up to 7 yrs*" },
     ],
-    differentiators: [
-      { title: "Smart BMS", body: "Per-cell monitoring for balanced, protected performance across every ride." },
-      { title: "Vibration-hardened", body: "Sealed, shock-resistant housing engineered for daily road use." },
-      { title: "Thermal control", body: "Managed heat dissipation for consistent output in Indian climates." },
+    features: [
+      { icon: "maintenance", title: "Zero Maintenance", body: "Sealed LiFePO4 chemistry — no water top-ups, no acid, no fumes." },
+      { icon: "bms", title: "Inbuilt BMS", body: "An on-board battery management system monitors and protects every cell." },
+      { icon: "booster", title: "Voltage Booster Switch", body: "A built-in voltage booster switch on every unit." },
+      { icon: "protection", title: "Upgraded Protections", body: "Overcharge, over-discharge and over-current protection with cell balancing." },
+      { icon: "india", title: "Make in India", body: "Proudly manufactured in India by an ISO 9001 / 14001 certified company." },
     ],
-    accent: "volt",
-    renderHint:
-      "Studio render of a sleek e-bike battery pack on black seamless, single rim light, blue seam reflection.",
-    variants: [],
+    applications: ["Home power backup", "Shops & offices", "Clinics & small businesses", "Upgrading lead-acid inverter batteries"],
+    protections: [
+      "Overcharge Protection",
+      "Over-discharge Protection",
+      "Over-current Protection",
+      "Cell Balance Function",
+    ],
+    warranty: {
+      headline: "6 / 7-year replacement warranty",
+      summary: warrantyCoverage,
+      terms: [
+        "Warranty covers manufacturing defects during the specified warranty period from the date of invoice.",
+        "Warranty is valid only for the original purchaser and is non-transferable unless approved by the Company.",
+        "The battery must be used with a compatible inverter/charger and within the specified operating limits.",
+        "The battery must be installed and operated as per the Company's instructions.",
+        "Any unauthorised opening, repair, modification or tampering with the battery or BMS will void the warranty.",
+        "Damage due to accident, impact, water, fire, short circuit, surge, wrong wiring or reverse polarity is not covered.",
+        "Damage caused by operation outside the specified temperature or environmental conditions is not covered.",
+        "Normal battery capacity reduction due to usage and ageing is not covered.",
+        "All warranty claims are subject to inspection and approval by the Company or its authorised service representative.",
+        "For approved claims, the Company may repair or replace the defective battery/component, with the original warranty period continuing to apply.",
+      ],
+    },
+    specSheet: {
+      layout: "grouped",
+      groupLabel: "Nominal voltage",
+      fields: [
+        { key: "warranty", label: "Warranty" },
+        { key: "backup", label: "Backup @ 400 W" },
+      ],
+      notes: ["*Warranty terms and conditions apply.", "Backup times are indicative at a 400 W load."],
+    },
+    models: inverterModels,
     featured: true,
   },
   {
     slug: "e-rickshaw",
-    name: "E-Rickshaw Batteries",
+    name: "Lithium E-Rickshaw Batteries",
+    shortName: "E-Rickshaw Batteries",
     tagline: "Built for the daily grind.",
     summary:
-      "Heavy-duty lithium packs for e-rickshaws — deep cycling, high torque delivery, and all-day dependability.",
+      "LiFePO4 traction batteries for e-rickshaws — 51.2 V, 60 V and 64 V at 105 Ah, IP68 sealed, 2000+ cycles and a 3-year warranty.",
     overview:
-      "Engineered for the demands of commercial e-rickshaw operation, LEIZOUN packs sustain high current draw, deep daily cycling, and long duty hours. Lower running cost, faster charging, and dramatically longer service life than traditional lead-acid.",
-    applications: ["Passenger e-rickshaws", "Cargo loaders", "Last-mile transport"],
-    specChips: [
-      { label: "Duty", value: "Heavy-duty", unit: "" },
-      { label: "Cycling", value: "Deep", unit: "" },
-      { label: "Charging", value: "Rapid", unit: "" },
+      "Engineered for commercial e-rickshaw duty, LEIZOUN e-rickshaw batteries pair LiFePO4 cells with a high-current BMS, built-in Bluetooth (BLE) and IP68 protection. High performance, zero maintenance and long-lasting backup — rated for over 2000 cycles at 80% depth of discharge.",
+    chemistry: "LiFePO4",
+    image: {
+      src: "/products/e-rickshaw/e-rickshaw-hero.webp",
+      alt: "LEIZOUN lithium e-rickshaw battery, 51.2V 105Ah, with 3-year warranty label",
+      width: 1600,
+      height: 1091,
+    },
+    scene: {
+      src: "/products/e-rickshaw/e-rickshaw-scene.webp",
+      alt: "LEIZOUN e-rickshaw battery beside an electric rickshaw in a city setting",
+      width: 1800,
+      height: 1172,
+    },
+    gallery: [
+      {
+        src: "/products/e-rickshaw/e-rickshaw-glow.webp",
+        alt: "LEIZOUN e-rickshaw battery, front view",
+        width: 1600,
+        height: 946,
+      },
+      {
+        src: "/products/e-rickshaw/e-rickshaw-top.webp",
+        alt: "LEIZOUN e-rickshaw battery, elevated view of the blue top cover",
+        width: 1600,
+        height: 1158,
+      },
+      {
+        src: "/products/e-rickshaw/e-rickshaw-hero.webp",
+        alt: "LEIZOUN e-rickshaw battery, three-quarter view",
+        width: 1600,
+        height: 1091,
+      },
     ],
-    highlights: [
-      { title: "Daily range", value: "Full shift", note: "Sustained high-current output" },
-      { title: "Service life", value: "Extended", note: "Far beyond lead-acid" },
-      { title: "Running cost", value: "Lower", note: "Reduced cost per kilometre" },
+    keyStats: [
+      { label: "Capacity", value: "105 Ah" },
+      { label: "Nominal voltage", value: "51.2–64 V" },
+      { label: "Cycle life", value: "2000+" },
+      { label: "Warranty", value: "3 yrs" },
     ],
-    differentiators: [
-      { title: "Deep-cycle chemistry", body: "Optimised for heavy daily discharge without capacity fade." },
-      { title: "High-current BMS", body: "Protects against overload during acceleration and full loads." },
-      { title: "Rapid charging", body: "Turnaround between shifts, maximising vehicle uptime." },
+    features: [
+      { icon: "performance", title: "High Performance", body: "Up to 100 A max. discharge for strong pull under full passenger and cargo loads." },
+      { icon: "maintenance", title: "Zero Maintenance", body: "Sealed, IP68-rated LiFePO4 pack — no water top-ups, no acid." },
+      { icon: "backup", title: "Long Lasting Backup", body: "Up to 6.72 kWh of rated energy and 2000+ cycles at 80% depth of discharge." },
+      { icon: "bluetooth", title: "Smart Connectivity", body: "Bluetooth (BLE) built in, with optional CAN, RS485/UART and IoT." },
+      { icon: "eco", title: "Eco Friendly", body: "Clean lithium iron phosphate chemistry — no lead, no acid." },
     ],
-    accent: "volt",
-    renderHint:
-      "Rugged e-rickshaw battery module, industrial-premium, black background, cool rim light.",
-    variants: [],
+    applications: ["Passenger e-rickshaws", "Cargo e-loaders", "Last-mile transport"],
+    protections: [
+      "Cell Over Voltage",
+      "Cell Under Voltage",
+      "Battery Pack Over Voltage",
+      "Battery Pack Under Voltage",
+      "Charging Over Current",
+      "Discharging Over Current",
+      "Over Temperature",
+      "Under Temperature",
+      "SOC Display",
+      "Current Limiting",
+    ],
+    warranty: {
+      headline: "3-year warranty",
+      summary: warrantyCoverage,
+      terms: [
+        "The batteries are warranted against any manufacturing defects arising during the warranty period. This warranty covers only defects resulting from faulty materials or poor workmanship that affect normal use and is in conformity with the respective specifications.",
+        "This warranty is applicable only if the batteries are used in accordance with the Company's specified application chart.",
+        "The warranty period begins on the date of sale of the battery, as indicated on the warranty card and the sales bill.",
+        "This warranty card is issued only at the time of original purchase. It is non-transferable and will not be reissued if lost or damaged.",
+        "To validate the warranty, the registration portion of the warranty card must be filled out completely and returned to the Dealer/Distributor/Company from which the battery was purchased.",
+        "In the event of a complaint, the battery must be returned untampered and complete to the Company's authorised Dealer/Distributor/Service Station, along with the warranty card with the barcode intact and the original bill. Delivery of the replaced, repaired or discounted battery will be F.O.R. to the same location.",
+        "The service record in the warranty booklet must be filled out regularly by an authorised Dealer/Distributor as proof of specified maintenance. Without this record, a claim may be deemed invalid.",
+        "Battery storage capacity gradually decreases with the number of usage cycles. This is normal for any battery and is not covered by the warranty.",
+        "If a service battery is issued, it may have to be returned within 15 days; otherwise, the purchaser shall be liable to pay the normal charges per day.",
+        "The Company reserves the right to determine whether the battery requires repair, rectification, free replacement or pro-rata settlement. Any defective battery replaced or settled under this warranty becomes the property of the Company, and no scrap rebate will be given for it.",
+        "The warranty period on a battery replaced free of charge begins from the date of sale of the original battery, as stated on the original warranty card, and not from the date of replacement.",
+        "For batteries purchased on pro-rata warranty settlement discount, a fresh warranty applies.",
+      ],
+    },
+    specSheet: {
+      layout: "matrix",
+      fields: eRickshawRows.map(([label]) => ({ key: fieldKey(label), label })),
+      notes: ["Specifications as per the LEIZOUN E-Rickshaw data sheet. Warranty terms and conditions apply."],
+    },
+    models: eRickshawSkus.map((sku, i) => ({
+      sku,
+      specs: Object.fromEntries(eRickshawRows.map((row) => [fieldKey(row[0]), row[i + 1]])),
+    })),
     featured: true,
-  },
-  {
-    slug: "inverter",
-    name: "Inverter Batteries",
-    tagline: "Silent, clean, always ready.",
-    summary:
-      "Lithium inverter and solar batteries for homes and businesses — instant backup, zero maintenance, compact footprint.",
-    overview:
-      "LEIZOUN inverter batteries replace bulky lead-acid banks with a compact, maintenance-free lithium solution. Faster recharge, deeper usable capacity, and a longer lifespan — ideal for home backup, offices, shops, and pairing with rooftop solar.",
-    applications: ["Home backup", "Solar systems", "Retail & offices", "Clinics"],
-    specChips: [
-      { label: "Maintenance", value: "Zero", unit: "" },
-      { label: "Recharge", value: "Fast", unit: "" },
-      { label: "Design", value: "Compact", unit: "" },
-    ],
-    highlights: [
-      { title: "Usable capacity", value: "Deep", note: "More usable backup" },
-      { title: "Maintenance", value: "Zero", note: "No topping up, ever" },
-      { title: "Footprint", value: "Compact", note: "Wall-friendly design" },
-    ],
-    differentiators: [
-      { title: "Maintenance-free", body: "Sealed lithium chemistry — no water top-up, no acid, no fumes." },
-      { title: "Fast recharge", body: "Rides through short grid windows between outages." },
-      { title: "Long lifespan", body: "Years of daily cycling with minimal capacity loss." },
-    ],
-    accent: "silver",
-    renderHint:
-      "Clean wall-mounted inverter battery, minimal, premium electronics aesthetic, black backdrop.",
-    variants: [],
-    featured: true,
-  },
-  {
-    slug: "ups",
-    name: "Built-in UPS Batteries",
-    tagline: "Uninterrupted, by design.",
-    summary:
-      "Integrated lithium UPS solutions delivering seamless, instant power continuity for critical loads.",
-    overview:
-      "LEIZOUN built-in UPS batteries provide instantaneous switchover and stable power for sensitive equipment. Integrated intelligence, compact packaging, and a long maintenance-free life make them ideal for networking, POS, and critical infrastructure.",
-    applications: ["Networking & servers", "POS systems", "Security systems", "Critical loads"],
-    specChips: [
-      { label: "Switchover", value: "Instant", unit: "" },
-      { label: "Protection", value: "Smart BMS", unit: "" },
-      { label: "Operation", value: "Silent", unit: "" },
-    ],
-    highlights: [
-      { title: "Switchover", value: "Instant", note: "Seamless to the load" },
-      { title: "Integration", value: "Built-in BMS", note: "Smart, self-protecting" },
-      { title: "Lifespan", value: "Extended", note: "Long service life" },
-    ],
-    differentiators: [
-      { title: "Seamless continuity", body: "Instant switchover protects sensitive electronics from dropouts." },
-      { title: "Integrated intelligence", body: "On-board BMS manages health, safety, and reporting." },
-      { title: "Compact & silent", body: "Fits tight installs with clean, fanless operation." },
-    ],
-    accent: "silver",
-    renderHint:
-      "Integrated UPS battery unit, sleek matte + metal, status LED echoing blue seam, black studio.",
-    variants: [],
-  },
-  {
-    slug: "industrial",
-    name: "Industrial Battery Solutions",
-    tagline: "Energy infrastructure at scale.",
-    summary:
-      "Custom-engineered lithium systems for industrial, telecom, renewable and energy-storage applications.",
-    overview:
-      "For large buyers and OEM partners, LEIZOUN designs and manufactures industrial-grade lithium systems — scalable, monitored, and built to specification. Telecom backup, solar and renewable storage, and heavy-duty applications with enterprise reliability and support.",
-    applications: ["Telecom towers", "Solar & renewable storage", "OEM integration", "Heavy machinery"],
-    specChips: [
-      { label: "Voltage", value: "Custom", unit: "" },
-      { label: "Capacity", value: "Scalable", unit: "" },
-      { label: "Config", value: "Made-to-spec", unit: "" },
-    ],
-    highlights: [
-      { title: "Scale", value: "Modular", note: "Grows with your load" },
-      { title: "Monitoring", value: "Remote BMS", note: "Fleet-level visibility" },
-      { title: "Support", value: "OEM-grade", note: "Engineering partnership" },
-    ],
-    differentiators: [
-      { title: "Made-to-spec", body: "Chemistry, form factor, and BMS tailored to your application." },
-      { title: "Remote telemetry", body: "Monitor health and performance across deployed fleets." },
-      { title: "Partnership model", body: "Dedicated engineering and supply support for OEMs and large buyers." },
-    ],
-    accent: "volt",
-    renderHint:
-      "Modular industrial battery rack, precision-engineered, cool cinematic light, factory-clean.",
-    variants: [],
   },
 ];
 

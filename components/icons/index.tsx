@@ -1,4 +1,5 @@
 import type { SVGProps } from "react";
+import type { FeatureIcon } from "@/lib/data/products";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -153,15 +154,28 @@ export const ChevronDown = (p: IconProps) => (
   </Base>
 );
 
-/* ---- Category icons ---- */
+/* ---- Feature icons ---- */
 
-export const Bike = (p: IconProps) => (
+export const Wrench = (p: IconProps) => (
   <Base {...p}>
-    <circle cx="6" cy="17" r="3" />
-    <circle cx="18" cy="17" r="3" />
-    <path d="M6 17 10 8h4l3 9M9 8h5l2 4" />
+    <path d="M14.5 4a4.5 4.5 0 0 0-4.2 6.1L4 16.4 7.6 20l6.3-6.3A4.5 4.5 0 0 0 20 9.5l-2.7 2.7-3-.5-.5-3L16.5 6A4.5 4.5 0 0 0 14.5 4Z" />
   </Base>
 );
+
+export const Award = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="12" cy="9" r="5" />
+    <path d="m9 13.5-1.5 7L12 18l4.5 2.5-1.5-7" />
+  </Base>
+);
+
+export const Bluetooth = (p: IconProps) => (
+  <Base {...p}>
+    <path d="m7 7 10 10-5 4V3l5 4L7 17" />
+  </Base>
+);
+
+/* ---- Category icons ---- */
 
 export const Rickshaw = (p: IconProps) => (
   <Base {...p}>
@@ -180,25 +194,19 @@ export const Home = (p: IconProps) => (
   </Base>
 );
 
-export const Server = (p: IconProps) => (
-  <Base {...p}>
-    <rect x="4" y="4" width="16" height="7" />
-    <rect x="4" y="13" width="16" height="7" />
-    <path d="M8 7.5h.01M8 16.5h.01" />
-  </Base>
-);
-
-export const Factory = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M3 20V10l5 3V10l5 3V6l3 2h5v12H3Z" />
-    <path d="M7 20v-4M12 20v-4M17 20v-4" />
-  </Base>
-);
-
 export const iconForSlug: Record<string, (p: IconProps) => React.JSX.Element> = {
-  "e-bike": Bike,
   "e-rickshaw": Rickshaw,
   inverter: Home,
-  ups: Server,
-  industrial: Factory,
+};
+
+export const iconForFeature: Record<FeatureIcon, (p: IconProps) => React.JSX.Element> = {
+  maintenance: Wrench,
+  bms: Cpu,
+  booster: Bolt,
+  protection: Shield,
+  india: Award,
+  performance: Gauge,
+  backup: Battery,
+  eco: Leaf,
+  bluetooth: Bluetooth,
 };

@@ -30,8 +30,8 @@ export default function AboutPage() {
             For over four decades, our journey has been built on quality, expertise, trust, and
             customer commitment. With more than 40 years in battery manufacturing, we&apos;ve
             developed deep knowledge of the technology, the market, and our customers. LEIZOUN
-            ENERGY brings that same commitment into advanced lithium technology — for electric
-            mobility, automotive, home, solar, commercial and industrial energy.
+            ENERGY brings that same commitment into advanced LiFePO4 lithium technology — starting
+            with home inverter and e-rickshaw batteries.
           </p>
         </Reveal>
         <RevealGroup className="mt-14 grid grid-cols-2 gap-8 border-t border-graphite-500 pt-8 md:grid-cols-4">

@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ui/Button";
-import { ProductVisual } from "@/components/ui/ProductVisual";
+import { ProductShot } from "@/components/ui/ProductShot";
+import { site } from "@/lib/config/site";
 import { ArrowRight } from "@/components/icons";
 import type { CSSProperties } from "react";
 
@@ -33,16 +34,16 @@ export function Hero() {
             className="anim-hero mt-7 max-w-xl text-[length:var(--text-lead)] leading-relaxed text-silver-300"
             style={d("0.22s")}
           >
-            Four decades of battery expertise, now engineered into lithium — intelligent,
-            high-performance energy for mobility, home and industry.
+            LiFePO4 lithium batteries for home inverters and e-rickshaws — built on four
+            decades of battery expertise, with an inbuilt BMS and zero maintenance.
           </p>
 
           <div className="anim-hero mt-9 flex flex-col gap-4 sm:flex-row" style={d("0.32s")}>
-            <ButtonLink href="/products" size="lg">
-              Explore Products <ArrowRight className="h-4 w-4" />
+            <ButtonLink href="/products/inverter" size="lg">
+              Inverter Batteries <ArrowRight className="h-4 w-4" />
             </ButtonLink>
-            <ButtonLink href="/contact" size="lg" variant="secondary">
-              Enquire Now
+            <ButtonLink href="/products/e-rickshaw" size="lg" variant="secondary">
+              E-Rickshaw Batteries <ArrowRight className="h-4 w-4" />
             </ButtonLink>
           </div>
 
@@ -52,8 +53,8 @@ export function Hero() {
           >
             {[
               { k: "40+", v: "Years of expertise" },
-              { k: "Zero", v: "Maintenance" },
-              { k: "Fast", v: "Charging" },
+              { k: "LiFePO4", v: "Lithium chemistry" },
+              { k: "Up to 7 yrs", v: "Warranty*" },
             ].map((s) => (
               <div key={s.v}>
                 <p className="font-display text-lg text-silver-100">{s.k}</p>
@@ -64,7 +65,20 @@ export function Hero() {
         </div>
 
         <div className="anim-hero-visual relative">
-          <ProductVisual slug="e-bike" className="aspect-[4/5] w-full rounded-[14px] border border-graphite-500" />
+          <ProductShot
+            image={{
+              src: "/products/range/range-combo.webp",
+              alt: "LEIZOUN lithium e-rickshaw battery and inverter battery side by side",
+              width: 1600,
+              height: 927,
+            }}
+            eager
+            padding="p-[6%]"
+            className="aspect-[4/3] w-full rounded-[14px] border border-graphite-500"
+          />
+          <p className="mt-4 text-center font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel-400">
+            {site.certification}
+          </p>
         </div>
       </div>
     </section>

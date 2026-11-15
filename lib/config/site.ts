@@ -1,14 +1,16 @@
 /**
  * Central brand/site configuration.
- * Placeholder contact values — swap real ones at go-live.
+ * Contact details are taken from the official product pamphlets and warranty cards.
  */
 export const site = {
   name: "LEIZOUN ENERGY",
   shortName: "LEIZOUN",
+  legalName: "LEIZOUN ENERGY LLP",
   tagline: "Lithium Power. Limitless Future.",
   description:
-    "Backed by four decades of battery manufacturing expertise, LEIZOUN ENERGY brings a trusted legacy of quality into next-generation lithium technology — energy solutions for electric mobility, automotive, solar, home, commercial and industrial applications.",
-  url: "https://leizoun.energy",
+    "Backed by four decades of battery manufacturing expertise, LEIZOUN ENERGY brings a trusted legacy of quality into next-generation LiFePO4 lithium batteries — for home inverters and e-rickshaws.",
+  url: "https://www.leizounenergy.com",
+  certification: "An ISO 9001:2015 / 14001:2015 Certified Company",
 
   // Heritage of the parent business (40+ years in lead-acid manufacturing).
   // Add the legacy brand name here if you'd like it referenced on the site.
@@ -19,12 +21,13 @@ export const site = {
   },
 
   contact: {
-    phoneDisplay: "+91 00000 00000",
-    // E.164 digits only, used for WhatsApp deep links.
-    whatsapp: "910000000000",
-    email: "hello@leizoun.energy",
-    address: "Hyderabad, India",
-    hours: "Mon–Sat · 9:30 AM – 6:30 PM IST",
+    /** Customer care line. */
+    phoneDisplay: "+91 90 10 5000 96",
+    // E.164 digits only, used for WhatsApp deep links. Assumes the customer care line is on WhatsApp.
+    whatsapp: "919010500096",
+    email: "leizounenergyindia@gmail.com",
+    address: "Shed No. M-29, Near Sapna Theatre, Kattedan, Hyderabad, Telangana – 500077",
+    city: "Hyderabad, Telangana",
   },
 
   social: {

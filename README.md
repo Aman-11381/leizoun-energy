@@ -21,8 +21,8 @@ npm run lint
 | Route | Description |
 |---|---|
 | `/` | Landing — hero, positioning, featured products, advantages, strengths, CTA, inquiry |
-| `/products` | Catalogue — premium alternating showcase of the 5 category lines |
-| `/products/[category]` | Category template (e-bike, e-rickshaw, inverter, ups, industrial) |
+| `/products` | Catalogue — alternating showcase of the two product lines |
+| `/products/[category]` | Product-line page (`inverter`, `e-rickshaw`): features, gallery, model spec table, protections, warranty |
 | `/about` | Brand story — mission, vision, journey, manufacturing, values |
 | `/contact` | Contact + inquiry form |
 
@@ -32,13 +32,13 @@ npm run lint
 app/                     Routes (App Router)
 components/
   layout/                Nav, Footer, FloatingEnquire
-  sections/              Hero, ProductCard, InquiryForm, CtaBand, InquirySection
+  sections/              Hero, ProductCard, SpecTable, InquiryForm, CtaBand, InquirySection
   ui/                    Logo, Button, Card, Section/Heading/Eyebrow/Seam/Divider,
-                         Reveal (CSS scroll-reveal), StatCounter, ProductVisual
+                         Reveal (CSS scroll-reveal), StatCounter, ProductShot
   icons/                 Custom thin-line geometric icon set
 lib/
-  config/site.ts         Brand + contact configuration (edit for go-live)
-  data/products.ts       Product content model + async data-access layer
+  config/site.ts         Brand + contact configuration (from the official pamphlets)
+  data/products.ts       Product data (from official pamphlets/data sheets) + async data-access layer
   utils.ts               cn(), WhatsApp/Email link builders
 app/globals.css          Design tokens (Tailwind @theme) + brand utilities
 ```
@@ -70,9 +70,10 @@ The site is frontend-only today but structured so a backend plugs in with **no U
 
 ## Assets
 
-Product visuals currently use a branded **placeholder** (`components/ui/ProductVisual.tsx`)
-labelled `RENDER · PLACEHOLDER`. Swap for real studio renders per the art-direction spec
-(studio, black seamless, single rim light, blue-seam reflection).
+Official product renders and pamphlet scenes live in `public/products/` as WebP
+(`inverter/`, `e-rickshaw/`, `range/`). They are rendered through
+`components/ui/ProductShot.tsx` (transparent render on a lit stage) and referenced from
+each category's `image`, `scene` and `gallery` fields in `lib/data/products.ts`.
 
 Official logos (from the brand guideline) live in `public/brand/`:
 

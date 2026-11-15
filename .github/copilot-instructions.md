@@ -24,12 +24,14 @@ There is no test suite. Use `npm run build` to check types and prerendering.
   - Pages must use the async accessors `getCategories`, `getFeaturedCategories`, and `getCategory(slug)`. Do not import the raw array.
   - Only `getCategorySlugs()` is synchronous, because `generateStaticParams` uses it.
   - This design lets a future CMS or API replace the array by changing only this file.
-  - Adding a category requires a matching entry in `iconForSlug` (`components/icons/index.tsx`).
+  - Adding a category requires a matching entry in `iconForSlug` (`components/icons/index.tsx`). Each feature's `icon` key maps to an icon through `iconForFeature` in the same file.
+  - A category's `specSheet.layout` controls how `components/sections/SpecTable.tsx` renders its models: `grouped` puts one row per model, grouped by `group` (the inverter range, grouped by voltage); `matrix` puts one row per parameter and one column per model (the e-rickshaw data sheet).
+  - Product data is transcribed from the official pamphlets and data sheets. Don't invent specifications such as capacity, dimensions or weight.
 - **Inquiry flow:**
   - `InquiryForm` validates input on the client.
   - It builds prefilled WhatsApp (`wa.me`) or `mailto:` links with `buildWhatsAppLink` and `buildMailtoLink` from `lib/utils.ts`.
   - Its `submit()` function is the single swap point for a future POST endpoint.
-- **Brand and contact configuration** lives in `lib/config/site.ts` (`site` and `nav`). It currently holds placeholder contact values. Never hardcode the brand name, phone number, email, or WhatsApp number in components.
+- **Brand and contact configuration** lives in `lib/config/site.ts` (`site` and `nav`): the brand name, legal name, ISO certification line, customer-care number, WhatsApp number, email and address. Never hardcode these values in components.
 
 ## Conventions
 
@@ -47,7 +49,7 @@ There is no test suite. Use `npm run build` to check types and prerendering.
   - Scroll reveals are CSS-only (`.reveal` + scroll-driven animations). `Reveal`, `RevealGroup`, and `RevealItem` add the class without JavaScript. Their `delay` and `stagger` props are intentionally ignored.
   - Content must remain visible without JavaScript.
   - The `motion` library (`motion/react`) is only for small client widgets such as `StatCounter`, and it must respect `useReducedMotion`.
-- **Product images:** Product visuals use the branded placeholder `components/ui/ProductVisual.tsx`, driven by each category's `renderHint` and `accent`.
+- **Product images:** The official renders are WebP files in `public/products/`. Render transparent product shots with `ProductShot` (`components/ui/ProductShot.tsx`, which wraps `next/image` with `fill`), and use `next/image` directly for the opaque pamphlet `scene` banners. In Next 16, use `loading="eager"` or `preload` instead of the deprecated `priority` prop.
 - **Logos:** Use the official logos in `public/brand/` according to the brand guideline:
   - The secondary (horizontal) logo is for the header and footer. Render it through `Logo` in `components/ui/Logo.tsx`.
   - The primary (vertical) logo is used in `app/opengraph-image.png`.

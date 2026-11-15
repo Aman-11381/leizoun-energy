@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { Section, Eyebrow, Heading, Divider, Seam } from "@/components/ui/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
-import { ProductVisual } from "@/components/ui/ProductVisual";
+import { ProductShot } from "@/components/ui/ProductShot";
 import { ButtonLink } from "@/components/ui/Button";
+import { SpecTable } from "@/components/sections/SpecTable";
 import { InquirySection } from "@/components/sections/InquirySection";
 import { getCategory, getCategorySlugs, getCategories } from "@/lib/data/products";
-import { ArrowRight, Check, iconForSlug } from "@/components/icons";
+import { ArrowRight, Check, Shield, ChevronDown, iconForFeature, iconForSlug } from "@/components/icons";
 
 type Params = { params: Promise<{ category: string }> };
 
@@ -22,6 +24,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: c.name,
     description: c.summary,
+    openGraph: { images: [{ url: c.scene.src, width: c.scene.width, height: c.scene.height, alt: c.scene.alt }] },
   };
 }
 
@@ -31,8 +34,7 @@ export default async function CategoryPage({ params }: Params) {
   if (!c) notFound();
 
   const all = await getCategories();
-  const others = all.filter((x) => x.slug !== c.slug).slice(0, 3);
-  const Icon = iconForSlug[c.slug];
+  const others = all.filter((x) => x.slug !== c.slug);
 
   return (
     <>
@@ -45,64 +47,132 @@ export default async function CategoryPage({ params }: Params) {
         </div>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <Eyebrow>{c.tagline}</Eyebrow>
+            <div className="flex flex-wrap items-center gap-3">
+              <Eyebrow>{c.tagline}</Eyebrow>
+              <span className="rounded-full border border-volt-500/40 px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-volt-400">
+                {c.chemistry}
+              </span>
+            </div>
             <Heading as="h1" className="mt-5">
               {c.name}
             </Heading>
             <p className="mt-6 max-w-lg text-[length:var(--text-lead)] leading-relaxed text-silver-300">
               {c.overview}
             </p>
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-              {c.specChips.map((s) => (
-                <div key={s.label}>
-                  <p className="font-display text-xl text-metal">
-                    {s.value}
-                    {s.unit ? ` ${s.unit}` : ""}
-                  </p>
-                  <p className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-steel-400">
-                    {s.label}
-                  </p>
+            <dl className="mt-8 grid max-w-md grid-cols-2 gap-x-10 gap-y-6">
+              {c.keyStats.map((s) => (
+                <div key={s.label} className="flex flex-col-reverse">
+                  <dt className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-steel-400">{s.label}</dt>
+                  <dd className="whitespace-nowrap font-display text-xl text-metal">{s.value}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="#enquire" size="lg">
-                Enquire about this line <ArrowRight className="h-4 w-4" />
+                Enquire now <ArrowRight className="h-4 w-4" />
+              </ButtonLink>
+              <ButtonLink href="#specifications" size="lg" variant="secondary">
+                View {c.models.length} models
               </ButtonLink>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <ProductVisual slug={c.slug} className="aspect-[4/3] w-full rounded-[14px] border border-graphite-500" />
+            <ProductShot
+              image={c.image}
+              eager
+              padding="p-[4%]"
+              className="aspect-[4/3] w-full rounded-[14px] border border-graphite-500"
+            />
           </Reveal>
         </div>
       </Section>
 
       <Divider />
 
-      {/* Highlights */}
+      {/* Features */}
       <Section>
-        <Reveal className="mb-10">
-          <Eyebrow index="01">Highlights</Eyebrow>
+        <Reveal className="mb-10 max-w-2xl">
+          <Eyebrow index="01">Features</Eyebrow>
           <Heading as="h2" className="mt-5">
             Built to outperform
           </Heading>
         </Reveal>
-        <RevealGroup className="grid gap-px overflow-hidden rounded-[12px] border border-graphite-500 bg-graphite-500 md:grid-cols-3">
-          {c.highlights.map((h) => (
-            <RevealItem key={h.title} className="surface-lit p-8">
-              <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">{h.title}</p>
-              <p className="mt-3 font-display text-3xl text-metal">{h.value}</p>
-              <p className="mt-3 text-sm text-silver-300">{h.note}</p>
-            </RevealItem>
-          ))}
+        <RevealGroup className="grid gap-px overflow-hidden rounded-[12px] border border-graphite-500 bg-graphite-500 sm:grid-cols-2 lg:grid-cols-3">
+          {c.features.map((f) => {
+            const FIcon = iconForFeature[f.icon];
+            return (
+              <RevealItem key={f.title} className="group surface-lit p-8 transition-colors hover:bg-ink-700">
+                <span className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-graphite-500 text-silver-300 transition-colors group-hover:border-volt-500/50 group-hover:text-volt-400">
+                  <FIcon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-5 font-display text-base text-silver-100">{f.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-silver-300">{f.body}</p>
+              </RevealItem>
+            );
+          })}
         </RevealGroup>
       </Section>
 
-      {/* Applications + differentiators */}
+      {/* Scene + gallery */}
+      <Section tone="raised">
+        <Reveal>
+          <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[14px] border border-graphite-500 md:aspect-[21/9]">
+            <Image src={c.scene.src} alt={c.scene.alt} fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-transparent to-transparent" />
+          </div>
+        </Reveal>
+        {c.gallery.length > 0 && (
+          <RevealGroup className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {c.gallery.map((g) => (
+              <RevealItem key={g.src}>
+                <ProductShot
+                  image={g}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="aspect-[4/3] w-full rounded-[12px] border border-graphite-500"
+                />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        )}
+      </Section>
+
+      {/* Specifications */}
+      <Section id="specifications" className="scroll-mt-20">
+        <Reveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <Eyebrow index="02">Specifications</Eyebrow>
+            <Heading as="h2" className="mt-5">
+              Choose your model
+            </Heading>
+          </div>
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-steel-400">
+            {c.models.length} models · {c.chemistry}
+          </p>
+        </Reveal>
+        <Reveal>
+          <SpecTable sheet={c.specSheet} models={c.models} />
+        </Reveal>
+      </Section>
+
+      {/* Protections + applications */}
       <Section tone="raised">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <Eyebrow index="02">Applications</Eyebrow>
+            <Eyebrow index="03">Safety</Eyebrow>
+            <Heading as="h2" className="mt-5">
+              Built-in protections
+            </Heading>
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              {c.protections.map((p) => (
+                <li key={p} className="flex items-center gap-3 rounded-[8px] border border-graphite-500 px-4 py-3 text-sm text-silver-200">
+                  <Shield className="h-4 w-4 shrink-0 text-volt-400" />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Eyebrow index="04">Applications</Eyebrow>
             <Heading as="h2" className="mt-5">
               Where it works
             </Heading>
@@ -115,83 +185,75 @@ export default async function CategoryPage({ params }: Params) {
               ))}
             </ul>
           </Reveal>
-
-          <Reveal delay={0.1}>
-            <Eyebrow index="03">Why this line</Eyebrow>
-            <Heading as="h2" className="mt-5">
-              The LEIZOUN difference
-            </Heading>
-            <div className="mt-8 space-y-6">
-              {c.differentiators.map((d) => (
-                <div key={d.title} className="flex items-start gap-4">
-                  <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-graphite-500 text-volt-400">
-                    {Icon && <Icon className="h-4 w-4" />}
-                  </span>
-                  <div>
-                    <p className="text-sm text-silver-100">{d.title}</p>
-                    <p className="mt-1 text-sm text-steel-400">{d.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
       </Section>
 
-      {/* Variants placeholder — backend-ready */}
+      {/* Warranty */}
       <Section>
         <Reveal>
           <Seam className="mb-10 max-w-xs" />
-          <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-xl">
-              <Eyebrow index="04">Models</Eyebrow>
-              <Heading as="h2" className="mt-5">
-                Configurations & variants
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <div>
+              <Eyebrow index="05">Warranty</Eyebrow>
+              <Heading as="h2" metal className="mt-5">
+                {c.warranty.headline}
               </Heading>
-              <p className="mt-5 text-silver-300">
-                Detailed model-level specifications for this line are available on request. Share
-                your voltage, capacity, and application requirements and we&apos;ll recommend the
-                right configuration.
-              </p>
             </div>
-            <ButtonLink href="#enquire" variant="secondary">
-              Request specifications
-            </ButtonLink>
+            <div>
+              <p className="text-[length:var(--text-lead)] leading-relaxed text-silver-300">{c.warranty.summary}</p>
+              <details className="group mt-8 rounded-[10px] border border-graphite-500">
+                <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm uppercase tracking-[0.14em] text-silver-200 [&::-webkit-details-marker]:hidden">
+                  Warranty terms &amp; conditions
+                  <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
+                </summary>
+                <ol className="list-decimal space-y-3 border-t border-graphite-500 py-5 pl-10 pr-5 text-sm leading-relaxed text-steel-400">
+                  {c.warranty.terms.map((t) => (
+                    <li key={t}>{t}</li>
+                  ))}
+                </ol>
+              </details>
+            </div>
           </div>
         </Reveal>
       </Section>
 
-      {/* Related */}
-      <Section tone="raised">
-        <Reveal className="mb-10">
-          <Eyebrow>Explore more</Eyebrow>
-          <Heading as="h2" className="mt-5">
-            Other product lines
-          </Heading>
-        </Reveal>
-        <RevealGroup className="grid gap-6 md:grid-cols-3">
-          {others.map((o) => {
-            const OIcon = iconForSlug[o.slug];
-            return (
-              <RevealItem key={o.slug}>
-                <Link
-                  href={`/products/${o.slug}`}
-                  className="group flex h-full items-center gap-4 rounded-[10px] border border-graphite-500 p-5 transition-colors hover:border-silver-300/40"
-                >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-graphite-500 text-silver-300 group-hover:text-volt-400">
-                    {OIcon && <OIcon className="h-5 w-5" />}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="block text-sm text-silver-100">{o.name}</span>
-                    <span className="block text-xs text-steel-400">{o.tagline}</span>
-                  </span>
-                  <ArrowRight className="h-4 w-4 text-steel-400 transition-transform group-hover:translate-x-1 group-hover:text-volt-400" />
-                </Link>
-              </RevealItem>
-            );
-          })}
-        </RevealGroup>
-      </Section>
+      {/* Other line */}
+      {others.length > 0 && (
+        <Section tone="raised">
+          <Reveal className="mb-10">
+            <Eyebrow>Explore more</Eyebrow>
+            <Heading as="h2" className="mt-5">
+              Also from LEIZOUN
+            </Heading>
+          </Reveal>
+          <RevealGroup className="grid gap-6 md:grid-cols-2">
+            {others.map((o) => {
+              const OIcon = iconForSlug[o.slug];
+              return (
+                <RevealItem key={o.slug}>
+                  <Link
+                    href={`/products/${o.slug}`}
+                    className="group grid h-full items-center overflow-hidden rounded-[12px] border border-graphite-500 transition-colors hover:border-silver-300/40 sm:grid-cols-[200px_1fr]"
+                  >
+                    <ProductShot image={o.image} sizes="200px" padding="p-[10%]" className="aspect-[4/3] w-full sm:h-full" />
+                    <span className="flex items-center gap-4 p-5">
+                      <span className="min-w-0 flex-1">
+                        <span className="flex items-center gap-2 text-steel-400">
+                          {OIcon && <OIcon className="h-4 w-4" />}
+                          <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em]">{o.tagline}</span>
+                        </span>
+                        <span className="mt-2 block font-display text-lg text-silver-100">{o.name}</span>
+                        <span className="mt-1 block text-sm text-steel-400">{o.summary}</span>
+                      </span>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-steel-400 transition-transform group-hover:translate-x-1 group-hover:text-volt-400" />
+                    </span>
+                  </Link>
+                </RevealItem>
+              );
+            })}
+          </RevealGroup>
+        </Section>
+      )}
 
       <InquirySection defaultCategory={c.slug} />
     </>

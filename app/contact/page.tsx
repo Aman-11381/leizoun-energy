@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Section, Eyebrow, Heading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { InquiryForm } from "@/components/sections/InquiryForm";
+import { Phone, Mail, MapPin } from "@/components/icons";
+import { site } from "@/lib/config/site";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -19,8 +21,45 @@ export default function ContactPage() {
             Let&apos;s talk energy
           </Heading>
           <p className="mt-6 max-w-md text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-            Whether you&apos;re a distributor, OEM partner, or looking for a premium battery —
-            tell us what you need and our team will respond fast.
+            Whether you&apos;re a distributor, dealer, or looking for a lithium battery for your
+            home or e-rickshaw — tell us what you need and our team will respond fast.
+          </p>
+
+          <dl className="mt-10 max-w-md space-y-5 border-t border-graphite-500 pt-8">
+            <div className="flex items-start gap-4">
+              <Phone className="mt-1 h-4 w-4 shrink-0 text-volt-400" />
+              <div>
+                <dt className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">Customer care</dt>
+                <dd className="mt-1 text-silver-100">
+                  <a href={`tel:${site.contact.phoneDisplay.replace(/\s/g, "")}`} className="hover:text-volt-400">
+                    {site.contact.phoneDisplay}
+                  </a>
+                </dd>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <Mail className="mt-1 h-4 w-4 shrink-0 text-volt-400" />
+              <div>
+                <dt className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">Email</dt>
+                <dd className="mt-1 break-all text-silver-100">
+                  <a href={`mailto:${site.contact.email}`} className="hover:text-volt-400">
+                    {site.contact.email}
+                  </a>
+                </dd>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <MapPin className="mt-1 h-4 w-4 shrink-0 text-volt-400" />
+              <div>
+                <dt className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
+                  {site.legalName}
+                </dt>
+                <dd className="mt-1 text-silver-100">{site.contact.address}</dd>
+              </div>
+            </div>
+          </dl>
+          <p className="mt-8 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
+            {site.certification}
           </p>
         </Reveal>
 

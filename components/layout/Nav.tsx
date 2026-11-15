@@ -10,11 +10,8 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, Menu, Close, ArrowUpRight, iconForSlug } from "@/components/icons";
 
 const productLinks = [
-  { slug: "e-bike", name: "E-Bike Batteries", tagline: "Lightweight range" },
-  { slug: "e-rickshaw", name: "E-Rickshaw Batteries", tagline: "Daily-grind duty" },
-  { slug: "inverter", name: "Inverter Batteries", tagline: "Silent backup" },
-  { slug: "ups", name: "Built-in UPS", tagline: "Instant continuity" },
-  { slug: "industrial", name: "Industrial Solutions", tagline: "Scale energy" },
+  { slug: "inverter", name: "Inverter Batteries", tagline: "12.8 V · 25.6 V · 51.2 V" },
+  { slug: "e-rickshaw", name: "E-Rickshaw Batteries", tagline: "51.2 V · 60 V · 64 V · 105 Ah" },
 ];
 
 export function Nav() {

@@ -8,11 +8,9 @@ const columns = [
   {
     title: "Products",
     links: [
-      { label: "E-Bike Batteries", href: "/products/e-bike" },
-      { label: "E-Rickshaw Batteries", href: "/products/e-rickshaw" },
       { label: "Inverter Batteries", href: "/products/inverter" },
-      { label: "Built-in UPS", href: "/products/ups" },
-      { label: "Industrial Solutions", href: "/products/industrial" },
+      { label: "E-Rickshaw Batteries", href: "/products/e-rickshaw" },
+      { label: "Full Catalogue", href: "/products" },
     ],
   },
   {
@@ -34,8 +32,11 @@ export function Footer() {
           <div className="md:col-span-5">
             <Logo className="h-auto w-64" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-silver-300">
-              Four decades of battery expertise, now engineered into next-generation lithium
-              technology for mobility, home and industry.
+              Four decades of battery expertise, now engineered into LiFePO4 lithium batteries
+              for home inverters and e-rickshaws.
+            </p>
+            <p className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
+              {site.certification}
             </p>
             <ul className="mt-6 space-y-3 text-sm text-silver-300">
               <li className="flex items-center gap-3">
@@ -50,8 +51,8 @@ export function Footer() {
                   {site.contact.email}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <MapPin className="h-4 w-4 text-steel-400" />
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-steel-400" />
                 {site.contact.address}
               </li>
             </ul>
@@ -79,7 +80,7 @@ export function Footer() {
 
         <div className="mt-6 text-center">
           <p className="text-xs text-steel-400">
-            © {new Date().getFullYear()} {site.name}. All rights reserved.
+            © {new Date().getFullYear()} {site.legalName}. All rights reserved.
           </p>
         </div>
       </div>

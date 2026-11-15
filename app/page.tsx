@@ -5,24 +5,16 @@ import { ProductCard } from "@/components/sections/ProductCard";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { InquirySection } from "@/components/sections/InquirySection";
 import { getFeaturedCategories } from "@/lib/data/products";
-import {
-  Bolt,
-  Shield,
-  Cycle,
-  Gauge,
-  Cpu,
-  Leaf,
-  ArrowRight,
-} from "@/components/icons";
+import { Bolt, Shield, Cycle, Cpu, Wrench, Award, ArrowRight } from "@/components/icons";
 import Link from "next/link";
 
 const advantages = [
-  { icon: Gauge, title: "High Performance", body: "Superior power delivery and energy density for demanding real-world duty." },
-  { icon: Shield, title: "Safety First", body: "Smart BMS protection against overcharge, overload, and thermal events." },
-  { icon: Cycle, title: "Long Lifespan", body: "Thousands of deep cycles with minimal capacity fade over years of use." },
-  { icon: Bolt, title: "Fast Charging", body: "Rapid recharge chemistry that keeps vehicles and systems up and running." },
-  { icon: Cpu, title: "Intelligent BMS", body: "Per-cell monitoring, balancing, and health reporting built in." },
-  { icon: Leaf, title: "Cleaner Energy", body: "Maintenance-free, efficient, and lighter footprint than legacy batteries." },
+  { icon: Wrench, title: "Zero Maintenance", body: "Sealed LiFePO4 packs — no water top-ups, no acid, no routine servicing." },
+  { icon: Cpu, title: "Inbuilt BMS", body: "An intelligent battery management system monitors and balances every cell." },
+  { icon: Shield, title: "Upgraded Protections", body: "Guards against overcharge, over-discharge, over-current and temperature extremes." },
+  { icon: Cycle, title: "Long Life", body: "2000+ cycles on e-rickshaw packs and up to 7 years' warranty on inverter batteries." },
+  { icon: Bolt, title: "Voltage Booster", body: "Inverter batteries include a voltage booster switch, as listed in their official specifications." },
+  { icon: Award, title: "Make in India", body: "Manufactured in Hyderabad by an ISO 9001:2015 / 14001:2015 certified company." },
 ];
 
 export default async function Home() {
@@ -51,9 +43,9 @@ export default async function Home() {
             <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
               {[
                 { big: "40+", l: "Years of expertise" },
-                { big: "Smart", l: "BMS protection" },
-                { big: "Long", l: "Cycle life" },
-                { big: "Lighter", l: "Than lead-acid" },
+                { big: "LiFePO4", l: "Lithium chemistry" },
+                { big: "19", l: "Battery models" },
+                { big: "ISO", l: "9001 · 14001 certified" },
               ].map((s) => (
                 <div key={s.l}>
                   <p className="font-display text-2xl text-metal">{s.big}</p>
@@ -73,7 +65,7 @@ export default async function Home() {
           <Reveal>
             <Eyebrow index="02">Product Range</Eyebrow>
             <Heading as="h2" className="mt-5 max-w-xl">
-              A lineup engineered for every load
+              Two lines. One standard.
             </Heading>
           </Reveal>
           <Reveal delay={0.1}>
@@ -86,7 +78,7 @@ export default async function Home() {
             </Link>
           </Reveal>
         </div>
-        <RevealGroup className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="grid gap-6 md:grid-cols-2">
           {featured.map((c) => (
             <RevealItem key={c.slug}>
               <ProductCard category={c} />
