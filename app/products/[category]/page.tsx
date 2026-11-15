@@ -36,6 +36,12 @@ export default async function CategoryPage({ params }: Params) {
   const c = await getCategory(category);
   if (!c) notFound();
 
+  // Features are stored in priority order: the first two are shown larger.
+  const lead = c.features.slice(0, 2);
+  const rest = c.features.slice(2);
+  // When protections are already a feature card, skip the separate protection panel.
+  const showProtections = !c.features.some((f) => f.icon === "protection");
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -147,78 +153,82 @@ export default async function CategoryPage({ params }: Params) {
         </Reveal>
       </Section>
 
-      {/* Key details */}
+      {/* Features + protection */}
       <Section tone="raised">
         <Reveal className="mb-10 max-w-2xl">
-          <Eyebrow index="02">Key Details</Eyebrow>
+          <Eyebrow index="02">Features</Eyebrow>
           <Heading as="h2" className="mt-5">
-            Features, safety &amp; warranty
+            Why choose it
           </Heading>
         </Reveal>
 
-        <div className="grid gap-10 lg:grid-cols-3 lg:gap-12">
-          <Reveal>
-            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Features</h3>
-            <ul className="mt-5 space-y-4">
-              {c.features.map((f) => (
-                <li key={f.title} className="border-b border-graphite-500 pb-4">
-                  <p className="text-sm text-silver-100">{f.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-steel-400">{f.body}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Built-in protections</h3>
-            <ul className="mt-5 space-y-3">
+        <RevealGroup className="grid gap-4 md:grid-cols-2">
+          {lead.map((f, i) => (
+            <RevealItem key={f.title} className="surface-lit rounded-[12px] border border-graphite-500 p-7 md:p-9">
+              <span className="font-mono text-xs tracking-[0.2em] text-volt-400">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-4 font-display text-h3 text-silver-100">{f.title}</h3>
+              <p className="mt-3 max-w-md leading-relaxed text-silver-300">{f.body}</p>
+            </RevealItem>
+          ))}
+        </RevealGroup>
+
+        {rest.length > 0 && (
+          <RevealGroup className={cn("mt-4 grid gap-4 sm:grid-cols-2", rest.length === 3 && "lg:grid-cols-3")}>
+            {rest.map((f, i) => (
+              <RevealItem
+                key={f.title}
+                className={cn(
+                  "rounded-[12px] border border-graphite-500 p-6",
+                  rest.length === 3 && i === 2 && "sm:col-span-2 lg:col-span-1"
+                )}
+              >
+                <span className="font-mono text-xs tracking-[0.2em] text-steel-400">{String(i + lead.length + 1).padStart(2, "0")}</span>
+                <h3 className="mt-3 font-display text-base text-silver-100">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-silver-300">{f.body}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        )}
+
+        {showProtections && (
+          <Reveal className="mt-4 rounded-[12px] border border-graphite-500 p-6 md:p-8">
+            <h3 className="font-display text-base text-silver-100">Built-in protection</h3>
+            <ul className="mt-5 grid max-w-3xl gap-x-12 gap-y-3 sm:grid-cols-2">
               {c.protections.map((p) => (
-                <li key={p} className="flex items-center gap-3 border-b border-graphite-500 pb-3 text-sm text-silver-200">
+                <li key={p} className="flex items-center gap-3 text-sm text-silver-200">
                   <Check className="h-4 w-4 shrink-0 text-volt-400" />
                   {p}
                 </li>
               ))}
             </ul>
           </Reveal>
-          <Reveal delay={0.1}>
-            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Applications</h3>
-            <ul className="mt-5 space-y-3">
-              {c.applications.map((a) => (
-                <li key={a} className="flex items-center gap-3 border-b border-graphite-500 pb-3 text-sm text-silver-200">
-                  <Check className="h-4 w-4 shrink-0 text-volt-400" />
-                  {a}
-                </li>
+        )}
+      </Section>
+
+      {/* Warranty */}
+      <Section>
+        <Reveal className="max-w-3xl">
+          <Eyebrow index="03">Warranty</Eyebrow>
+          <Heading as="h2" className="mt-5">
+            {c.warranty.headline}
+          </Heading>
+          <p className="mt-5 leading-relaxed text-silver-300">{c.warranty.summary}</p>
+          <details className="group mt-8 rounded-[12px] border border-graphite-500">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 text-sm uppercase tracking-[0.14em] text-silver-200 [&::-webkit-details-marker]:hidden">
+              Terms &amp; conditions
+              <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" />
+            </summary>
+            <ol className="list-decimal space-y-3 border-t border-graphite-500 py-6 pl-11 pr-6 text-sm leading-relaxed text-steel-400">
+              {c.warranty.terms.map((term) => (
+                <li key={term}>{term}</li>
               ))}
-            </ul>
-          </Reveal>
-        </div>
-
-        <Reveal className="mt-12 rounded-[12px] border border-graphite-500 p-6 md:p-8">
-          <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
-            <div>
-              <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Warranty</h3>
-              <p className="mt-3 font-display text-xl text-metal">{c.warranty.headline}</p>
-            </div>
-            <div>
-              <p className="text-sm leading-relaxed text-silver-300">{c.warranty.summary}</p>
-              <details className="group mt-5 rounded-[10px] border border-graphite-500">
-                <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-3.5 text-xs uppercase tracking-[0.14em] text-silver-200 [&::-webkit-details-marker]:hidden">
-                  Warranty terms &amp; conditions
-                  <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
-                </summary>
-                <ol className="list-decimal space-y-3 border-t border-graphite-500 py-5 pl-10 pr-5 text-sm leading-relaxed text-steel-400">
-                  {c.warranty.terms.map((term) => (
-                    <li key={term}>{term}</li>
-                  ))}
-                </ol>
-              </details>
-            </div>
+            </ol>
+          </details>
+          <div className="mt-10">
+            <ButtonLink href="/contact" size="lg">
+              Enquire
+            </ButtonLink>
           </div>
-        </Reveal>
-
-        <Reveal className="mt-12 flex justify-center">
-          <ButtonLink href="/contact" size="lg">
-            Enquire
-          </ButtonLink>
         </Reveal>
       </Section>
     </>

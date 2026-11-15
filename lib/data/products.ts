@@ -63,7 +63,6 @@ export type ProductCategory = {
   /** Headline figures (hero + cards). */
   keyStats: { label: string; value: string }[];
   features: Feature[];
-  applications: string[];
   protections: string[];
   warranty: { headline: string; summary: string; terms: string[] };
   specSheet: SpecSheet;
@@ -177,13 +176,12 @@ const categories: ProductCategory[] = [
       { label: "Warranty", value: "Up to 7 yrs*" },
     ],
     features: [
-      { icon: "maintenance", title: "Zero Maintenance", body: "Sealed LiFePO4 chemistry — no water top-ups, no acid, no fumes." },
-      { icon: "bms", title: "Inbuilt BMS", body: "An on-board battery management system monitors and protects every cell." },
-      { icon: "booster", title: "Voltage Booster Switch", body: "A built-in voltage booster switch on every unit." },
-      { icon: "protection", title: "Upgraded Protections", body: "Overcharge, over-discharge and over-current protection with cell balancing." },
-      { icon: "india", title: "Make in India", body: "Proudly manufactured in India by an ISO 9001 / 14001 certified company." },
+      { icon: "maintenance", title: "Zero Maintenance", body: "LiFePO4 (lithium iron phosphate) battery that needs no maintenance." },
+      { icon: "protection", title: "Upgraded Protections", body: "Overcharge, over-discharge and over-current protection, with cell balancing." },
+      { icon: "bms", title: "Inbuilt BMS", body: "A battery management system is built into the battery." },
+      { icon: "booster", title: "Voltage Booster Switch", body: "A voltage booster switch is built into the battery." },
+      { icon: "india", title: "Make in India", body: "Made in India by an ISO 9001:2015 / 14001:2015 certified company." },
     ],
-    applications: ["Home power backup", "Shops & offices", "Clinics & small businesses", "Upgrading lead-acid inverter batteries"],
     protections: [
       "Overcharge Protection",
       "Over-discharge Protection",
@@ -203,7 +201,6 @@ const categories: ProductCategory[] = [
         "Damage caused by operation outside the specified temperature or environmental conditions is not covered.",
         "Normal battery capacity reduction due to usage and ageing is not covered.",
         "All warranty claims are subject to inspection and approval by the Company or its authorised service representative.",
-        "For approved claims, the Company may repair or replace the defective battery/component, with the original warranty period continuing to apply.",
       ],
     },
     specSheet: {
@@ -261,13 +258,12 @@ const categories: ProductCategory[] = [
       { label: "Warranty", value: "3 yrs" },
     ],
     features: [
-      { icon: "performance", title: "High Performance", body: "Up to 100 A max. discharge for strong pull under full passenger and cargo loads." },
-      { icon: "maintenance", title: "Zero Maintenance", body: "Sealed, IP68-rated LiFePO4 pack — no water top-ups, no acid." },
-      { icon: "backup", title: "Long Lasting Backup", body: "Up to 6.72 kWh of rated energy and 2000+ cycles at 80% depth of discharge." },
-      { icon: "bluetooth", title: "Smart Connectivity", body: "Bluetooth (BLE) built in, with optional CAN, RS485/UART and IoT." },
-      { icon: "eco", title: "Eco Friendly", body: "Clean lithium iron phosphate chemistry — no lead, no acid." },
+      { icon: "backup", title: "Long Lasting Backup", body: "105 Ah capacity, up to 6.72 kWh of rated energy and over 2000 cycles at 80% depth of discharge." },
+      { icon: "performance", title: "High Performance", body: "Up to 100 A maximum discharging current (80 A on the 51.2 V model)." },
+      { icon: "maintenance", title: "Zero Maintenance", body: "IP68-rated LiFePO4 battery pack that needs no maintenance." },
+      { icon: "bluetooth", title: "Bluetooth Built In", body: "BLE is fixed on every model; CAN, RS485/UART and IoT are optional." },
+      { icon: "eco", title: "Eco Friendly", body: "Built on LiFePO4 (lithium iron phosphate) chemistry." },
     ],
-    applications: ["Passenger e-rickshaws", "Cargo e-loaders", "Last-mile transport"],
     protections: [
       "Cell Over Voltage",
       "Cell Under Voltage",
