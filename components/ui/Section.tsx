@@ -13,14 +13,16 @@ export function Section({
   className?: string;
   containerClassName?: string;
   id?: string;
-  tone?: "base" | "raised";
+  tone?: "base" | "raised" | "deep";
 }) {
   return (
     <section
       id={id}
       className={cn(
         "relative py-16 md:py-24 lg:py-28",
-        tone === "raised" && "bg-ink-700/60",
+        tone === "raised" &&
+          "border-y border-graphite-500/60 bg-ink-700 bg-[radial-gradient(70%_70%_at_50%_0%,rgba(0,127,196,0.09),transparent_70%)]",
+        tone === "deep" && "border-y border-graphite-500/60 bg-ink-900",
         className
       )}
     >

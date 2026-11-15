@@ -29,7 +29,7 @@ export default async function Home() {
       <Hero />
 
       {/* Featured product categories */}
-      <Section>
+      <Section tone="deep">
         <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <Reveal>
             <Eyebrow index="01">Product Range</Eyebrow>
