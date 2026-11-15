@@ -4,9 +4,8 @@ import { Section, Eyebrow, Heading, Divider } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProductShot } from "@/components/ui/ProductShot";
 import { ButtonLink } from "@/components/ui/Button";
-import { CtaBand } from "@/components/sections/CtaBand";
 import { getCategories } from "@/lib/data/products";
-import { ArrowRight, iconForFeature } from "@/components/icons";
+import { iconForFeature } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Product Catalogue",
@@ -86,9 +85,8 @@ export default async function ProductsPage() {
                       })}
                     </ul>
 
-                    <div className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.14em] text-silver-200 transition-colors group-hover:text-volt-400">
+                    <div className="mt-8 text-sm uppercase tracking-[0.14em] text-silver-200 transition-colors group-hover:text-volt-400">
                       Explore {c.models.length} models
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                   <span className="pointer-events-none absolute inset-x-10 bottom-0 h-px bg-gradient-to-r from-transparent via-volt-500 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -100,17 +98,10 @@ export default async function ProductsPage() {
 
         <Reveal className="mt-14 flex justify-center">
           <ButtonLink href="/contact" size="lg">
-            Request a quote <ArrowRight className="h-4 w-4" />
+            Enquire
           </ButtonLink>
         </Reveal>
       </Section>
-
-      <CtaBand
-        title="Need a custom configuration?"
-        subtitle="Tell us your voltage, backup or range requirement — our team will recommend the right LEIZOUN battery for your application."
-        primary={{ label: "Talk to our team", href: "/contact" }}
-        secondary={{ label: "About LEIZOUN", href: "/about" }}
-      />
     </>
   );
 }

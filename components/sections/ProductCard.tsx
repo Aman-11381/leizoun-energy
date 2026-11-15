@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { ProductShot } from "@/components/ui/ProductShot";
-import { ArrowRight } from "@/components/icons";
 import type { ProductCategory } from "@/lib/data/products";
 
 export function ProductCard({ category }: { category: ProductCategory }) {
@@ -31,9 +30,8 @@ export function ProductCard({ category }: { category: ProductCategory }) {
             ))}
           </dl>
 
-          <div className="mt-auto flex items-center gap-2 pt-6 text-sm uppercase tracking-[0.14em] text-silver-200 transition-colors group-hover:text-volt-400">
+          <div className="mt-auto pt-6 text-sm uppercase tracking-[0.14em] text-silver-200 transition-colors group-hover:text-volt-400">
             Explore {category.models.length} models
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </div>
       </Link>

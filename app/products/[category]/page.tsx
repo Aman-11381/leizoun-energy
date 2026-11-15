@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { SpecTable } from "@/components/sections/SpecTable";
 import { InquirySection } from "@/components/sections/InquirySection";
 import { getCategory, getCategorySlugs, getCategories } from "@/lib/data/products";
-import { ArrowRight, Check, Shield, ChevronDown, iconForFeature } from "@/components/icons";
+import { Check, Shield, ChevronDown, iconForFeature } from "@/components/icons";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
@@ -86,7 +86,7 @@ export default async function CategoryPage({ params }: Params) {
             </dl>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="#enquire" size="lg">
-                Enquire now <ArrowRight className="h-4 w-4" />
+                Enquire now
               </ButtonLink>
               <ButtonLink href="#specifications" size="lg" variant="secondary">
                 View {c.models.length} models
@@ -260,13 +260,10 @@ export default async function CategoryPage({ params }: Params) {
                   className="group grid h-full items-center overflow-hidden rounded-[12px] border border-graphite-500 transition-colors hover:border-silver-300/40 sm:grid-cols-[200px_1fr]"
                 >
                   <ProductShot image={o.image} sizes="200px" padding="p-[10%]" className="aspect-[4/3] w-full sm:h-full" />
-                  <span className="flex items-center gap-4 p-5">
-                    <span className="min-w-0 flex-1">
-                      <span className="block font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel-400">{o.tagline}</span>
-                      <span className="mt-2 block font-display text-lg text-silver-100">{o.name}</span>
-                      <span className="mt-1 block text-sm text-steel-400">{o.summary}</span>
-                    </span>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-steel-400 transition-transform group-hover:translate-x-1 group-hover:text-volt-400" />
+                  <span className="block p-5">
+                    <span className="block font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel-400">{o.tagline}</span>
+                    <span className="mt-2 block font-display text-lg text-silver-100">{o.name}</span>
+                    <span className="mt-1 block text-sm text-steel-400">{o.summary}</span>
                   </span>
                 </Link>
               </RevealItem>

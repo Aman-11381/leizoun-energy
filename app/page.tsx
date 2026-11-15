@@ -4,7 +4,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ProductCard } from "@/components/sections/ProductCard";
 import { InquirySection } from "@/components/sections/InquirySection";
 import { getFeaturedCategories } from "@/lib/data/products";
-import { Bolt, Shield, Cycle, Cpu, Wrench, Award, ArrowRight } from "@/components/icons";
+import { Bolt, Shield, Cycle, Cpu, Wrench, Award } from "@/components/icons";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -40,10 +40,9 @@ export default async function Home() {
           <Reveal delay={0.1}>
             <Link
               href="/products"
-              className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.14em] text-silver-200 hover:text-volt-400"
+              className="text-sm uppercase tracking-[0.14em] text-silver-200 hover:text-volt-400"
             >
               Full catalogue
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Reveal>
         </div>

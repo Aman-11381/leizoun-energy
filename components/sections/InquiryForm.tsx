@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/config/site";
 import { buildWhatsAppLink, buildMailtoLink, cn } from "@/lib/utils";
-import { WhatsApp, Mail, Check, ArrowRight } from "@/components/icons";
+import { WhatsApp, Mail, Check } from "@/components/icons";
 
 type Props = {
   /** Optional product-interest label, included silently in the message. */
@@ -143,8 +143,7 @@ export function InquiryForm({ defaultCategory, compact }: Props) {
           <Mail className="h-4 w-4" /> Send via Email
         </Button>
       </div>
-      <p className="flex items-center gap-2 pt-1 text-xs text-steel-400">
-        <ArrowRight className="h-3.5 w-3.5" />
+      <p className="pt-1 text-xs text-steel-400">
         No account needed — your message opens pre-filled, ready to send.
       </p>
     </form>

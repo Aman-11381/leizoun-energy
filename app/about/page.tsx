@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Section, Eyebrow, Heading, Divider, Seam } from "@/components/ui/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { Check, ArrowRight } from "@/components/icons";
+import { Check } from "@/components/icons";
 import { site } from "@/lib/config/site";
 
 export const metadata: Metadata = {
@@ -152,10 +152,9 @@ export default function AboutPage() {
             </p>
             <Link
               href="/products"
-              className="group mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.14em] text-silver-200 hover:text-volt-400"
+              className="mt-8 inline-block text-sm uppercase tracking-[0.14em] text-silver-200 hover:text-volt-400"
             >
               See our current products
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Reveal>
           <Reveal delay={0.1}>

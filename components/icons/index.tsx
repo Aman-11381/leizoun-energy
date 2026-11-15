@@ -35,18 +35,6 @@ export const Moon = (p: IconProps) => (
   </Base>
 );
 
-export const ArrowRight = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M4 12h15M13 6l6 6-6 6" />
-  </Base>
-);
-
-export const ArrowUpRight = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M7 17 17 7M8 7h9v9" />
-  </Base>
-);
-
 export const Bolt = (p: IconProps) => (
   <Base {...p}>
     <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />

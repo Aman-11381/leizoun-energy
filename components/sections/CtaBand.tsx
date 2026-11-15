@@ -1,7 +1,6 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { Heading, Seam } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { ArrowRight } from "@/components/icons";
 
 export function CtaBand({
   title = "Power your business with LEIZOUN",
@@ -29,7 +28,7 @@ export function CtaBand({
         </p>
         <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
           <ButtonLink href={primary.href} size="lg">
-            {primary.label} <ArrowRight className="h-4 w-4" />
+            {primary.label}
           </ButtonLink>
           <ButtonLink href={secondary.href} size="lg" variant="secondary">
             {secondary.label}
