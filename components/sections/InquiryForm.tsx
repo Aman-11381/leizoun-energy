@@ -93,9 +93,11 @@ export function InquiryForm({ defaultCategory, compact }: Props) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
+            aria-invalid={!!errors.name}
+            aria-describedby={errors.name ? "name-error" : undefined}
           />
           <label htmlFor="name" className={label}>Name</label>
-          {errors.name && <p className="mt-1 text-xs text-error">{errors.name}</p>}
+          {errors.name && <p id="name-error" className="mt-1 text-xs text-error">{errors.name}</p>}
         </div>
         <div className="relative">
           <input
@@ -106,9 +108,11 @@ export function InquiryForm({ defaultCategory, compact }: Props) {
             onChange={(e) => setPhone(e.target.value)}
             inputMode="tel"
             autoComplete="tel"
+            aria-invalid={!!errors.phone}
+            aria-describedby={errors.phone ? "phone-error" : undefined}
           />
           <label htmlFor="phone" className={label}>Phone Number</label>
-          {errors.phone && <p className="mt-1 text-xs text-error">{errors.phone}</p>}
+          {errors.phone && <p id="phone-error" className="mt-1 text-xs text-error">{errors.phone}</p>}
         </div>
       </div>
 
@@ -119,19 +123,21 @@ export function InquiryForm({ defaultCategory, compact }: Props) {
           placeholder="Inquiry"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? "message-error" : undefined}
         />
         <label htmlFor="message" className={label}>Your Inquiry</label>
-        {errors.message && <p className="mt-1 text-xs text-error">{errors.message}</p>}
+        {errors.message && <p id="message-error" className="mt-1 text-xs text-error">{errors.message}</p>}
       </div>
 
       <div className="flex flex-col gap-3 pt-1 sm:flex-row">
-        <Button type="submit" className="flex-1">
+        <Button type="submit" className="w-full sm:w-auto sm:flex-1">
           <WhatsApp className="h-4 w-4" /> Send via WhatsApp
         </Button>
         <Button
           type="button"
           variant="secondary"
-          className="flex-1"
+          className="w-full sm:w-auto sm:flex-1"
           onClick={() => submit("email")}
         >
           <Mail className="h-4 w-4" /> Send via Email

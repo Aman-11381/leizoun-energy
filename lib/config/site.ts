@@ -26,6 +26,13 @@ export const site = {
     email: "leizounenergyindia@gmail.com",
     address: "Shed No. M-29, Near Sapna Theatre, Kattedan, Hyderabad, Telangana – 500077",
     city: "Hyderabad, Telangana",
+    postal: {
+      street: "Shed No. M-29, Near Sapna Theatre, Kattedan",
+      locality: "Hyderabad",
+      region: "Telangana",
+      code: "500077",
+      country: "IN",
+    },
   },
 
   social: {

@@ -7,6 +7,7 @@ import { site } from "@/lib/config/site";
 
 export const metadata: Metadata = {
   title: "Contact",
+  alternates: { canonical: "/contact" },
   description:
     "Get in touch with LEIZOUN ENERGY. Send an enquiry via WhatsApp or email — distributors, dealers and customers welcome.",
 };

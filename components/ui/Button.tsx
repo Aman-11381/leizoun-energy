@@ -13,7 +13,7 @@ const sizes: Record<Size, string> = {
 
 const variants: Record<Variant, string> = {
   primary:
-    "group btn-shear text-silver-100 [--btn-border:var(--color-graphite-500)] [--btn-fill:var(--color-graphite-600)] hover:[--btn-border:rgba(0,127,196,0.6)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
+    "group btn-shear text-white [--btn-border:var(--color-volt-500)] [--btn-fill:var(--color-volt-600)] hover:[--btn-fill:var(--color-volt-500)] hover:[--btn-border:var(--color-volt-400)]",
   secondary:
     "btn-shear text-silver-200 hover:text-silver-100 [--btn-border:var(--color-graphite-500)] [--btn-fill:transparent] hover:[--btn-border:rgba(183,185,188,0.6)] hover:[--btn-fill:rgba(28,31,37,0.4)]",
   ghost:

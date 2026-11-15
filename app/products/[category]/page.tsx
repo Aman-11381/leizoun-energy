@@ -10,6 +10,9 @@ import { SpecTable } from "@/components/sections/SpecTable";
 import { InquirySection } from "@/components/sections/InquirySection";
 import { getCategory, getCategorySlugs, getCategories } from "@/lib/data/products";
 import { ArrowRight, Check, Shield, ChevronDown, iconForFeature, iconForSlug } from "@/components/icons";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { site } from "@/lib/config/site";
+import { cn } from "@/lib/utils";
 
 type Params = { params: Promise<{ category: string }> };
 
@@ -24,6 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: c.name,
     description: c.summary,
+    alternates: { canonical: `/products/${c.slug}` },
     openGraph: { images: [{ url: c.scene.src, width: c.scene.width, height: c.scene.height, alt: c.scene.alt }] },
   };
 }
@@ -36,12 +40,25 @@ export default async function CategoryPage({ params }: Params) {
   const all = await getCategories();
   const others = all.filter((x) => x.slug !== c.slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: c.name,
+    description: c.summary,
+    image: new URL(c.image.src, site.url).href,
+    url: new URL(`/products/${c.slug}`, site.url).href,
+    brand: { "@type": "Brand", name: site.name },
+    manufacturer: { "@type": "Organization", name: site.legalName, url: site.url },
+    model: c.models.map((m) => m.sku),
+  };
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       {/* Hero */}
       <Section className="pt-32 md:pt-40">
-        <div className="mb-8">
-          <Link href="/products" className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400 hover:text-silver-200">
+        <div className="-mt-3 mb-5">
+          <Link href="/products" className="inline-block py-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400 hover:text-silver-200">
             ← Catalogue
           </Link>
         </div>
@@ -98,12 +115,19 @@ export default async function CategoryPage({ params }: Params) {
           </Heading>
         </Reveal>
         <RevealGroup className="grid gap-px overflow-hidden rounded-[12px] border border-graphite-500 bg-graphite-500 sm:grid-cols-2 lg:grid-cols-3">
-          {c.features.map((f) => {
+          {c.features.map((f, i) => {
             const FIcon = iconForFeature[f.icon];
+            const n = c.features.length;
+            const last = i === n - 1;
+            // Stretch the final tile so the grid never ends with an empty cell.
+            const span = cn(
+              last && n % 2 === 1 && "sm:col-span-2",
+              last && (n % 3 === 0 ? "lg:col-span-1" : n % 3 === 2 ? "lg:col-span-2" : "lg:col-span-3")
+            );
             return (
-              <RevealItem key={f.title} className="group surface-lit p-8 transition-colors hover:bg-ink-700">
-                <span className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-graphite-500 text-silver-300 transition-colors group-hover:border-volt-500/50 group-hover:text-volt-400">
-                  <FIcon className="h-5 w-5" />
+              <RevealItem key={f.title} className={cn("group surface-lit p-8 transition-colors hover:bg-ink-700", span)}>
+                <span className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-volt-500/30 bg-volt-500/[0.06] text-volt-400 transition-colors group-hover:border-volt-500/60">
+                  <FIcon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-5 font-display text-base text-silver-100">{f.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-silver-300">{f.body}</p>
@@ -122,13 +146,15 @@ export default async function CategoryPage({ params }: Params) {
           </div>
         </Reveal>
         {c.gallery.length > 0 && (
-          <RevealGroup className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            className={cn("mt-6 grid gap-6 sm:grid-cols-2", c.gallery.length % 3 === 0 && "lg:grid-cols-3")}
+          >
             {c.gallery.map((g) => (
               <RevealItem key={g.src}>
                 <ProductShot
                   image={g}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="aspect-[4/3] w-full rounded-[12px] border border-graphite-500"
+                  sizes={c.gallery.length % 3 === 0 ? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
+                  className={cn("w-full rounded-[12px] border border-graphite-500", c.gallery.length % 3 === 0 ? "aspect-[4/3]" : "aspect-[16/9]")}
                 />
               </RevealItem>
             ))}

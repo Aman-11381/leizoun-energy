@@ -1,7 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Heading } from "@/components/ui/Section";
 import { ButtonLink } from "@/components/ui/Button";
 import { ArrowRight } from "@/components/icons";
+
+export const metadata: Metadata = {
+  title: "Page not found",
+};
 
 export default function NotFound() {
   return (
@@ -21,7 +26,7 @@ export default function NotFound() {
             Back home <ArrowRight className="h-4 w-4" />
           </ButtonLink>
         </div>
-        <Link href="/products" className="mt-6 inline-block text-xs uppercase tracking-[0.14em] text-steel-400 hover:text-silver-200">
+        <Link href="/products" className="mt-4 inline-block py-3 text-xs uppercase tracking-[0.14em] text-steel-400 hover:text-silver-200">
           Or explore products
         </Link>
       </div>

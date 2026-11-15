@@ -40,7 +40,11 @@ export function Nav() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled ? "glass border-b border-graphite-500/70" : "border-b border-transparent"
+        mobileOpen
+          ? "border-b border-graphite-500 bg-ink-900"
+          : scrolled
+            ? "glass border-b border-graphite-500/70"
+            : "border-b border-transparent"
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-6 md:px-10">
@@ -65,7 +69,7 @@ export function Nav() {
 
             {megaOpen && (
               <div className="absolute left-1/2 top-full w-[560px] -translate-x-1/2 pt-3">
-                <div className="glass clip-shear grid grid-cols-2 gap-1 rounded-[10px] border border-graphite-500 p-3">
+                <div className="grid grid-cols-2 gap-1 rounded-[10px] border border-graphite-500 bg-ink-800/95 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur-md">
                   {productLinks.map((p) => {
                     const Icon = iconForSlug[p.slug];
                     return (
@@ -123,21 +127,23 @@ export function Nav() {
         </div>
 
         <button
-          className="flex h-10 w-10 items-center justify-center text-silver-100 lg:hidden"
+          className="-mr-2 flex h-11 w-11 items-center justify-center text-silver-100 lg:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
         >
-          {mobileOpen ? <Menu className="hidden" /> : null}
           {mobileOpen ? <Close className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {/* Mobile drawer */}
       <div
+        id="mobile-menu"
+        inert={!mobileOpen}
         className={cn(
-          "glass overflow-hidden border-t border-graphite-500 transition-[max-height,opacity] duration-500 lg:hidden",
-          mobileOpen ? "max-h-[80vh] opacity-100" : "max-h-0 opacity-0"
+          "overflow-y-auto border-t border-graphite-500 bg-ink-900 transition-[max-height,opacity] duration-500 lg:hidden",
+          mobileOpen ? "max-h-[calc(100svh-4rem)] opacity-100" : "pointer-events-none max-h-0 border-transparent opacity-0"
         )}
       >
         <div className="space-y-1 px-6 py-6">
@@ -156,6 +162,12 @@ export function Nav() {
                 </Link>
               );
             })}
+            <Link
+              href="/products"
+              className="flex items-center justify-between rounded-[6px] px-2 py-3 text-sm text-silver-300"
+            >
+              Full catalogue <ArrowUpRight className="h-4 w-4 text-steel-400" />
+            </Link>
           </div>
           <div className="my-3 hairline" />
           {nav

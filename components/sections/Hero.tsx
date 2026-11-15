@@ -48,16 +48,16 @@ export function Hero() {
           </div>
 
           <div
-            className="anim-hero mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-graphite-500 pt-6"
+            className="anim-hero mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-graphite-500 pt-6 sm:gap-6"
             style={d("0.42s")}
           >
             {[
               { k: "40+", v: "Years of expertise" },
               { k: "LiFePO4", v: "Lithium chemistry" },
-              { k: "Up to 7 yrs", v: "Warranty*" },
+              { k: "Up to 7 yrs", v: "Warranty · T&C apply" },
             ].map((s) => (
               <div key={s.v}>
-                <p className="font-display text-lg text-silver-100">{s.k}</p>
+                <p className="whitespace-nowrap font-display text-sm text-silver-100 sm:text-lg">{s.k}</p>
                 <p className="mt-1 text-xs text-steel-400">{s.v}</p>
               </div>
             ))}

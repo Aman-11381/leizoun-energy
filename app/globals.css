@@ -95,6 +95,13 @@ body {
   color: var(--color-silver-100);
 }
 
+/* Brand keyboard focus ring (components with their own ring opt out via outline-none) */
+:focus-visible {
+  outline: 2px solid var(--color-volt-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

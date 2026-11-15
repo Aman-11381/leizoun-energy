@@ -8,6 +8,7 @@ import { site } from "@/lib/config/site";
 
 export const metadata: Metadata = {
   title: "About",
+  alternates: { canonical: "/about" },
   description:
     "More than 40 years of lead-acid battery manufacturing under the brand Heritor — now taking the next step into lithium battery technology as LEIZOUN ENERGY.",
 };

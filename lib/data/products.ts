@@ -253,12 +253,6 @@ const categories: ProductCategory[] = [
         width: 1600,
         height: 1158,
       },
-      {
-        src: "/products/e-rickshaw/e-rickshaw-hero.webp",
-        alt: "LEIZOUN e-rickshaw battery, three-quarter view",
-        width: 1600,
-        height: 1091,
-      },
     ],
     keyStats: [
       { label: "Capacity", value: "105 Ah" },

@@ -7,7 +7,12 @@ import { InquirySection } from "@/components/sections/InquirySection";
 import { getFeaturedCategories } from "@/lib/data/products";
 import { Bolt, Shield, Cycle, Cpu, Wrench, Award, ArrowRight } from "@/components/icons";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { site } from "@/lib/config/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const advantages = [
   { icon: Wrench, title: "Zero Maintenance", body: "Sealed LiFePO4 packs — no water top-ups, no acid, no routine servicing." },
@@ -54,15 +59,14 @@ export default async function Home() {
               Our story
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <div className="mt-8 grid grid-cols-3 gap-6 border-t border-graphite-500 pt-6">
               {[
-                { big: "40+", l: "Years of expertise" },
-                { big: "LiFePO4", l: "Lithium chemistry" },
-                { big: "19", l: "Battery models" },
+                { big: site.legacy.brand, l: "Lead-acid legacy" },
+                { big: "19", l: "Lithium battery models" },
                 { big: "ISO", l: "9001 · 14001 certified" },
               ].map((s) => (
                 <div key={s.l}>
-                  <p className="font-display text-2xl text-metal">{s.big}</p>
+                  <p className="font-display text-lg text-metal sm:text-2xl">{s.big}</p>
                   <p className="mt-1 text-xs text-steel-400">{s.l}</p>
                 </div>
               ))}
@@ -112,8 +116,8 @@ export default async function Home() {
         <RevealGroup className="grid gap-px overflow-hidden rounded-[12px] border border-graphite-500 bg-graphite-500 sm:grid-cols-2 lg:grid-cols-3">
           {advantages.map((a) => (
             <RevealItem key={a.title} className="group surface-lit p-8 transition-colors hover:bg-ink-700">
-              <span className="flex h-11 w-11 items-center justify-center rounded-[8px] border border-graphite-500 text-silver-300 transition-colors group-hover:border-volt-500/50 group-hover:text-volt-400">
-                <a.icon className="h-5 w-5" />
+              <span className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-volt-500/30 bg-volt-500/[0.06] text-volt-400 transition-colors group-hover:border-volt-500/60">
+                <a.icon className="h-6 w-6" />
               </span>
               <h3 className="mt-5 font-display text-base text-silver-100">{a.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-silver-300">{a.body}</p>

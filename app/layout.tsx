@@ -5,6 +5,7 @@ import { site } from "@/lib/config/site";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingEnquire } from "@/components/layout/FloatingEnquire";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 const display = Michroma({
   weight: "400",
@@ -48,6 +49,33 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const orgJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.name,
+    legalName: site.legalName,
+    url: site.url,
+    logo: new URL("/icon.png", site.url).href,
+    description: site.description,
+    email: site.contact.email,
+    telephone: site.contact.phoneDisplay.replace(/\s/g, ""),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.contact.postal.street,
+      addressLocality: site.contact.postal.locality,
+      addressRegion: site.contact.postal.region,
+      postalCode: site.contact.postal.code,
+      addressCountry: site.contact.postal.country,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      telephone: site.contact.phoneDisplay.replace(/\s/g, ""),
+      email: site.contact.email,
+      areaServed: "IN",
+    },
+  };
+
   return (
     <html
       lang="en"
@@ -55,8 +83,17 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-ink-800 text-silver-100 antialiased">
+        <a
+          href="#main"
+          className="sr-only z-[60] rounded-[6px] bg-volt-600 px-4 py-3 text-sm font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        >
+          Skip to content
+        </a>
+        <JsonLd data={orgJsonLd} />
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main id="main" tabIndex={-1} className="flex-1 outline-none">
+          {children}
+        </main>
         <Footer />
         <FloatingEnquire />
       </body>

@@ -19,7 +19,7 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "relative py-20 md:py-28 lg:py-32",
+        "relative py-16 md:py-24 lg:py-28",
         tone === "raised" && "bg-ink-700/60",
         className
       )}

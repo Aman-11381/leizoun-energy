@@ -38,20 +38,20 @@ export function Footer() {
             <p className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
               {site.certification}
             </p>
-            <ul className="mt-6 space-y-3 text-sm text-silver-300">
+            <ul className="mt-6 space-y-1 text-sm text-silver-300">
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-steel-400" />
-                <a href={`tel:${site.contact.phoneDisplay.replace(/\s/g, "")}`} className="hover:text-silver-100">
+                <a href={`tel:${site.contact.phoneDisplay.replace(/\s/g, "")}`} className="inline-block py-2 hover:text-silver-100">
                   {site.contact.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-steel-400" />
-                <a href={`mailto:${site.contact.email}`} className="hover:text-silver-100">
+                <a href={`mailto:${site.contact.email}`} className="inline-block break-all py-2 hover:text-silver-100">
                   {site.contact.email}
                 </a>
               </li>
-              <li className="flex items-start gap-3">
+              <li className="flex items-start gap-3 pt-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-steel-400" />
                 {site.contact.address}
               </li>
@@ -60,11 +60,11 @@ export function Footer() {
 
           {columns.map((col) => (
             <div key={col.title} className="md:col-span-3">
-              <h3 className="eyebrow mb-5">{col.title}</h3>
-              <ul className="space-y-3">
+              <h3 className="eyebrow mb-3">{col.title}</h3>
+              <ul className="space-y-1">
                 {col.links.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="text-sm text-silver-300 transition-colors hover:text-silver-100">
+                    <Link href={l.href} className="inline-block py-2 text-sm text-silver-300 transition-colors hover:text-silver-100">
                       {l.label}
                     </Link>
                   </li>

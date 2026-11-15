@@ -8,6 +8,9 @@ const td = "px-4 py-3 text-sm text-silver-200";
 export function SpecTable({ sheet, models }: { sheet: SpecSheet; models: ProductModel[] }) {
   return (
     <div>
+      <p className="mb-2 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400 md:hidden" aria-hidden="true">
+        Swipe to see all columns →
+      </p>
       <div className="overflow-x-auto rounded-[12px] border border-graphite-500">
         {sheet.layout === "grouped" ? <Grouped sheet={sheet} models={models} /> : <Matrix sheet={sheet} models={models} />}
       </div>

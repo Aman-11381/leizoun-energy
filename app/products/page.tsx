@@ -10,6 +10,7 @@ import { ArrowRight, iconForFeature, iconForSlug } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Product Catalogue",
+  alternates: { canonical: "/products" },
   description:
     "Explore the LEIZOUN ENERGY range — LiFePO4 lithium inverter batteries (12.8 V, 25.6 V, 51.2 V) and e-rickshaw batteries (51.2 V, 60 V, 64 V · 105 Ah).",
 };
@@ -43,13 +44,14 @@ export default async function ProductsPage() {
               <Reveal key={c.slug}>
                 <Link
                   href={`/products/${c.slug}`}
-                  className="group relative grid overflow-hidden clip-shear rounded-[14px] border border-graphite-500 transition-colors hover:border-silver-300/40 lg:grid-cols-2"
+                  className="group relative grid overflow-hidden rounded-[14px] border border-graphite-500 transition-colors hover:border-silver-300/40 lg:grid-cols-2"
                 >
                   <div className={reversed ? "lg:order-2" : ""}>
                     <ProductShot
                       image={c.image}
                       eager={i === 0}
-                      className="aspect-[4/3] w-full lg:aspect-auto lg:h-full lg:min-h-[460px]"
+                      padding="p-[5%]"
+                      className="aspect-[4/3] w-full lg:aspect-auto lg:h-full lg:min-h-[420px]"
                     />
                   </div>
                   <div className={`flex flex-col justify-center p-8 md:p-12 ${reversed ? "lg:order-1" : ""}`}>
