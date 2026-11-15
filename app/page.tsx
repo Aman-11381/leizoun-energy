@@ -15,7 +15,7 @@ const advantages = [
   { title: "Zero Maintenance", body: "Both ranges are built on LiFePO4 (lithium iron phosphate) chemistry and need no maintenance." },
   { title: "Inbuilt BMS", body: "Every LEIZOUN battery has a built-in battery management system." },
   { title: "Upgraded Protections", body: "Overcharge, over-discharge and over-current protection on inverter batteries; ten built-in protections on e-rickshaw batteries." },
-  { title: "Long Life", body: "Over 2000 cycles on e-rickshaw batteries and up to 7 years' warranty on inverter batteries." },
+  { title: "Long Life", body: "Over 2000 cycles on e-rickshaw batteries, and a 6 / 7-year replacement warranty on both ranges." },
   { title: "Voltage Booster Switch", body: "Built into every LEIZOUN inverter battery." },
   { title: "Make in India", body: "Made in India by an ISO 9001:2015 / 14001:2015 certified company." },
 ];

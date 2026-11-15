@@ -221,13 +221,13 @@ const categories: ProductCategory[] = [
     shortName: "E-Rickshaw Batteries",
     tagline: "Built for the daily grind.",
     summary:
-      "LiFePO4 traction batteries for e-rickshaws — 51.2 V, 60 V and 64 V at 105 Ah, IP68 rated, 2000+ cycles and a 3-year warranty.",
+      "LiFePO4 traction batteries for e-rickshaws — 51.2 V, 60 V and 64 V at 105 Ah, IP68 rated, 2000+ cycles and a 6 / 7-year replacement warranty.",
     overview:
       "Engineered for commercial e-rickshaw duty, LEIZOUN e-rickshaw batteries pair LiFePO4 cells with an inbuilt BMS, built-in Bluetooth (BLE) and IP68 protection. High performance, zero maintenance and long-lasting backup — rated for over 2000 cycles at 80% depth of discharge.",
     chemistry: "LiFePO4",
     image: {
       src: "/products/e-rickshaw/e-rickshaw-hero.webp",
-      alt: "LEIZOUN lithium e-rickshaw battery, 51.2V 105Ah, with 3-year warranty label",
+      alt: "LEIZOUN lithium e-rickshaw battery, 51.2V 105Ah",
       width: 1600,
       height: 1091,
     },
@@ -255,7 +255,7 @@ const categories: ProductCategory[] = [
       { label: "Capacity", value: "105 Ah" },
       { label: "Nominal voltage", value: "51.2–64 V" },
       { label: "Cycle life", value: "2000+" },
-      { label: "Warranty", value: "3 yrs" },
+      { label: "Warranty", value: "6 / 7 yrs" },
     ],
     features: [
       { icon: "backup", title: "Long Lasting Backup", body: "105 Ah capacity, up to 6.72 kWh of rated energy and over 2000 cycles at 80% depth of discharge." },
@@ -277,7 +277,7 @@ const categories: ProductCategory[] = [
       "Current Limiting",
     ],
     warranty: {
-      headline: "3-year replacement warranty",
+      headline: "6 / 7-year replacement warranty",
       summary: warrantyCoverage,
       terms: [
         "The batteries are warranted against any manufacturing defects arising during the warranty period. This warranty covers only defects resulting from faulty materials or poor workmanship that affect normal use and is in conformity with the respective specifications.",
