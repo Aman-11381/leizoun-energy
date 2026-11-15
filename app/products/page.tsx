@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Section, Eyebrow, Heading, Divider } from "@/components/ui/Section";
+import { Section, Eyebrow, Heading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ProductShot } from "@/components/ui/ProductShot";
 import { ButtonLink } from "@/components/ui/Button";
 import { getCategories } from "@/lib/data/products";
-import { iconForFeature } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Product Catalogue",
@@ -19,7 +18,7 @@ export default async function ProductsPage() {
 
   return (
     <>
-      <Section className="pt-32 md:pt-40">
+      <Section className="pt-32 pb-12 md:pt-40 md:pb-16 lg:pb-16">
         <Reveal className="max-w-3xl">
           <Eyebrow index="◆">Catalogue</Eyebrow>
           <Heading as="h1" className="mt-5">
@@ -32,9 +31,7 @@ export default async function ProductsPage() {
         </Reveal>
       </Section>
 
-      <Divider />
-
-      <Section className="pt-0">
+      <Section className="pt-0 md:pt-0 lg:pt-0">
         <div className="flex flex-col gap-6 md:gap-8">
           {categories.map((c, i) => {
             const reversed = i % 2 === 1;
@@ -47,7 +44,7 @@ export default async function ProductsPage() {
                   <div className={reversed ? "lg:order-2" : ""}>
                     <ProductShot
                       image={c.image}
-                      eager={i === 0}
+                      eager
                       padding="p-[5%]"
                       className="aspect-[4/3] w-full lg:aspect-auto lg:h-full lg:min-h-[420px]"
                     />
@@ -71,18 +68,14 @@ export default async function ProductsPage() {
                     </dl>
 
                     <ul className="mt-6 flex flex-wrap gap-2">
-                      {c.features.map((f) => {
-                        const FIcon = iconForFeature[f.icon];
-                        return (
-                          <li
-                            key={f.title}
-                            className="inline-flex items-center gap-2 rounded-full border border-graphite-500 px-3 py-1 text-[0.7rem] text-steel-400"
-                          >
-                            <FIcon className="h-3.5 w-3.5" />
-                            {f.title}
-                          </li>
-                        );
-                      })}
+                      {c.features.map((f) => (
+                        <li
+                          key={f.title}
+                          className="rounded-full border border-graphite-500 px-3 py-1 text-[0.7rem] text-steel-400"
+                        >
+                          {f.title}
+                        </li>
+                      ))}
                     </ul>
 
                     <div className="mt-8 text-sm uppercase tracking-[0.14em] text-silver-200 transition-colors group-hover:text-volt-400">

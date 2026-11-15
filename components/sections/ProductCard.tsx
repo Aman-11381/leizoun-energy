@@ -3,12 +3,13 @@ import { Card } from "@/components/ui/Card";
 import { ProductShot } from "@/components/ui/ProductShot";
 import type { ProductCategory } from "@/lib/data/products";
 
-export function ProductCard({ category }: { category: ProductCategory }) {
+export function ProductCard({ category, eager = false }: { category: ProductCategory; eager?: boolean }) {
   return (
     <Card className="flex h-full flex-col">
       <Link href={`/products/${category.slug}`} className="flex h-full flex-col">
         <ProductShot
           image={category.image}
+          eager={eager}
           sizes="(min-width: 768px) 50vw, 100vw"
           className="aspect-[16/10] w-full rounded-t-[8px]"
         />

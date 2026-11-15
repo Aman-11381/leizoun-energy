@@ -24,7 +24,7 @@ There is no test suite. Use `npm run build` to check types and prerendering.
   - Pages must use the async accessors `getCategories`, `getFeaturedCategories`, and `getCategory(slug)`. Do not import the raw array.
   - Only `getCategorySlugs()` is synchronous, because `generateStaticParams` uses it.
   - This design lets a future CMS or API replace the array by changing only this file.
-  - Each feature's `icon` key maps to an icon through `iconForFeature` (`components/icons/index.tsx`).
+  - Features are listed in display priority; the product page shows the first two as large cards. A feature's `icon` key is a semantic tag (for example, `protection` hides the separate protections panel) and is not rendered as an icon.
   - A category's `specSheet.layout` controls how `components/sections/SpecTable.tsx` renders its models: `grouped` puts one row per model, grouped by `group` (the inverter range, grouped by voltage); `matrix` puts one row per parameter and one column per model (the e-rickshaw data sheet).
   - Product data is transcribed from the official pamphlets and data sheets. Don't invent specifications such as capacity, dimensions or weight.
 - **Inquiry flow:**

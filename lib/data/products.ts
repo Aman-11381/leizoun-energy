@@ -221,9 +221,9 @@ const categories: ProductCategory[] = [
     shortName: "E-Rickshaw Batteries",
     tagline: "Built for the daily grind.",
     summary:
-      "LiFePO4 traction batteries for e-rickshaws — 51.2 V, 60 V and 64 V at 105 Ah, IP68 sealed, 2000+ cycles and a 3-year warranty.",
+      "LiFePO4 traction batteries for e-rickshaws — 51.2 V, 60 V and 64 V at 105 Ah, IP68 rated, 2000+ cycles and a 3-year warranty.",
     overview:
-      "Engineered for commercial e-rickshaw duty, LEIZOUN e-rickshaw batteries pair LiFePO4 cells with a high-current BMS, built-in Bluetooth (BLE) and IP68 protection. High performance, zero maintenance and long-lasting backup — rated for over 2000 cycles at 80% depth of discharge.",
+      "Engineered for commercial e-rickshaw duty, LEIZOUN e-rickshaw batteries pair LiFePO4 cells with an inbuilt BMS, built-in Bluetooth (BLE) and IP68 protection. High performance, zero maintenance and long-lasting backup — rated for over 2000 cycles at 80% depth of discharge.",
     chemistry: "LiFePO4",
     image: {
       src: "/products/e-rickshaw/e-rickshaw-hero.webp",

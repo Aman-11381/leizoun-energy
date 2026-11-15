@@ -1,5 +1,4 @@
 import type { SVGProps } from "react";
-import type { FeatureIcon } from "@/lib/data/products";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -35,71 +34,9 @@ export const Moon = (p: IconProps) => (
   </Base>
 );
 
-export const Bolt = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
-  </Base>
-);
-
-export const Shield = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z" />
-    <path d="m9 12 2 2 4-4" />
-  </Base>
-);
-
-export const Battery = (p: IconProps) => (
-  <Base {...p}>
-    <rect x="3" y="7" width="15" height="10" />
-    <path d="M18 10h2v4h-2M6 10v4M9 10v4" />
-  </Base>
-);
-
-export const Cycle = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M4 12a8 8 0 0 1 13-6l2 2M20 12a8 8 0 0 1-13 6l-2-2" />
-    <path d="M19 3v5h-5M5 21v-5h5" />
-  </Base>
-);
-
-export const Gauge = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M4 18a8 8 0 1 1 16 0" />
-    <path d="M12 14 16 9" />
-    <path d="M4 18h16" />
-  </Base>
-);
-
-export const Cpu = (p: IconProps) => (
-  <Base {...p}>
-    <rect x="7" y="7" width="10" height="10" />
-    <rect x="10" y="10" width="4" height="4" />
-    <path d="M10 3v2M14 3v2M10 19v2M14 19v2M3 10h2M3 14h2M19 10h2M19 14h2" />
-  </Base>
-);
-
-export const Thermometer = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M12 4a2 2 0 0 1 2 2v8a4 4 0 1 1-4 0V6a2 2 0 0 1 2-2Z" />
-  </Base>
-);
-
-export const Leaf = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14Z" />
-    <path d="M9 15c3-3 6-4 8-5" />
-  </Base>
-);
-
 export const Check = (p: IconProps) => (
   <Base {...p}>
     <path d="m5 12 5 5L20 6" />
-  </Base>
-);
-
-export const Plus = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M12 5v14M5 12h14" />
   </Base>
 );
 
@@ -120,13 +57,6 @@ export const MapPin = (p: IconProps) => (
   <Base {...p}>
     <path d="M12 21c5-5 7-8 7-11a7 7 0 1 0-14 0c0 3 2 6 7 11Z" />
     <circle cx="12" cy="10" r="2.5" />
-  </Base>
-);
-
-export const Clock = (p: IconProps) => (
-  <Base {...p}>
-    <circle cx="12" cy="12" r="8" />
-    <path d="M12 8v4l3 2" />
   </Base>
 );
 
@@ -154,36 +84,3 @@ export const ChevronDown = (p: IconProps) => (
     <path d="m6 9 6 6 6-6" />
   </Base>
 );
-
-/* ---- Feature icons ---- */
-
-export const Wrench = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M14.5 4a4.5 4.5 0 0 0-4.2 6.1L4 16.4 7.6 20l6.3-6.3A4.5 4.5 0 0 0 20 9.5l-2.7 2.7-3-.5-.5-3L16.5 6A4.5 4.5 0 0 0 14.5 4Z" />
-  </Base>
-);
-
-export const Award = (p: IconProps) => (
-  <Base {...p}>
-    <circle cx="12" cy="9" r="5" />
-    <path d="m9 13.5-1.5 7L12 18l4.5 2.5-1.5-7" />
-  </Base>
-);
-
-export const Bluetooth = (p: IconProps) => (
-  <Base {...p}>
-    <path d="m7 7 10 10-5 4V3l5 4L7 17" />
-  </Base>
-);
-
-export const iconForFeature: Record<FeatureIcon, (p: IconProps) => React.JSX.Element> = {
-  maintenance: Wrench,
-  bms: Cpu,
-  booster: Bolt,
-  protection: Shield,
-  india: Award,
-  performance: Gauge,
-  backup: Battery,
-  eco: Leaf,
-  bluetooth: Bluetooth,
-};

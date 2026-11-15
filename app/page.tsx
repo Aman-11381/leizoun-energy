@@ -4,7 +4,6 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ProductCard } from "@/components/sections/ProductCard";
 import { InquirySection } from "@/components/sections/InquirySection";
 import { getFeaturedCategories } from "@/lib/data/products";
-import { Bolt, Shield, Cycle, Cpu, Wrench, Award } from "@/components/icons";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -13,12 +12,12 @@ export const metadata: Metadata = {
 };
 
 const advantages = [
-  { icon: Wrench, title: "Zero Maintenance", body: "Sealed LiFePO4 packs — no water top-ups, no acid, no routine servicing." },
-  { icon: Cpu, title: "Inbuilt BMS", body: "An intelligent battery management system monitors and balances every cell." },
-  { icon: Shield, title: "Upgraded Protections", body: "Guards against overcharge, over-discharge, over-current and temperature extremes." },
-  { icon: Cycle, title: "Long Life", body: "2000+ cycles on e-rickshaw packs and up to 7 years' warranty on inverter batteries." },
-  { icon: Bolt, title: "Voltage Booster", body: "Inverter batteries include a voltage booster switch, as listed in their official specifications." },
-  { icon: Award, title: "Make in India", body: "Made in India by an ISO 9001:2015 / 14001:2015 certified company." },
+  { title: "Zero Maintenance", body: "Both ranges are built on LiFePO4 (lithium iron phosphate) chemistry and need no maintenance." },
+  { title: "Inbuilt BMS", body: "Every LEIZOUN battery has a built-in battery management system." },
+  { title: "Upgraded Protections", body: "Overcharge, over-discharge and over-current protection on inverter batteries; ten built-in protections on e-rickshaw batteries." },
+  { title: "Long Life", body: "Over 2000 cycles on e-rickshaw batteries and up to 7 years' warranty on inverter batteries." },
+  { title: "Voltage Booster Switch", body: "Built into every LEIZOUN inverter battery." },
+  { title: "Make in India", body: "Made in India by an ISO 9001:2015 / 14001:2015 certified company." },
 ];
 
 export default async function Home() {
@@ -47,9 +46,9 @@ export default async function Home() {
           </Reveal>
         </div>
         <RevealGroup className="grid gap-6 md:grid-cols-2">
-          {featured.map((c) => (
+          {featured.map((c, i) => (
             <RevealItem key={c.slug}>
-              <ProductCard category={c} />
+              <ProductCard category={c} eager={i === 0} />
             </RevealItem>
           ))}
         </RevealGroup>
@@ -63,14 +62,12 @@ export default async function Home() {
             Engineering advantages, built in
           </Heading>
         </Reveal>
-        <RevealGroup className="grid gap-px overflow-hidden rounded-[12px] border border-graphite-500 bg-graphite-500 sm:grid-cols-2 lg:grid-cols-3">
-          {advantages.map((a) => (
-            <RevealItem key={a.title} className="group surface-lit p-8 transition-colors hover:bg-ink-700">
-              <span className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-volt-500/30 bg-volt-500/[0.06] text-volt-400 transition-colors group-hover:border-volt-500/60">
-                <a.icon className="h-6 w-6" />
-              </span>
-              <h3 className="mt-5 font-display text-base text-silver-100">{a.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-silver-300">{a.body}</p>
+        <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {advantages.map((a, i) => (
+            <RevealItem key={a.title} className="surface-lit rounded-[12px] border border-graphite-500 p-7">
+              <span className="font-mono text-xs tracking-[0.2em] text-volt-400">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-4 font-display text-base text-silver-100">{a.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-silver-300">{a.body}</p>
             </RevealItem>
           ))}
         </RevealGroup>
