@@ -6,6 +6,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingEnquire } from "@/components/layout/FloatingEnquire";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getCategories } from "@/lib/data/products";
 
 const display = Michroma({
   weight: "400",
@@ -50,9 +51,17 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const navProducts = (await getCategories()).map((c) => ({
+    slug: c.slug,
+    name: c.name,
+    tagline: c.tagline,
+    image: c.image,
+    keyStats: c.keyStats,
+    modelCount: c.models.length,
+  }));
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -98,7 +107,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <JsonLd data={orgJsonLd} />
-        <Nav />
+        <Nav products={navProducts} />
         <main id="main" tabIndex={-1} className="flex-1 outline-none">
           {children}
         </main>
