@@ -88,14 +88,18 @@ export function Nav({ products }: { products: NavProduct[] }) {
                   onMouseEnter={isProducts ? openProducts : closeProducts}
                   onMouseLeave={isProducts ? closeProductsSoon : undefined}
                   className={cn(
-                    "relative px-4 py-2 text-xs uppercase tracking-[0.14em] transition-colors",
+                    "group/link relative px-4 py-2 text-xs uppercase tracking-[0.14em] transition-colors",
                     active || (isProducts && productsOpen) ? "text-silver-100" : "text-silver-300 hover:text-silver-100"
                   )}
                 >
                   {n.label}
-                  {active && (
-                    <span className="absolute inset-x-4 -bottom-0.5 h-px bg-volt-500 shadow-[0_0_10px_rgba(0,127,196,0.7)]" />
-                  )}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "absolute inset-x-4 -bottom-0.5 h-px bg-volt-500 shadow-[0_0_10px_rgba(0,127,196,0.7)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                      active ? "scale-x-100" : "scale-x-0 group-hover/link:scale-x-100 group-focus-visible/link:scale-x-100"
+                    )}
+                  />
                 </Link>
               );
               if (!isProducts) return link;

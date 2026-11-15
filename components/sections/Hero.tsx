@@ -15,7 +15,7 @@ export function Hero() {
       <div className="relative mx-auto grid min-h-[calc(100svh-4rem)] w-full max-w-[1280px] items-center gap-12 px-6 py-16 md:px-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <p className="anim-hero eyebrow mb-6 flex items-center gap-3" style={d("0.05s")}>
-            <span className="h-px w-8 bg-volt-500 shadow-[0_0_10px_rgba(0,127,196,0.7)]" />
+            <span className="anim-line h-px w-8 bg-volt-500 shadow-[0_0_10px_rgba(0,127,196,0.7)]" />
             40+ Years of Battery Expertise
           </p>
 
@@ -72,6 +72,7 @@ export function Hero() {
               height: 927,
             }}
             eager
+            float
             padding="p-[6%]"
             className="aspect-[4/3] w-full rounded-[14px] border border-graphite-500"
           />

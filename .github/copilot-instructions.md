@@ -48,6 +48,7 @@ There is no test suite. Use `npm run build` to check types and prerendering.
 - **Motion:**
   - Scroll reveals are CSS-only (`.reveal` + scroll-driven animations). `Reveal`, `RevealGroup`, and `RevealItem` add the class without JavaScript. Their `delay` and `stagger` props are intentionally ignored.
   - Content must remain visible without JavaScript.
+  - Other motion is also CSS-only and lives in `app/globals.css` inside `prefers-reduced-motion: no-preference`: `.anim-hero`/`.anim-hero-visual` (hero entrance), `.anim-line`, `.anim-float` (via `ProductShot`'s `float` prop), and `.anim-page` (page fade, applied by `app/template.tsx`). `ProductShot` zooms slightly when an ancestor `group` is hovered.
   - The `motion` library (`motion/react`) is only for small client widgets such as `StatCounter`, and it must respect `useReducedMotion`.
 - **Product images:** The official renders are WebP files in `public/products/`. Render transparent product shots with `ProductShot` (`components/ui/ProductShot.tsx`, which wraps `next/image` with `fill`), and use `next/image` directly for the opaque pamphlet `scene` banners. In Next 16, use `loading="eager"` or `preload` instead of the deprecated `priority` prop.
 - **Logos:** Use the official logos in `public/brand/` according to the brand guideline:

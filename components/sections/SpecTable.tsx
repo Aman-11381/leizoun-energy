@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { cn } from "@/lib/utils";
 import type { ProductModel, SpecSheet } from "@/lib/data/products";
 
 const th = "px-4 py-3 text-left font-mono text-[0.65rem] font-normal uppercase tracking-[0.18em] text-steel-400";
@@ -48,7 +49,10 @@ function Grouped({ sheet, models }: { sheet: SpecSheet; models: ProductModel[] }
               {rows.map((m, i) => (
                 <tr
                   key={m.sku}
-                  className={i === 0 ? "border-t border-graphite-500" : "border-t border-graphite-500/40"}
+                  className={cn(
+                    "transition-colors hover:bg-volt-500/[0.06]",
+                    i === 0 ? "border-t border-graphite-500" : "border-t border-graphite-500/40"
+                  )}
                 >
                   {i === 0 && (
                     <th
@@ -88,7 +92,7 @@ function Matrix({ sheet, models }: { sheet: SpecSheet; models: ProductModel[] })
       </thead>
       <tbody>
         {sheet.fields.map((f) => (
-          <tr key={f.key} className="border-t border-graphite-500/40 odd:bg-ink-700/40">
+          <tr key={f.key} className="border-t border-graphite-500/40 transition-colors odd:bg-ink-700/40 hover:bg-volt-500/[0.06]">
             <th scope="row" className="sticky left-0 bg-ink-800 px-4 py-3 text-left text-sm font-normal text-silver-300">
               {f.label}
             </th>

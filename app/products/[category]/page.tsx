@@ -101,6 +101,7 @@ export default async function CategoryPage({ params }: Params) {
             <ProductShot
               image={c.image}
               eager
+              float
               padding="p-[4%]"
               className="aspect-[4/3] w-full rounded-[14px] border border-graphite-500"
             />
@@ -123,7 +124,7 @@ export default async function CategoryPage({ params }: Params) {
             className={cn("mt-6 grid gap-6 sm:grid-cols-2", c.gallery.length % 3 === 0 && "lg:grid-cols-3")}
           >
             {c.gallery.map((g) => (
-              <RevealItem key={g.src}>
+              <RevealItem key={g.src} className="group">
                 <ProductShot
                   image={g}
                   sizes={c.gallery.length % 3 === 0 ? "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" : "(min-width: 640px) 50vw, 100vw"}
