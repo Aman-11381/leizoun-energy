@@ -56,10 +56,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const navProducts = (await getCategories()).map((c) => ({
     slug: c.slug,
-    name: c.name,
-    tagline: c.tagline,
-    image: c.image,
-    keyStats: c.keyStats,
+    shortName: c.shortName,
     modelCount: c.models.length,
   }));
   const orgJsonLd = {

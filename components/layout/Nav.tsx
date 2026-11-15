@@ -6,13 +6,12 @@ import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { ButtonLink } from "@/components/ui/Button";
-import { ProductShot } from "@/components/ui/ProductShot";
 import { nav } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Menu, Close } from "@/components/icons";
+import { Menu, Close } from "@/components/icons";
 import type { ProductCategory } from "@/lib/data/products";
 
-export type NavProduct = Pick<ProductCategory, "slug" | "name" | "tagline" | "image" | "keyStats"> & {
+export type NavProduct = Pick<ProductCategory, "slug" | "shortName"> & {
   modelCount: number;
 };
 
@@ -63,7 +62,7 @@ export function Nav({ products }: { products: NavProduct[] }) {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        mobileOpen || productsOpen
+        mobileOpen
           ? "border-b border-graphite-500 bg-ink-900"
           : scrolled
             ? "glass border-b border-graphite-500/70"
@@ -104,6 +103,7 @@ export function Nav({ products }: { products: NavProduct[] }) {
                 // The panel sits inside this wrapper so keyboard focus moves Products → panel → About.
                 <div
                   key={n.href}
+                  className="relative"
                   onFocus={() => {
                     if (skipFocusOpen.current) skipFocusOpen.current = false;
                     else openProducts();
@@ -201,70 +201,37 @@ function ProductsPanel({
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 }) {
-  const totalModels = products.reduce((sum, p) => sum + p.modelCount, 0);
   return (
+    // pt-2 keeps the hover area continuous between the link and the menu.
     <div
       id="products-panel"
       inert={!open}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       className={cn(
-        "absolute inset-x-0 top-full border-b border-graphite-500 bg-ink-900 shadow-[0_24px_48px_-24px_rgba(0,0,0,0.45)]",
-        "transition-[opacity,transform,visibility] duration-200 motion-reduce:transition-none",
+        "absolute left-0 top-full w-60 pt-2",
+        "transition-[opacity,transform,visibility] duration-150 motion-reduce:transition-none",
         open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
       )}
     >
-      <div className="mx-auto grid w-full max-w-[1280px] gap-6 px-6 py-8 md:px-10 lg:grid-cols-[1fr_1fr_15rem]">
+      <div className="rounded-[8px] border border-graphite-500 bg-ink-900 p-2 shadow-[0_16px_32px_-16px_rgba(0,0,0,0.5)]">
         {products.map((p) => (
           <Link
             key={p.slug}
             href={`/products/${p.slug}`}
-            className="group grid grid-cols-[11rem_1fr] overflow-hidden rounded-[12px] border border-graphite-500 transition-colors hover:border-silver-300/40"
+            className="block rounded-[6px] px-3 py-2.5 transition-colors hover:bg-graphite-600/60"
           >
-            <ProductShot image={p.image} sizes="176px" padding="p-[5%]" eager className="h-full min-h-[11rem]" />
-            <span className="flex flex-col p-5">
-              <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel-400">{p.tagline}</span>
-              <span className="mt-2 font-display text-base leading-snug text-silver-100">{p.name}</span>
-              <span className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3">
-                {p.keyStats.slice(0, 4).map((s) => (
-                  <span key={s.label} className="block">
-                    <span className="block font-mono text-[0.6rem] uppercase tracking-[0.16em] text-steel-400">{s.label}</span>
-                    <span className="mt-0.5 block text-sm text-silver-100">{s.value}</span>
-                  </span>
-                ))}
-              </span>
-              <span className="mt-auto flex items-center gap-2 pt-4 text-[0.7rem] uppercase tracking-[0.18em] text-silver-200 transition-colors group-hover:text-volt-400">
-                View {p.modelCount} models
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-              </span>
-            </span>
+            <span className="block text-sm text-silver-100">{p.shortName}</span>
+            <span className="mt-0.5 block text-xs text-steel-400">{p.modelCount} models</span>
           </Link>
         ))}
-
-        <div className="flex flex-col justify-between rounded-[12px] border border-graphite-500 p-5">
-          <span>
-            <span className="block font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel-400">Catalogue</span>
-            <span className="mt-2 block text-sm leading-relaxed text-silver-200">
-              {products.length} LiFePO4 product lines, {totalModels} models.
-            </span>
-          </span>
-          <span className="mt-6 flex flex-col gap-3">
-            <Link
-              href="/products"
-              className="group flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-silver-100 transition-colors hover:text-volt-400"
-            >
-              Full catalogue
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="/contact"
-              className="group flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-silver-300 transition-colors hover:text-volt-400"
-            >
-              Help me choose
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </span>
-        </div>
+        <div className="mx-3 my-1 h-px bg-graphite-500" />
+        <Link
+          href="/products"
+          className="block rounded-[6px] px-3 py-2.5 text-xs uppercase tracking-[0.14em] text-silver-300 transition-colors hover:bg-graphite-600/60 hover:text-silver-100"
+        >
+          All products
+        </Link>
       </div>
     </div>
   );

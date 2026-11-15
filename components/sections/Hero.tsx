@@ -1,7 +1,6 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { ProductShot } from "@/components/ui/ProductShot";
 import { site } from "@/lib/config/site";
-import { ArrowRight } from "@/components/icons";
 import type { CSSProperties } from "react";
 
 const d = (delay: string) => ({ ["--d" as string]: delay } as CSSProperties);
@@ -40,10 +39,10 @@ export function Hero() {
 
           <div className="anim-hero mt-9 flex flex-col gap-4 sm:flex-row" style={d("0.32s")}>
             <ButtonLink href="/products/inverter" size="lg">
-              Inverter Batteries <ArrowRight className="h-4 w-4" />
+              Inverter Batteries
             </ButtonLink>
             <ButtonLink href="/products/e-rickshaw" size="lg" variant="secondary">
-              E-Rickshaw Batteries <ArrowRight className="h-4 w-4" />
+              E-Rickshaw Batteries
             </ButtonLink>
           </div>
 
