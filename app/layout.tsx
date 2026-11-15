@@ -20,6 +20,10 @@ const body = Roboto({
   display: "swap",
 });
 
+// Runs before first paint: saved choice wins, otherwise follow the device setting.
+// Without JS the site stays dark (the CSS default).
+const themeScript = `(function(){try{var d=document.documentElement,m=matchMedia("(prefers-color-scheme: light)"),s=localStorage.getItem("theme");d.dataset.theme=s==="light"||s==="dark"?s:m.matches?"light":"dark";m.addEventListener("change",function(e){var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")d.dataset.theme=e.matches?"light":"dark"})}catch(e){}})()`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -81,7 +85,11 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       className={`${display.variable} ${body.variable} h-full`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col bg-ink-800 text-silver-100 antialiased">
         <a
           href="#main"

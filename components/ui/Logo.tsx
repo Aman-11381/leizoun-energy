@@ -17,15 +17,27 @@ export function Logo({
   /** Load immediately (above-the-fold header usage). */
   eager?: boolean;
 }) {
+  // Both variants are rendered; CSS shows the one matching the active theme.
+  // The light variant is derived from the official logo (silver recoloured to graphite).
   const content = (
-    <Image
-      src="/brand/leizoun-logo-horizontal.png"
-      alt="LEIZOUN ENERGY — Lithium Power. Limitless Future."
-      width={1600}
-      height={286}
-      loading={eager ? "eager" : "lazy"}
-      className={cn("h-9 w-auto", className)}
-    />
+    <>
+      <Image
+        src="/brand/leizoun-logo-horizontal.png"
+        alt="LEIZOUN ENERGY — Lithium Power. Limitless Future."
+        width={1600}
+        height={286}
+        loading={eager ? "eager" : "lazy"}
+        className={cn("h-9 w-auto light:hidden", className)}
+      />
+      <Image
+        src="/brand/leizoun-logo-horizontal-light.png"
+        alt="LEIZOUN ENERGY — Lithium Power. Limitless Future."
+        width={1600}
+        height={286}
+        loading="lazy"
+        className={cn("hidden h-9 w-auto light:block", className)}
+      />
+    </>
   );
 
   if (href === null) return content;

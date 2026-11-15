@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* `light:` variant — applies when <html data-theme="light"> (set by the inline script in layout.tsx). */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
 /*
   LEIZOUN ENERGY — Design tokens
   Follows the official brand guideline (LE_Brand Guideline Sheet):
@@ -7,7 +10,7 @@
     Graphite Black #101217 · Steel Grey #6F747A (secondary)
     Pure White #FFFFFF (neutral)
     Michroma (headlines, numbers) · Roboto (body, captions, specs, UI)
-  Dark-first. Blue is used surgically.
+  Dark-first, with a light theme via [data-theme="light"]. Blue is used surgically.
 */
 
 @theme {
@@ -58,6 +61,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --background: var(--color-ink-800);
   --foreground: var(--color-silver-100);
 
@@ -71,6 +75,45 @@
   );
   --volt-glow: 0 0 24px rgba(0, 127, 196, 0.6);
   --hairline: rgba(183, 185, 188, 0.14);
+  --glass-bg: rgba(22, 24, 30, 0.72);
+  --surface-glow: rgba(183, 185, 188, 0.08);
+  --grid-line: rgba(183, 185, 188, 0.045);
+  --shadow-pop: 0 24px 60px rgba(0, 0, 0, 0.5);
+  --product-shadow: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+}
+
+/*
+  Light theme — the same token names, remapped. Roles are preserved:
+  ink-* = page/section backgrounds, graphite-600 = cards, graphite-500 = borders,
+  steel-400 = muted text, silver-* = body → strongest text, volt-400 = accent text.
+*/
+[data-theme="light"] {
+  color-scheme: light;
+  --color-ink-900: #eceef1;
+  --color-ink-800: #f6f7f9;
+  --color-ink-700: #eef0f3;
+  --color-graphite-600: #ffffff;
+  --color-graphite-500: #d5d9de;
+  --color-steel-400: #5d636a;
+  --color-silver-300: #3d434a;
+  --color-silver-200: #262a31;
+  --color-silver-100: #101217; /* Graphite Black */
+  --color-volt-400: #006aa6; /* darker tint for small text on light */
+
+  --metal-gradient: linear-gradient(
+    180deg,
+    #3a3f46 0%,
+    #101217 45%,
+    #2b2f36 70%,
+    #6f747a 100%
+  );
+  --volt-glow: 0 0 16px rgba(0, 127, 196, 0.35);
+  --hairline: rgba(16, 18, 23, 0.12);
+  --glass-bg: rgba(246, 247, 249, 0.82);
+  --surface-glow: rgba(255, 255, 255, 0.9);
+  --grid-line: rgba(16, 18, 23, 0.05);
+  --shadow-pop: 0 24px 60px rgba(16, 18, 23, 0.14);
+  --product-shadow: drop-shadow(0 24px 28px rgba(16, 18, 23, 0.22));
 }
 
 * {
@@ -188,7 +231,7 @@ body {
 
 /* Frosted glass surface */
 .glass {
-  background: rgba(22, 24, 30, 0.72);
+  background: var(--glass-bg);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
@@ -196,15 +239,15 @@ body {
 /* Subtle top-down surface light for cards */
 .surface-lit {
   background:
-    radial-gradient(120% 80% at 50% -20%, rgba(183, 185, 188, 0.08), transparent 60%),
+    radial-gradient(120% 80% at 50% -20%, var(--surface-glow), transparent 60%),
     var(--color-graphite-600);
 }
 
 /* Faint engineering grid backdrop */
 .grid-backdrop {
   background-image:
-    linear-gradient(rgba(183, 185, 188, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(183, 185, 188, 0.045) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 

@@ -22,6 +22,19 @@ function Base({ children, ...props }: IconProps & { children: React.ReactNode })
   );
 }
 
+export const Sun = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+  </Base>
+);
+
+export const Moon = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />
+  </Base>
+);
+
 export const ArrowRight = (p: IconProps) => (
   <Base {...p}>
     <path d="M4 12h15M13 6l6 6-6 6" />

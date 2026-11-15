@@ -142,7 +142,7 @@ export default async function CategoryPage({ params }: Params) {
         <Reveal>
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[14px] border border-graphite-500 md:aspect-[21/9]">
             <Image src={c.scene.src} alt={c.scene.alt} fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-transparent to-transparent light:hidden" />
           </div>
         </Reveal>
         {c.gallery.length > 0 && (

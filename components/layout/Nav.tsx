@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { ButtonLink } from "@/components/ui/Button";
 import { nav } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
@@ -69,7 +70,7 @@ export function Nav() {
 
             {megaOpen && (
               <div className="absolute left-1/2 top-full w-[560px] -translate-x-1/2 pt-3">
-                <div className="grid grid-cols-2 gap-1 rounded-[10px] border border-graphite-500 bg-ink-800/95 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                <div className="grid grid-cols-2 gap-1 rounded-[10px] border border-graphite-500 bg-ink-800/95 p-3 shadow-[var(--shadow-pop)] backdrop-blur-md">
                   {productLinks.map((p) => {
                     const Icon = iconForSlug[p.slug];
                     return (
@@ -121,20 +122,26 @@ export function Nav() {
             })}
         </nav>
 
-          <ButtonLink href="/contact" size="sm" aria-current={pathname === "/contact" ? "page" : undefined}>
-            Enquire
-          </ButtonLink>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <ButtonLink href="/contact" size="sm" aria-current={pathname === "/contact" ? "page" : undefined}>
+              Enquire
+            </ButtonLink>
+          </div>
         </div>
 
-        <button
-          className="-mr-2 flex h-11 w-11 items-center justify-center text-silver-100 lg:hidden"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-        >
-          {mobileOpen ? <Close className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="-mr-2 flex items-center lg:hidden">
+          <ThemeToggle />
+          <button
+            className="flex h-11 w-11 items-center justify-center text-silver-100"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+          >
+            {mobileOpen ? <Close className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile drawer */}
