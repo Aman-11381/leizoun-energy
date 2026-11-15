@@ -39,7 +39,7 @@ export const site = {
   distributorship: {
     company: "Eastman Power Solutions",
     url: "https://eastmanpowersolutions.in",
-    title: "Official and sole distributor for Telangana",
+    title: "Authorized distributor for Telangana",
     products: "home inverters, inverter batteries and LithTec combos",
   },
 

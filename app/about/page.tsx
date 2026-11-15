@@ -130,7 +130,7 @@ export default function AboutPage() {
       {/* Distributorship */}
       <Section tone="raised">
         <Reveal className="max-w-3xl">
-          <Eyebrow index="03">Authorised Distributor</Eyebrow>
+          <Eyebrow index="03">Authorized Distributor</Eyebrow>
           <Heading as="h2" className="mt-5">
             {site.distributorship.company}
           </Heading>
@@ -138,7 +138,7 @@ export default function AboutPage() {
             {site.distributorship.title}
           </p>
           <p className="mt-6 leading-relaxed text-silver-300">
-            {site.name} is the official and sole distributor of {site.distributorship.company} in
+            {site.name} is an authorized distributor of {site.distributorship.company} in
             Telangana, offering their {site.distributorship.products}.
           </p>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
