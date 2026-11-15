@@ -8,7 +8,7 @@ import { site } from "@/lib/config/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with LEIZOUN ENERGY. Send an enquiry via WhatsApp or email — distributors, dealers, OEM partners and buyers welcome.",
+    "Get in touch with LEIZOUN ENERGY. Send an enquiry via WhatsApp or email — distributors, dealers and customers welcome.",
 };
 
 export default function ContactPage() {
@@ -22,7 +22,8 @@ export default function ContactPage() {
           </Heading>
           <p className="mt-6 max-w-md text-[length:var(--text-lead)] leading-relaxed text-silver-300">
             Whether you&apos;re a distributor, dealer, or looking for a lithium battery for your
-            home or e-rickshaw — tell us what you need and our team will respond fast.
+            home or e-rickshaw — tell us about your application and we&apos;ll help you find the
+            right solution.
           </p>
 
           <dl className="mt-10 max-w-md space-y-5 border-t border-graphite-500 pt-8">

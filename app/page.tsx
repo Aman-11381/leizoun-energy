@@ -7,6 +7,7 @@ import { InquirySection } from "@/components/sections/InquirySection";
 import { getFeaturedCategories } from "@/lib/data/products";
 import { Bolt, Shield, Cycle, Cpu, Wrench, Award, ArrowRight } from "@/components/icons";
 import Link from "next/link";
+import { site } from "@/lib/config/site";
 
 const advantages = [
   { icon: Wrench, title: "Zero Maintenance", body: "Sealed LiFePO4 packs — no water top-ups, no acid, no routine servicing." },
@@ -14,7 +15,7 @@ const advantages = [
   { icon: Shield, title: "Upgraded Protections", body: "Guards against overcharge, over-discharge, over-current and temperature extremes." },
   { icon: Cycle, title: "Long Life", body: "2000+ cycles on e-rickshaw packs and up to 7 years' warranty on inverter batteries." },
   { icon: Bolt, title: "Voltage Booster", body: "Inverter batteries include a voltage booster switch, as listed in their official specifications." },
-  { icon: Award, title: "Make in India", body: "Manufactured in Hyderabad by an ISO 9001:2015 / 14001:2015 certified company." },
+  { icon: Award, title: "Make in India", body: "Made in India by an ISO 9001:2015 / 14001:2015 certified company." },
 ];
 
 export default async function Home() {
@@ -28,18 +29,31 @@ export default async function Home() {
       <Section>
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
-            <Eyebrow index="01">Our Legacy</Eyebrow>
+            <Eyebrow index="01">Our Legacy · Our Experience</Eyebrow>
             <Heading as="h2" className="mt-5">
-              A legacy of battery expertise. The future of lithium energy.
+              The next generation of energy
             </Heading>
           </Reveal>
           <Reveal delay={0.1} className="flex flex-col justify-center">
             <p className="text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-              For over 40 years, we&apos;ve manufactured dependable batteries and earned the trust
-              of customers through quality, expertise, and long-term commitment. LEIZOUN ENERGY is
-              our next chapter — bringing that same deep technical knowledge, proven manufacturing,
-              and customer service to advanced lithium technology for a fast-electrifying world.
+              With more than 40 years of experience in lead-acid battery manufacturing under the
+              brand {site.legacy.brand}, we have developed deep knowledge of battery technology,
+              manufacturing, quality, market requirements, and customer needs.
             </p>
+            <p className="mt-5 leading-relaxed text-silver-300">
+              Today, as the world moves towards electric mobility, renewable energy, and advanced
+              energy storage, we are taking our next significant step into lithium battery
+              technology. Our approach remains unchanged: understand the application, provide the
+              right solution, deliver consistent quality, and support our customers for the long
+              term.
+            </p>
+            <Link
+              href="/about"
+              className="group mt-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.14em] text-silver-200 hover:text-volt-400"
+            >
+              Our story
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
             <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
               {[
                 { big: "40+", l: "Years of expertise" },

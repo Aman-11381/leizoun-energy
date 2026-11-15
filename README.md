@@ -23,7 +23,7 @@ npm run lint
 | `/` | Landing — hero, positioning, featured products, advantages, strengths, CTA, inquiry |
 | `/products` | Catalogue — alternating showcase of the two product lines |
 | `/products/[category]` | Product-line page (`inverter`, `e-rickshaw`): features, gallery, model spec table, protections, warranty |
-| `/about` | Brand story — mission, vision, journey, manufacturing, values |
+| `/about` | Company story from the official introduction — Heritor legacy, journey, applications, approach, values |
 | `/contact` | Contact + inquiry form |
 
 ## Structure

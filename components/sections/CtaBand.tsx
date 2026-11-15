@@ -5,7 +5,7 @@ import { ArrowRight } from "@/components/icons";
 
 export function CtaBand({
   title = "Power your business with LEIZOUN",
-  subtitle = "Partner with a battery manufacturer that pairs four decades of trust with next-generation lithium technology. Distributors, dealers and OEMs welcome.",
+  subtitle = "Four decades of battery expertise, now in lithium. We understand the application, provide the right solution, deliver consistent quality, and support our customers for the long term.",
   primary = { label: "Become a Distributor", href: "/contact" },
   secondary = { label: "View Products", href: "/products" },
 }: {

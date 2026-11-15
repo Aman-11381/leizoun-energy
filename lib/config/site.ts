@@ -8,16 +8,14 @@ export const site = {
   legalName: "LEIZOUN ENERGY LLP",
   tagline: "Lithium Power. Limitless Future.",
   description:
-    "Backed by four decades of battery manufacturing expertise, LEIZOUN ENERGY brings a trusted legacy of quality into next-generation LiFePO4 lithium batteries — for home inverters and e-rickshaws.",
+    "With more than 40 years of lead-acid battery manufacturing under the brand Heritor, LEIZOUN ENERGY is taking the next step into lithium battery technology — starting with LiFePO4 inverter and e-rickshaw batteries.",
   url: "https://www.leizounenergy.com",
   certification: "An ISO 9001:2015 / 14001:2015 Certified Company",
 
-  // Heritage of the parent business (40+ years in lead-acid manufacturing).
-  // Add the legacy brand name here if you'd like it referenced on the site.
+  // From the official company introduction: 40+ years of lead-acid battery manufacturing.
   legacy: {
     years: "40+",
-    decades: "four decades",
-    brandName: "", // e.g. "our founding battery brand" — optional
+    brand: "Heritor",
   },
 
   contact: {

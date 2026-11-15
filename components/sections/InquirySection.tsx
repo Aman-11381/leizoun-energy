@@ -24,8 +24,9 @@ export async function InquirySection({
             Let&apos;s talk energy
           </Heading>
           <p className="mt-5 max-w-md text-[length:var(--text-lead)] leading-relaxed text-silver-300">
-            Tell us what you need — product, quantity, or partnership. Backed by decades of
-            experience, our team responds fast, with the right technical answer.
+            Tell us about your application — product, quantity, or partnership. We&apos;ll help
+            you find a solution that is technically suitable, dependable, safe, and commercially
+            practical.
           </p>
 
           <ul className="mt-8 space-y-4 text-sm text-silver-200">
@@ -33,7 +34,7 @@ export async function InquirySection({
               <span className="flex h-9 w-9 items-center justify-center rounded-[6px] border border-graphite-500 text-volt-400">
                 <WhatsApp className="h-4 w-4" />
               </span>
-              WhatsApp — fastest response
+              WhatsApp enquiry
             </li>
             <li className="flex items-center gap-3">
               <span className="flex h-9 w-9 items-center justify-center rounded-[6px] border border-graphite-500 text-steel-400">
