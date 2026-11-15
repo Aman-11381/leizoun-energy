@@ -119,11 +119,33 @@ export default function AboutPage() {
             embracing the technology of the future — with the same commitment to quality and customer
             satisfaction that has guided us for over 40 years.
           </p>
-          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-9">
             <ButtonLink href="/products" size="lg">
               View Products
             </ButtonLink>
-            <ButtonLink href="/contact" size="lg" variant="secondary">
+          </div>
+        </Reveal>
+      </Section>
+
+      {/* Distributorship */}
+      <Section tone="raised">
+        <Reveal className="max-w-3xl">
+          <Eyebrow index="03">Authorised Distributor</Eyebrow>
+          <Heading as="h2" className="mt-5">
+            {site.distributorship.company}
+          </Heading>
+          <p className="mt-4 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-volt-400">
+            {site.distributorship.title}
+          </p>
+          <p className="mt-6 leading-relaxed text-silver-300">
+            {site.name} is the official and sole distributor of {site.distributorship.company} in
+            Telangana, offering their {site.distributorship.products}.
+          </p>
+          <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+            <ButtonLink href={site.distributorship.url} size="lg" variant="secondary">
+              Visit Eastman website
+            </ButtonLink>
+            <ButtonLink href="/contact" size="lg">
               Enquire
             </ButtonLink>
           </div>

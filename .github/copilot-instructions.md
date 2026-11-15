@@ -31,7 +31,7 @@ There is no test suite. Use `npm run build` to check types and prerendering.
   - `InquiryForm` validates input on the client.
   - It builds prefilled WhatsApp (`wa.me`) or `mailto:` links with `buildWhatsAppLink` and `buildMailtoLink` from `lib/utils.ts`.
   - Its `submit()` function is the single swap point for a future POST endpoint.
-- **Brand and contact configuration** lives in `lib/config/site.ts` (`site` and `nav`): the brand name, legal name, ISO certification line, customer-care number, WhatsApp number, email and address. Never hardcode these values in components.
+- **Brand and contact configuration** lives in `lib/config/site.ts` (`site` and `nav`): the brand name, legal name, ISO certification line, customer-care number, WhatsApp number, email and address. It also holds `site.distributorship` (Eastman Power Solutions, for which LEIZOUN is the official and sole distributor in Telangana), used by the About page, the footer and the enquiry form's product-interest options. Link to the distributed brand's site; don't reproduce its catalogue. Never hardcode these values in components.
 
 ## Conventions
 

@@ -35,6 +35,14 @@ export const site = {
     },
   },
 
+  // Third-party brand LEIZOUN distributes. Link out to their site rather than reproducing their catalogue.
+  distributorship: {
+    company: "Eastman Power Solutions",
+    url: "https://eastmanpowersolutions.in",
+    title: "Official and sole distributor for Telangana",
+    products: "home inverters, inverter batteries and LithTec combos",
+  },
+
   social: {
     linkedin: "#",
     instagram: "#",

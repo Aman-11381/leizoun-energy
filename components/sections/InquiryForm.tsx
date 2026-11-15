@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { site } from "@/lib/config/site";
 import { buildWhatsAppLink, buildMailtoLink, cn } from "@/lib/utils";
-import { WhatsApp, Mail, Check } from "@/components/icons";
+import { WhatsApp, Mail, Check, ChevronDown } from "@/components/icons";
 
 type Props = {
-  /** Optional product-interest label, included silently in the message. */
+  /** Product-interest options (LEIZOUN category names). The distributed brand is appended automatically. */
+  interests?: string[];
+  /** Preselected product interest. */
   defaultCategory?: string;
   compact?: boolean;
 };
@@ -18,7 +20,9 @@ type Props = {
  * single swap point for a future POST endpoint (Next.js API route) — the
  * UI never changes.
  */
-export function InquiryForm({ defaultCategory, compact }: Props) {
+export function InquiryForm({ interests = [], defaultCategory, compact }: Props) {
+  const interestOptions = [...interests, `${site.distributorship.company} products`];
+  const [interest, setInterest] = useState(defaultCategory ?? "");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
@@ -40,7 +44,7 @@ export function InquiryForm({ defaultCategory, compact }: Props) {
       name,
       phone,
       message,
-      category: defaultCategory || undefined,
+      category: interest || undefined,
     };
     const href =
       channel === "whatsapp"
@@ -114,6 +118,26 @@ export function InquiryForm({ defaultCategory, compact }: Props) {
           <label htmlFor="phone" className={label}>Phone Number</label>
           {errors.phone && <p id="phone-error" className="mt-1 text-xs text-error">{errors.phone}</p>}
         </div>
+      </div>
+
+      <div className="relative">
+        <select
+          id="interest"
+          className={cn(field, "cursor-pointer appearance-none pr-10 [&>option]:bg-ink-900 [&>option]:text-silver-100")}
+          value={interest}
+          onChange={(e) => setInterest(e.target.value)}
+        >
+          <option value="">Not sure yet</option>
+          {interestOptions.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="interest" className="pointer-events-none absolute left-4 top-2 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
+          Product Interest
+        </label>
+        <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-steel-400" />
       </div>
 
       <div className="relative">

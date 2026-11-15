@@ -4,6 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { InquiryForm } from "@/components/sections/InquiryForm";
 import { Phone, Mail, MapPin } from "@/components/icons";
 import { site } from "@/lib/config/site";
+import { getCategories } from "@/lib/data/products";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
     "Get in touch with LEIZOUN ENERGY. Send an enquiry via WhatsApp or email — distributors, dealers and customers welcome.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const categories = await getCategories();
+
   return (
     <Section className="pt-32 md:pt-40">
       <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
@@ -70,7 +73,7 @@ export default function ContactPage() {
             <p className="mb-6 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">
               Send an enquiry
             </p>
-            <InquiryForm />
+            <InquiryForm interests={categories.map((c) => c.name)} />
           </div>
         </Reveal>
       </div>

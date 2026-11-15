@@ -37,6 +37,17 @@ export function Footer() {
             <p className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-steel-400">
               {site.certification}
             </p>
+            <p className="mt-3 text-xs leading-relaxed text-steel-400">
+              {site.distributorship.title}:{" "}
+              <a
+                href={site.distributorship.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-silver-300 underline decoration-graphite-500 underline-offset-4 transition-colors hover:text-silver-100"
+              >
+                {site.distributorship.company}
+              </a>
+            </p>
             <ul className="mt-6 space-y-1 text-sm text-silver-300">
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-steel-400" />
