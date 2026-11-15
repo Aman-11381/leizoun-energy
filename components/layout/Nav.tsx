@@ -113,7 +113,7 @@ export function Nav() {
                 >
                   {n.label}
                   {active && (
-                    <span className="absolute inset-x-4 -bottom-0.5 h-px bg-volt-500 shadow-[0_0_10px_rgba(30,144,255,0.7)]" />
+                    <span className="absolute inset-x-4 -bottom-0.5 h-px bg-volt-500 shadow-[0_0_10px_rgba(0,127,196,0.7)]" />
                   )}
                 </Link>
               );

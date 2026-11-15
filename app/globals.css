@@ -2,37 +2,41 @@
 
 /*
   LEIZOUN ENERGY — Design tokens
-  Derived from the logo: brushed metal, electric-blue energy seam,
-  forward shear geometry, Bank-Gothic-style display type.
+  Follows the official brand guideline (LE_Brand Guideline Sheet):
+    Electric Blue #007FC4 · Metallic Silver #B7B9BC (primary)
+    Graphite Black #101217 · Steel Grey #6F747A (secondary)
+    Pure White #FFFFFF (neutral)
+    Michroma (headlines, numbers) · Roboto (body, captions, specs, UI)
   Dark-first. Blue is used surgically.
 */
 
 @theme {
-  /* Neutrals — the stage & structure */
-  --color-ink-900: #000000;
-  --color-ink-800: #0a0c10;
-  --color-ink-700: #12151b;
-  --color-graphite-600: #1c2129;
-  --color-graphite-500: #2a313b;
-  --color-steel-400: #5b6472;
-  --color-silver-300: #9aa4b2;
-  --color-silver-200: #c9d1db;
-  --color-silver-100: #edf1f6;
+  /* Neutrals — the stage & structure (built around Graphite Black) */
+  --color-ink-900: #0a0b0f;
+  --color-ink-800: #101217; /* Graphite Black */
+  --color-ink-700: #16181e;
+  --color-graphite-600: #1c1f25;
+  --color-graphite-500: #2b2e35;
+  --color-steel-400: #6f747a; /* Steel Grey */
+  --color-silver-300: #b7b9bc; /* Metallic Silver */
+  --color-silver-200: #d7d9db;
+  --color-silver-100: #f2f3f4;
 
   /* Electric blue — the energy accent */
-  --color-volt-600: #0b6fd6;
-  --color-volt-500: #1e90ff;
-  --color-volt-400: #3aa0ff;
+  --color-volt-600: #00669e;
+  --color-volt-500: #007fc4; /* Electric Blue */
+  --color-volt-400: #2e9bd6; /* lighter tint for small text on dark */
 
   /* Semantic */
   --color-success: #27c08a;
   --color-warning: #e8b341;
   --color-error: #f0564a;
 
-  /* Fonts (wired in layout.tsx) */
+  /* Fonts (wired in layout.tsx). The guideline uses Roboto for specs and
+     labels too, so `font-mono` maps to Roboto rather than a monospace face. */
   --font-display: var(--font-display-face), "Michroma", sans-serif;
-  --font-sans: var(--font-body-face), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono-face), ui-monospace, monospace;
+  --font-sans: var(--font-body-face), "Roboto", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-body-face), "Roboto", ui-sans-serif, system-ui, sans-serif;
 
   /* Fluid type scale */
   --text-display: clamp(2.75rem, 6vw, 4.5rem);
@@ -60,13 +64,13 @@
   /* Signature composites */
   --metal-gradient: linear-gradient(
     180deg,
-    #f4f7fb 0%,
-    #c9d1db 42%,
-    #7e8794 72%,
-    #3a414c 100%
+    #ffffff 0%,
+    #d7d9db 42%,
+    #8c9096 72%,
+    #4a4e55 100%
   );
-  --volt-glow: 0 0 24px rgba(30, 144, 255, 0.55);
-  --hairline: rgba(154, 164, 178, 0.14);
+  --volt-glow: 0 0 24px rgba(0, 127, 196, 0.6);
+  --hairline: rgba(183, 185, 188, 0.14);
 }
 
 * {
@@ -87,7 +91,7 @@ body {
 }
 
 ::selection {
-  background: rgba(30, 144, 255, 0.28);
+  background: rgba(0, 127, 196, 0.35);
   color: var(--color-silver-100);
 }
 
@@ -177,7 +181,7 @@ body {
 
 /* Frosted glass surface */
 .glass {
-  background: rgba(18, 21, 27, 0.72);
+  background: rgba(22, 24, 30, 0.72);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
@@ -185,15 +189,15 @@ body {
 /* Subtle top-down surface light for cards */
 .surface-lit {
   background:
-    radial-gradient(120% 80% at 50% -20%, rgba(154, 164, 178, 0.08), transparent 60%),
+    radial-gradient(120% 80% at 50% -20%, rgba(183, 185, 188, 0.08), transparent 60%),
     var(--color-graphite-600);
 }
 
 /* Faint engineering grid backdrop */
 .grid-backdrop {
   background-image:
-    linear-gradient(rgba(154, 164, 178, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(154, 164, 178, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(183, 185, 188, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(183, 185, 188, 0.045) 1px, transparent 1px);
   background-size: 64px 64px;
 }
 

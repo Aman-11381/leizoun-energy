@@ -84,7 +84,7 @@ export default function AboutPage() {
           <RevealGroup className="grid gap-8 md:grid-cols-4">
             {journey.map((j) => (
               <RevealItem key={j.year} className="relative md:pt-10">
-                <span className="absolute left-0 top-8 hidden h-3 w-3 -translate-y-1/2 rounded-full bg-volt-500 shadow-[0_0_12px_rgba(30,144,255,0.7)] md:block" />
+                <span className="absolute left-0 top-8 hidden h-3 w-3 -translate-y-1/2 rounded-full bg-volt-500 shadow-[0_0_12px_rgba(0,127,196,0.7)] md:block" />
                 <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-volt-400">{j.year}</p>
                 <h3 className="mt-3 font-display text-base text-silver-100">{j.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-steel-400">{j.body}</p>

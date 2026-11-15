@@ -45,9 +45,11 @@ app/globals.css          Design tokens (Tailwind @theme) + brand utilities
 
 ## Design system
 
-- **Colors:** `ink-*` / `graphite-*` / `steel/silver-*` neutrals + `volt-*` electric blue
-  (used surgically). Brushed-metal gradient via `.text-metal`.
-- **Type:** Michroma (display), Inter (body/UI), JetBrains Mono (specs/labels).
+- **Colors (from the brand guideline):** Electric Blue `#007FC4` (`volt-500`, used
+  surgically), Metallic Silver `#B7B9BC` (`silver-300`), Graphite Black `#101217`
+  (`ink-800`, page background), Steel Grey `#6F747A` (`steel-400`), plus derived
+  `ink-*` / `graphite-*` / `silver-*` shades. Brushed-metal gradient via `.text-metal`.
+- **Type:** Michroma (headlines, titles, numbers), Roboto (body, captions, specs, UI).
 - **Signatures:** `.seam` (energy seam), `.hairline`, `.clip-shear` (12° corner), `.glass`,
   `.surface-lit`, `.grid-backdrop`.
 - **Motion:** CSS scroll-driven reveals (`.reveal`, progressive-enhancement, no JS

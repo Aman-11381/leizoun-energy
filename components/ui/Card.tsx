@@ -29,7 +29,7 @@ export function Card({
       {interactive && (
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-volt-500 to-transparent opacity-0 shadow-[0_0_18px_rgba(30,144,255,0.6)] transition-opacity duration-500 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-volt-500 to-transparent opacity-0 shadow-[0_0_18px_rgba(0,127,196,0.6)] transition-opacity duration-500 group-hover:opacity-100"
         />
       )}
     </div>

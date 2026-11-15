@@ -13,9 +13,9 @@ const sizes: Record<Size, string> = {
 
 const variants: Record<Variant, string> = {
   primary:
-    "group btn-shear text-silver-100 [--btn-border:#2a313b] [--btn-fill:#1c2129] hover:[--btn-border:rgba(30,144,255,0.6)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
+    "group btn-shear text-silver-100 [--btn-border:var(--color-graphite-500)] [--btn-fill:var(--color-graphite-600)] hover:[--btn-border:rgba(0,127,196,0.6)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
   secondary:
-    "btn-shear text-silver-200 hover:text-silver-100 [--btn-border:#2a313b] [--btn-fill:transparent] hover:[--btn-border:rgba(154,164,178,0.6)] hover:[--btn-fill:rgba(28,33,41,0.4)]",
+    "btn-shear text-silver-200 hover:text-silver-100 [--btn-border:var(--color-graphite-500)] [--btn-fill:transparent] hover:[--btn-border:rgba(183,185,188,0.6)] hover:[--btn-fill:rgba(28,31,37,0.4)]",
   ghost:
     "text-silver-200 hover:text-silver-100 px-0",
 };
@@ -29,7 +29,7 @@ function Inner({ variant, children }: { variant: Variant; children: ReactNode })
       {variant === "primary" && (
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-px translate-y-px bg-gradient-to-r from-transparent via-volt-500 to-transparent opacity-0 shadow-[0_0_18px_rgba(30,144,255,0.6)] transition-opacity duration-300 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-px translate-y-px bg-gradient-to-r from-transparent via-volt-500 to-transparent opacity-0 shadow-[0_0_18px_rgba(0,127,196,0.6)] transition-opacity duration-300 group-hover:opacity-100"
         />
       )}
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>

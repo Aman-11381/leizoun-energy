@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Michroma, Inter, JetBrains_Mono } from "next/font/google";
+import { Michroma, Roboto } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/config/site";
 import { Nav } from "@/components/layout/Nav";
@@ -13,15 +13,9 @@ const display = Michroma({
   display: "swap",
 });
 
-const body = Inter({
+const body = Roboto({
   subsets: ["latin"],
   variable: "--font-body-face",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono-face",
   display: "swap",
 });
 
@@ -60,7 +54,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${display.variable} ${body.variable} ${mono.variable} h-full`}
+      className={`${display.variable} ${body.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-ink-800 text-silver-100 antialiased">
         <Nav />
