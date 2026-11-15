@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogoLockup } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 import { Seam } from "@/components/ui/Section";
 import { site } from "@/lib/config/site";
 import { Phone, Mail, MapPin } from "@/components/icons";
@@ -32,7 +32,7 @@ export function Footer() {
       <div className="mx-auto w-full max-w-[1280px] px-6 py-16 md:px-10 md:py-20">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <LogoLockup className="w-48" />
+            <Logo className="h-auto w-64" />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-silver-300">
               Four decades of battery expertise, now engineered into next-generation lithium
               technology for mobility, home and industry.

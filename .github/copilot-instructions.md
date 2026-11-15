@@ -46,4 +46,9 @@ There is no test suite. Use `npm run build` to check types and prerendering.
   - Scroll reveals are CSS-only (`.reveal` + scroll-driven animations). `Reveal`, `RevealGroup`, and `RevealItem` add the class without JavaScript. Their `delay` and `stagger` props are intentionally ignored.
   - Content must remain visible without JavaScript.
   - The `motion` library (`motion/react`) is only for small client widgets such as `StatCounter`, and it must respect `useReducedMotion`.
-- **Product images:** Product visuals use the branded placeholder `components/ui/ProductVisual.tsx`, driven by each category's `renderHint` and `accent`. The master logo is in `public/brand/`. The header and footer use the SVG monogram in `components/ui/Logo.tsx`.
+- **Product images:** Product visuals use the branded placeholder `components/ui/ProductVisual.tsx`, driven by each category's `renderHint` and `accent`.
+- **Logos:** Use the official logos in `public/brand/` according to the brand guideline:
+  - The secondary (horizontal) logo is for the header and footer. Render it through `Logo` in `components/ui/Logo.tsx`.
+  - The primary (vertical) logo is used in `app/opengraph-image.png`.
+  - The logo mark is used for `app/icon.png` and `app/apple-icon.png`.
+  - Don't recreate logos as SVG or styled text.

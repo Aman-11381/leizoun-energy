@@ -47,7 +47,7 @@ export function Nav() {
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-6 md:px-10">
-        <Logo />
+        <Logo eager className="h-9 md:h-11" />
 
         <div className="hidden items-center gap-8 lg:flex">
           <nav className="flex items-center gap-1" onMouseLeave={() => setMegaOpen(false)}>

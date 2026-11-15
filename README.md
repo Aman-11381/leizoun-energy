@@ -70,6 +70,14 @@ The site is frontend-only today but structured so a backend plugs in with **no U
 
 Product visuals currently use a branded **placeholder** (`components/ui/ProductVisual.tsx`)
 labelled `RENDER · PLACEHOLDER`. Swap for real studio renders per the art-direction spec
-(studio, black seamless, single rim light, blue-seam reflection). The master logo lives at
-`public/brand/leizoun-logo.png`; the header/footer use an SVG monogram in
-`components/ui/Logo.tsx`.
+(studio, black seamless, single rim light, blue-seam reflection).
+
+Official logos (from the brand guideline) live in `public/brand/`:
+
+| File | Logo | Used for |
+|---|---|---|
+| `leizoun-logo-horizontal.png` | Secondary (horizontal) | Header and footer via `components/ui/Logo.tsx` |
+| `leizoun-logo.png` | Primary (vertical) | Social share image (`app/opengraph-image.png`) |
+| `leizoun-mark.png` | Logo mark | Favicon (`app/icon.png`) and `app/apple-icon.png` |
+
+The favicon, Apple icon and Open Graph image place the logo on Graphite Black (`#101217`).
