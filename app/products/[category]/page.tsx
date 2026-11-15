@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Section, Eyebrow, Heading, Divider, Seam } from "@/components/ui/Section";
+import { Section, Eyebrow, Heading, Divider } from "@/components/ui/Section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ProductShot } from "@/components/ui/ProductShot";
 import { ButtonLink } from "@/components/ui/Button";
 import { SpecTable } from "@/components/sections/SpecTable";
-import { InquirySection } from "@/components/sections/InquirySection";
-import { getCategory, getCategorySlugs, getCategories } from "@/lib/data/products";
-import { Check, Shield, ChevronDown, iconForFeature } from "@/components/icons";
+import { getCategory, getCategorySlugs } from "@/lib/data/products";
+import { Check, ChevronDown } from "@/components/icons";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/config/site";
 import { cn } from "@/lib/utils";
@@ -37,9 +36,6 @@ export default async function CategoryPage({ params }: Params) {
   const c = await getCategory(category);
   if (!c) notFound();
 
-  const all = await getCategories();
-  const others = all.filter((x) => x.slug !== c.slug);
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -57,11 +53,13 @@ export default async function CategoryPage({ params }: Params) {
       <JsonLd data={jsonLd} />
       {/* Hero */}
       <Section className="pt-32 md:pt-40">
-        <div className="-mt-3 mb-5">
-          <Link href="/products" className="inline-block py-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400 hover:text-silver-200">
-            ← Catalogue
+        <nav aria-label="Breadcrumb" className="-mt-3 mb-5 flex items-center gap-2 py-3 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">
+          <Link href="/products" className="hover:text-silver-200">
+            Products
           </Link>
-        </div>
+          <span aria-hidden>/</span>
+          <span className="text-silver-300">{c.shortName}</span>
+        </nav>
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <div className="flex flex-wrap items-center gap-3">
@@ -85,8 +83,8 @@ export default async function CategoryPage({ params }: Params) {
               ))}
             </dl>
             <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-              <ButtonLink href="#enquire" size="lg">
-                Enquire now
+              <ButtonLink href="/contact" size="lg">
+                Enquire
               </ButtonLink>
               <ButtonLink href="#specifications" size="lg" variant="secondary">
                 View {c.models.length} models
@@ -106,38 +104,7 @@ export default async function CategoryPage({ params }: Params) {
 
       <Divider />
 
-      {/* Features */}
-      <Section>
-        <Reveal className="mb-10 max-w-2xl">
-          <Eyebrow index="01">Features</Eyebrow>
-          <Heading as="h2" className="mt-5">
-            Built to outperform
-          </Heading>
-        </Reveal>
-        <RevealGroup className="grid gap-px overflow-hidden rounded-[12px] border border-graphite-500 bg-graphite-500 sm:grid-cols-2 lg:grid-cols-3">
-          {c.features.map((f, i) => {
-            const FIcon = iconForFeature[f.icon];
-            const n = c.features.length;
-            const last = i === n - 1;
-            // Stretch the final tile so the grid never ends with an empty cell.
-            const span = cn(
-              last && n % 2 === 1 && "sm:col-span-2",
-              last && (n % 3 === 0 ? "lg:col-span-1" : n % 3 === 2 ? "lg:col-span-2" : "lg:col-span-3")
-            );
-            return (
-              <RevealItem key={f.title} className={cn("group surface-lit p-8 transition-colors hover:bg-ink-700", span)}>
-                <span className="flex h-12 w-12 items-center justify-center rounded-[8px] border border-volt-500/30 bg-volt-500/[0.06] text-volt-400 transition-colors group-hover:border-volt-500/60">
-                  <FIcon className="h-6 w-6" />
-                </span>
-                <h3 className="mt-5 font-display text-base text-silver-100">{f.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-silver-300">{f.body}</p>
-              </RevealItem>
-            );
-          })}
-        </RevealGroup>
-      </Section>
-
-      {/* Scene + gallery */}
+      {/* Photos */}
       <Section tone="raised">
         <Reveal>
           <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[14px] border border-graphite-500 md:aspect-[21/9]">
@@ -166,7 +133,7 @@ export default async function CategoryPage({ params }: Params) {
       <Section id="specifications" className="scroll-mt-20">
         <Reveal className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Eyebrow index="02">Specifications</Eyebrow>
+            <Eyebrow index="01">Specifications</Eyebrow>
             <Heading as="h2" className="mt-5">
               Choose your model
             </Heading>
@@ -180,99 +147,80 @@ export default async function CategoryPage({ params }: Params) {
         </Reveal>
       </Section>
 
-      {/* Protections + applications */}
+      {/* Key details */}
       <Section tone="raised">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <Reveal className="mb-10 max-w-2xl">
+          <Eyebrow index="02">Key Details</Eyebrow>
+          <Heading as="h2" className="mt-5">
+            Features, safety &amp; warranty
+          </Heading>
+        </Reveal>
+
+        <div className="grid gap-10 lg:grid-cols-3 lg:gap-12">
           <Reveal>
-            <Eyebrow index="03">Safety</Eyebrow>
-            <Heading as="h2" className="mt-5">
-              Built-in protections
-            </Heading>
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Features</h3>
+            <ul className="mt-5 space-y-4">
+              {c.features.map((f) => (
+                <li key={f.title} className="border-b border-graphite-500 pb-4">
+                  <p className="text-sm text-silver-100">{f.title}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-steel-400">{f.body}</p>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Built-in protections</h3>
+            <ul className="mt-5 space-y-3">
               {c.protections.map((p) => (
-                <li key={p} className="flex items-center gap-3 rounded-[8px] border border-graphite-500 px-4 py-3 text-sm text-silver-200">
-                  <Shield className="h-4 w-4 shrink-0 text-volt-400" />
+                <li key={p} className="flex items-center gap-3 border-b border-graphite-500 pb-3 text-sm text-silver-200">
+                  <Check className="h-4 w-4 shrink-0 text-volt-400" />
                   {p}
                 </li>
               ))}
             </ul>
           </Reveal>
           <Reveal delay={0.1}>
-            <Eyebrow index="04">Applications</Eyebrow>
-            <Heading as="h2" className="mt-5">
-              Where it works
-            </Heading>
-            <ul className="mt-8 space-y-3">
+            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Applications</h3>
+            <ul className="mt-5 space-y-3">
               {c.applications.map((a) => (
-                <li key={a} className="flex items-center gap-3 border-b border-graphite-500 pb-3 text-silver-200">
-                  <Check className="h-4 w-4 text-volt-400" />
+                <li key={a} className="flex items-center gap-3 border-b border-graphite-500 pb-3 text-sm text-silver-200">
+                  <Check className="h-4 w-4 shrink-0 text-volt-400" />
                   {a}
                 </li>
               ))}
             </ul>
           </Reveal>
         </div>
-      </Section>
 
-      {/* Warranty */}
-      <Section>
-        <Reveal>
-          <Seam className="mb-10 max-w-xs" />
-          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <Reveal className="mt-12 rounded-[12px] border border-graphite-500 p-6 md:p-8">
+          <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
             <div>
-              <Eyebrow index="05">Warranty</Eyebrow>
-              <Heading as="h2" metal className="mt-5">
-                {c.warranty.headline}
-              </Heading>
+              <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-steel-400">Warranty</h3>
+              <p className="mt-3 font-display text-xl text-metal">{c.warranty.headline}</p>
             </div>
             <div>
-              <p className="text-[length:var(--text-lead)] leading-relaxed text-silver-300">{c.warranty.summary}</p>
-              <details className="group mt-8 rounded-[10px] border border-graphite-500">
-                <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm uppercase tracking-[0.14em] text-silver-200 [&::-webkit-details-marker]:hidden">
+              <p className="text-sm leading-relaxed text-silver-300">{c.warranty.summary}</p>
+              <details className="group mt-5 rounded-[10px] border border-graphite-500">
+                <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-3.5 text-xs uppercase tracking-[0.14em] text-silver-200 [&::-webkit-details-marker]:hidden">
                   Warranty terms &amp; conditions
                   <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" />
                 </summary>
                 <ol className="list-decimal space-y-3 border-t border-graphite-500 py-5 pl-10 pr-5 text-sm leading-relaxed text-steel-400">
-                  {c.warranty.terms.map((t) => (
-                    <li key={t}>{t}</li>
+                  {c.warranty.terms.map((term) => (
+                    <li key={term}>{term}</li>
                   ))}
                 </ol>
               </details>
             </div>
           </div>
         </Reveal>
+
+        <Reveal className="mt-12 flex justify-center">
+          <ButtonLink href="/contact" size="lg">
+            Enquire
+          </ButtonLink>
+        </Reveal>
       </Section>
-
-      {/* Other line */}
-      {others.length > 0 && (
-        <Section tone="raised">
-          <Reveal className="mb-10">
-            <Eyebrow>Explore more</Eyebrow>
-            <Heading as="h2" className="mt-5">
-              Also from LEIZOUN
-            </Heading>
-          </Reveal>
-          <RevealGroup className="grid gap-6 md:grid-cols-2">
-            {others.map((o) => (
-              <RevealItem key={o.slug}>
-                <Link
-                  href={`/products/${o.slug}`}
-                  className="group grid h-full items-center overflow-hidden rounded-[12px] border border-graphite-500 transition-colors hover:border-silver-300/40 sm:grid-cols-[200px_1fr]"
-                >
-                  <ProductShot image={o.image} sizes="200px" padding="p-[10%]" className="aspect-[4/3] w-full sm:h-full" />
-                  <span className="block p-5">
-                    <span className="block font-mono text-[0.65rem] uppercase tracking-[0.2em] text-steel-400">{o.tagline}</span>
-                    <span className="mt-2 block font-display text-lg text-silver-100">{o.name}</span>
-                    <span className="mt-1 block text-sm text-steel-400">{o.summary}</span>
-                  </span>
-                </Link>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </Section>
-      )}
-
-      <InquirySection defaultCategory={c.slug} />
     </>
   );
 }

@@ -32,7 +32,7 @@ npm run lint
 app/                     Routes (App Router)
 components/
   layout/                Nav, Footer, FloatingEnquire
-  sections/              Hero, ProductCard, SpecTable, InquiryForm, CtaBand, InquirySection
+  sections/              Hero, ProductCard, SpecTable, InquiryForm, InquirySection
   ui/                    Logo, Button, Card, Section/Heading/Eyebrow/Seam/Divider,
                          Reveal (CSS scroll-reveal), StatCounter, ProductShot
   icons/                 Custom thin-line geometric icon set
