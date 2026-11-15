@@ -1,5 +1,6 @@
 import { ButtonLink } from "@/components/ui/Button";
 import { ProductShot } from "@/components/ui/ProductShot";
+import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { site } from "@/lib/config/site";
 import type { CSSProperties } from "react";
 
@@ -8,7 +9,7 @@ const d = (delay: string) => ({ ["--d" as string]: delay } as CSSProperties);
 export function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden pt-16">
-      <div className="absolute inset-0 grid-backdrop opacity-60" />
+      <HeroBackdrop />
       <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-volt-500/[0.07] blur-[120px]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-800 to-transparent" />
 

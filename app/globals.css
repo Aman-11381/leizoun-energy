@@ -365,6 +365,105 @@ body {
   }
 }
 
+/* ---- Hero "live grid" backdrop ----
+   .grid-lines-mask only lets children show through the 64px grid lines, so
+   the drifting glows below light up the grid itself. Pulses and cells sit
+   exactly on the same 64px grid. Everything is idle (static/hidden) under
+   reduced motion. */
+.grid-lines-mask {
+  -webkit-mask-image:
+    linear-gradient(#000 1px, transparent 1px),
+    linear-gradient(90deg, #000 1px, transparent 1px);
+  mask-image:
+    linear-gradient(#000 1px, transparent 1px),
+    linear-gradient(90deg, #000 1px, transparent 1px);
+  -webkit-mask-size: 64px 64px;
+  mask-size: 64px 64px;
+}
+.grid-cell,
+.grid-pulse-x,
+.grid-pulse-y {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .anim-drift-a {
+    animation: drift-a 26s ease-in-out infinite alternate;
+  }
+  .anim-drift-b {
+    animation: drift-b 32s ease-in-out infinite alternate;
+  }
+  .grid-cell {
+    animation: cell-glow var(--dur, 8s) ease-in-out var(--d, 0s) infinite;
+  }
+  .grid-pulse-x {
+    animation: pulse-x var(--dur, 10s) linear var(--d, 0s) infinite;
+  }
+  .grid-pulse-y {
+    animation: pulse-y var(--dur, 12s) linear var(--d, 0s) infinite;
+  }
+}
+
+@keyframes drift-a {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-45vw, 35vh);
+  }
+}
+
+@keyframes drift-b {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(40vw, -30vh);
+  }
+}
+
+@keyframes cell-glow {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-x {
+  0% {
+    opacity: 1;
+    transform: translateX(-180px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateX(110vw);
+  }
+  40.01%,
+  100% {
+    opacity: 0;
+    transform: translateX(110vw);
+  }
+}
+
+@keyframes pulse-y {
+  0% {
+    opacity: 1;
+    transform: translateY(-180px);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(110vh);
+  }
+  40.01%,
+  100% {
+    opacity: 0;
+    transform: translateY(110vh);
+  }
+}
+
 /* Scroll-driven reveal where supported */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {

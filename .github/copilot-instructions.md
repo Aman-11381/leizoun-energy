@@ -17,7 +17,7 @@ There is no test suite. Use `npm run build` to check types and prerendering.
 
 ## Architecture
 
-- **Marketing site with no backend.** Pages are Server Components by default. Only interactive leaves use `"use client"`: `Nav`, `FloatingEnquire`, `InquiryForm`, and `StatCounter`. Keep client boundaries small and at the leaves.
+- **Marketing site with no backend.** Pages are Server Components by default. Only interactive leaves use `"use client"`: `Nav`, `FloatingEnquire`, `InquiryForm`, `StatCounter`, and `GridCursorGlow`. Keep client boundaries small and at the leaves.
 - **Root layout** (`app/layout.tsx`) loads Michroma and Roboto with `next/font/google` and exposes them as CSS variables (`--font-display-face`, `--font-body-face`). `app/globals.css` maps these variables to Tailwind font tokens; `font-mono` intentionally maps to Roboto because the brand guideline uses Roboto for specs and labels. The layout also renders `Nav`, `Footer`, and `FloatingEnquire` on every page and defines a metadata title template (`%s — LEIZOUN ENERGY`). Pages should set only a short `title`.
 - **Product catalogue data layer** (`lib/data/products.ts`):
   - A static `categories` array is the single source of truth.
@@ -49,7 +49,8 @@ There is no test suite. Use `npm run build` to check types and prerendering.
   - Scroll reveals are CSS-only (`.reveal` + scroll-driven animations). `Reveal`, `RevealGroup`, and `RevealItem` add the class without JavaScript. Their `delay` and `stagger` props are intentionally ignored.
   - Content must remain visible without JavaScript.
   - Other motion is also CSS-only and lives in `app/globals.css` inside `prefers-reduced-motion: no-preference`: `.anim-hero`/`.anim-hero-visual` (hero entrance), `.anim-line`, `.anim-float` (via `ProductShot`'s `float` prop), and `.anim-page` (page fade, applied by `app/template.tsx`). `ProductShot` zooms slightly when an ancestor `group` is hovered.
-  - The `motion` library (`motion/react`) is only for small client widgets such as `StatCounter`, and it must respect `useReducedMotion`.
+  - The `motion` library (`motion/react`) is only for small client widgets such as `StatCounter` and `GridCursorGlow` (the mouse-following grid glow), and it must respect `useReducedMotion`.
+  - The home hero background is `HeroBackdrop`: a masked grid (`.grid-lines-mask`) with drifting glows, line pulses, and glowing cells, all on the same 64px grid as `.grid-backdrop`.
 - **Product images:** The official renders are WebP files in `public/products/`. Render transparent product shots with `ProductShot` (`components/ui/ProductShot.tsx`, which wraps `next/image` with `fill`), and use `next/image` directly for the opaque pamphlet `scene` banners. In Next 16, use `loading="eager"` or `preload` instead of the deprecated `priority` prop.
 - **Logos:** Use the official logos in `public/brand/` according to the brand guideline:
   - The secondary (horizontal) logo is for the header and footer. Render it through `Logo` in `components/ui/Logo.tsx`.
