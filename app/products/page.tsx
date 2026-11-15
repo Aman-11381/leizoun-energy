@@ -6,7 +6,7 @@ import { ProductShot } from "@/components/ui/ProductShot";
 import { ButtonLink } from "@/components/ui/Button";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { getCategories } from "@/lib/data/products";
-import { ArrowRight, iconForFeature, iconForSlug } from "@/components/icons";
+import { ArrowRight, iconForFeature } from "@/components/icons";
 
 export const metadata: Metadata = {
   title: "Product Catalogue",
@@ -38,7 +38,6 @@ export default async function ProductsPage() {
       <Section className="pt-0">
         <div className="flex flex-col gap-6 md:gap-8">
           {categories.map((c, i) => {
-            const Icon = iconForSlug[c.slug];
             const reversed = i % 2 === 1;
             return (
               <Reveal key={c.slug}>
@@ -55,8 +54,7 @@ export default async function ProductsPage() {
                     />
                   </div>
                   <div className={`flex flex-col justify-center p-8 md:p-12 ${reversed ? "lg:order-1" : ""}`}>
-                    <div className="mb-4 flex items-center gap-3 text-steel-400">
-                      {Icon && <Icon className="h-5 w-5" />}
+                    <div className="mb-4 text-steel-400">
                       <span className="font-mono text-[0.7rem] uppercase tracking-[0.24em]">
                         0{i + 1} — {c.tagline}
                       </span>

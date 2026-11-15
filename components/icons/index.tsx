@@ -188,30 +188,6 @@ export const Bluetooth = (p: IconProps) => (
   </Base>
 );
 
-/* ---- Category icons ---- */
-
-export const Rickshaw = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M3 16V9a4 4 0 0 1 4-4h4l4 5h3v6" />
-    <circle cx="7" cy="18" r="2" />
-    <circle cx="17" cy="18" r="2" />
-    <path d="M3 16h2M9 16h6" />
-  </Base>
-);
-
-export const Home = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M4 11 12 4l8 7" />
-    <path d="M6 10v9h12v-9" />
-    <path d="M11 19v-5h2v5" />
-  </Base>
-);
-
-export const iconForSlug: Record<string, (p: IconProps) => React.JSX.Element> = {
-  "e-rickshaw": Rickshaw,
-  inverter: Home,
-};
-
 export const iconForFeature: Record<FeatureIcon, (p: IconProps) => React.JSX.Element> = {
   maintenance: Wrench,
   bms: Cpu,

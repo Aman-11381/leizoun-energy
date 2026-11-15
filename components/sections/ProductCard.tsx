@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { Card } from "@/components/ui/Card";
 import { ProductShot } from "@/components/ui/ProductShot";
-import { ArrowRight, iconForSlug } from "@/components/icons";
+import { ArrowRight } from "@/components/icons";
 import type { ProductCategory } from "@/lib/data/products";
 
 export function ProductCard({ category }: { category: ProductCategory }) {
-  const Icon = iconForSlug[category.slug];
   return (
     <Card className="flex h-full flex-col">
       <Link href={`/products/${category.slug}`} className="flex h-full flex-col">
@@ -15,8 +14,7 @@ export function ProductCard({ category }: { category: ProductCategory }) {
           className="aspect-[16/10] w-full rounded-t-[8px]"
         />
         <div className="flex flex-1 flex-col p-6 md:p-8">
-          <div className="mb-3 flex items-center gap-2 text-steel-400">
-            {Icon && <Icon className="h-4 w-4" />}
+          <div className="mb-3 text-steel-400">
             <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em]">
               {category.chemistry} · {category.tagline}
             </span>
