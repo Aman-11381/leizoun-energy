@@ -35,9 +35,9 @@ export function HeroBackdrop() {
       <div className="absolute inset-0 grid-backdrop opacity-60" />
 
       {/* Drifting light, visible only through the grid lines */}
-      <div className="grid-lines-mask absolute inset-0 opacity-40 light:opacity-30">
-        <div className="anim-drift-a absolute -right-[15vw] -top-[20vh] h-[70vh] w-[70vh] rounded-full bg-[radial-gradient(circle,var(--color-volt-500)_0%,transparent_65%)]" />
-        <div className="anim-drift-b absolute -bottom-[25vh] -left-[10vw] h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(circle,var(--color-volt-400)_0%,transparent_65%)]" />
+      <div className="grid-lines-mask absolute inset-0 opacity-20 light:opacity-15 md:opacity-40 md:light:opacity-30">
+        <div className="anim-drift-a absolute -right-[15vw] -top-[20vh] h-[min(70vh,80vw)] w-[min(70vh,80vw)] rounded-full bg-[radial-gradient(circle,var(--color-volt-500)_0%,transparent_65%)]" />
+        <div className="anim-drift-b absolute -bottom-[25vh] -left-[10vw] h-[min(60vh,70vw)] w-[min(60vh,70vw)] rounded-full bg-[radial-gradient(circle,var(--color-volt-400)_0%,transparent_65%)]" />
       </div>
 
       <GridCursorGlow />
@@ -53,7 +53,7 @@ export function HeroBackdrop() {
       {pulsesX.map(([r, dur, d]) => (
         <span
           key={`x${r}`}
-          className="grid-pulse-x absolute left-0 h-px w-[160px] bg-gradient-to-r from-transparent via-volt-500/45 to-transparent"
+          className="grid-pulse-x absolute hidden md:block left-0 h-px w-[160px] bg-gradient-to-r from-transparent via-volt-500/45 to-transparent"
           style={{ top: r * G, ...v({ "--dur": dur, "--d": d }) }}
         />
       ))}
@@ -61,7 +61,7 @@ export function HeroBackdrop() {
       {pulsesY.map(([c, dur, d]) => (
         <span
           key={`y${c}`}
-          className="grid-pulse-y absolute top-0 h-[160px] w-px bg-gradient-to-b from-transparent via-volt-500/45 to-transparent"
+          className="grid-pulse-y absolute hidden md:block top-0 h-[160px] w-px bg-gradient-to-b from-transparent via-volt-500/45 to-transparent"
           style={{ left: c * G, ...v({ "--dur": dur, "--d": d }) }}
         />
       ))}
