@@ -121,7 +121,7 @@ export function Nav() {
             })}
         </nav>
 
-          <ButtonLink href="/contact" size="sm">
+          <ButtonLink href="/contact" size="sm" aria-current={pathname === "/contact" ? "page" : undefined}>
             Enquire
           </ButtonLink>
         </div>
